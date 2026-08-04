@@ -19,21 +19,9 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-            line-height: 1.6;
-            padding: 10px;
-            padding-bottom: 80px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
+        /* ===== RESET & GLOBAL ===== */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f8f9fa; color: #333; line-height: 1.6; padding: 10px; padding-bottom: 80px; max-width: 800px; margin: 0 auto; }
         .header {
             background: linear-gradient(135deg, #2c3e50, #4a6491);
             color: white;
@@ -41,7 +29,7 @@
             border-radius: 12px;
             margin-bottom: 15px;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             position: relative;
         }
         .header h1 { font-size: 1.5rem; margin-bottom: 3px; }
@@ -85,6 +73,8 @@
         }
         .status-online { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
         .status-offline { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+        /* ===== BOTTOM NAV ===== */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -126,6 +116,8 @@
             border-radius: 10px;
             min-width: 18px;
         }
+
+        /* ===== SUB TABS ===== */
         .sub-tabs {
             display: flex;
             background: #f0f2f5;
@@ -151,11 +143,15 @@
         }
         .sub-tabs .sub-tab.active { background: white; color: #2c3e50; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
         .sub-tabs .sub-tab:hover:not(.active) { background: rgba(255,255,255,0.5); }
+
+        /* ===== CONTENT ===== */
         .tab-content { display: none; animation: fadeIn 0.3s ease; }
         .tab-content.active { display: block; }
         .sub-content { display: none; animation: fadeIn 0.3s ease; }
         .sub-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ===== LOGIN ===== */
         .login-container {
             background-color: white;
             border-radius: 12px;
@@ -171,6 +167,9 @@
         .login-container input:focus { outline: none; border-color: #3498db; }
         .login-container .btn { margin-top: 10px; }
         .error-message { color: #e74c3c; font-size: 0.9rem; margin-top: 10px; text-align: center; }
+        .register-link { display: none !important; }
+
+        /* ===== FORMS & BUTTONS ===== */
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #2c3e50; }
         .form-control { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border 0.3s; }
@@ -226,6 +225,8 @@
         .alert-danger { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
         .alert-info { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
         .alert-warning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+
+        /* ===== MENU ITEMS ===== */
         .menu-item {
             display: flex;
             justify-content: space-between;
@@ -250,6 +251,8 @@
             margin-bottom: 8px;
         }
         .category-name { font-weight: bold; color: #2c3e50; }
+
+        /* ===== ORDER ITEMS ===== */
         .order-item {
             display: flex;
             justify-content: space-between;
@@ -286,6 +289,8 @@
         .add-to-order-container { display: flex; align-items: flex-end; gap: 10px; flex-wrap: wrap; }
         .add-to-order-container .form-group { margin-bottom: 0; flex: 1; min-width: 120px; }
         .small-add-btn { padding: 8px 12px; height: 40px; font-size: 0.85rem; white-space: nowrap; width: auto; }
+
+        /* ===== RESERVATIONS ===== */
         .reservation-item {
             padding: 15px;
             background-color: #f8f9fa;
@@ -302,6 +307,8 @@
         .dp-info { margin-top: 4px; font-size: 0.85rem; color: #27ae60; }
         .dp-info i { margin-right: 4px; }
         .dp-missing { color: #e74c3c; font-style: italic; }
+
+        /* ===== TABLES ===== */
         .tables-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
@@ -341,6 +348,8 @@
         .table-number { font-weight: bold; color: #2c3e50; min-width: 50px; }
         .area-dropdown { padding: 6px 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.85rem; }
         .select-table-btn { margin: 5px 0; }
+
+        /* ===== MODALS ===== */
         .modal {
             display: none;
             position: fixed;
@@ -367,6 +376,8 @@
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .modal-title { font-size: 1.2rem; font-weight: bold; color: #2c3e50; }
         .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #7f8c8d; }
+
+        /* ===== IMPORT/EXPORT ===== */
         .import-export-section { background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
         .import-export-section h3 { margin-bottom: 10px; color: #2c3e50; font-size: 1rem; }
         .file-input-container { position: relative; margin-bottom: 10px; }
@@ -386,6 +397,8 @@
         .manual-import-section { background-color: #e8f4fc; padding: 15px; border-radius: 8px; margin-top: 10px; }
         .manual-import-section textarea { width: 100%; min-height: 100px; padding: 10px; border: 1px solid #3498db; border-radius: 5px; font-family: monospace; margin-bottom: 10px; font-size: 0.85rem; }
         .manual-import-section .example { background-color: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 0.8rem; margin-bottom: 10px; }
+
+        /* ===== AUTOCOMPLETE ===== */
         .autocomplete-container { position: relative; }
         .autocomplete-list {
             position: absolute;
@@ -402,6 +415,8 @@
         .autocomplete-item { padding: 8px 12px; cursor: pointer; border-bottom: 1px solid #f0f0f0; font-size: 0.9rem; }
         .autocomplete-item:hover { background-color: #f0f0f0; }
         .autocomplete-item:last-child { border-bottom: none; }
+
+        /* ===== REPORT ===== */
         .report-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9rem; }
         .report-table th, .report-table td { padding: 10px 8px; text-align: left; border-bottom: 1px solid #eee; }
         .report-table th { background-color: #f2f2f2; font-weight: 600; color: #2c3e50; }
@@ -414,31 +429,12 @@
         .category-item-name { font-weight: 500; cursor: pointer; color: #2c3e50; }
         .category-item-name:hover { color: #3498db; text-decoration: underline; }
         .category-item-qty { font-weight: bold; }
+
+        /* ===== PERIOD DELETE ===== */
         .period-delete-section { background-color: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #ffeaa7; }
         .period-delete-section .form-row { margin-bottom: 0; }
-        .btn-whatsapp { background-color: #25D366; }
-        .btn-whatsapp:hover { background-color: #1da851; }
-        .register-link { display: none !important; }
-        #installButton {
-            position: fixed;
-            bottom: 70px;
-            right: 15px;
-            z-index: 999;
-            padding: 10px 18px;
-            background: linear-gradient(135deg, #3498db, #2c3e50);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 0.8rem;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 600px) {
             .form-row { flex-direction: column; gap: 10px; }
             .header h1 { font-size: 1.2rem; }
@@ -462,13 +458,35 @@
             .bottom-nav .nav-item i { font-size: 1.5rem; }
         }
         body.pwa-mode { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
+        #installButton {
+            position: fixed;
+            bottom: 70px;
+            right: 15px;
+            z-index: 999;
+            padding: 10px 18px;
+            background: linear-gradient(135deg, #3498db, #2c3e50);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
     </style>
 </head>
 <body>
+    <!-- Status Koneksi -->
     <div class="connection-status" id="connectionStatus">
         <i class="fas fa-sync fa-spin"></i> Menghubungkan...
     </div>
-    
+
+    <!-- Header -->
     <div class="header">
         <h1><i class="fas fa-utensils"></i> Sistem Pesanan Restoran</h1>
         <p>Kelola menu, reservasi, takeaway, dan laporan</p>
@@ -478,8 +496,8 @@
             <button class="logout-btn" id="logoutBtn">Logout</button>
         </div>
     </div>
-    
-    <!-- Login Container -->
+
+    <!-- Login -->
     <div id="loginContainer" class="login-container">
         <h2>Login ke Aplikasi</h2>
         <div id="loginForm">
@@ -495,7 +513,7 @@
             <div id="loginError" class="error-message"></div>
         </div>
     </div>
-    
+
     <!-- Main App -->
     <div id="appContainer" style="display: none;">
         <div id="tabContentWrapper">
@@ -556,7 +574,7 @@
                     <div id="tablesListContainer"></div>
                 </div>
             </div>
-            
+
             <!-- TAB 2: RESERVASI -->
             <div id="tab-reservasi" class="tab-content">
                 <div class="sub-tabs" id="subTabsReservasi">
@@ -607,7 +625,6 @@
                         <div id="invoiceOutput" class="invoice"></div>
                         <div class="btn-group" style="margin-top:10px;">
                             <button id="copyInvoiceBtn" class="btn btn-success btn-sm"><i class="fas fa-copy"></i> Salin</button>
-                            <button id="sendWhatsAppBtn" class="btn btn-whatsapp btn-sm"><i class="fab fa-whatsapp"></i> Kirim WhatsApp</button>
                             <button id="clearOrderBtn" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
                         </div>
                     </div>
@@ -641,7 +658,7 @@
                     <div id="pastReservationsContainer"></div>
                 </div>
             </div>
-            
+
             <!-- TAB 3: TAKEAWAY -->
             <div id="tab-takeaway" class="tab-content">
                 <div class="sub-tabs" id="subTabsTakeaway">
@@ -683,7 +700,6 @@
                         <div id="invoiceTakeawayOutput" class="invoice"></div>
                         <div class="btn-group" style="margin-top:10px;">
                             <button id="copyTakeawayInvoiceBtn" class="btn btn-success btn-sm"><i class="fas fa-copy"></i> Salin</button>
-                            <button id="sendTakeawayWhatsAppBtn" class="btn btn-whatsapp btn-sm"><i class="fab fa-whatsapp"></i> Kirim WhatsApp</button>
                             <button id="clearTakeawayBtn" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</button>
                         </div>
                     </div>
@@ -705,7 +721,7 @@
                     <div id="takeawayListContainer"></div>
                 </div>
             </div>
-            
+
             <!-- TAB 4: LAPORAN -->
             <div id="tab-laporan" class="tab-content">
                 <div class="sub-tabs" id="subTabsLaporan">
@@ -721,7 +737,7 @@
                     <div id="reportResult" style="margin-top:20px;"></div>
                 </div>
             </div>
-            
+
             <!-- TAB 5: CEK MEJA -->
             <div id="tab-cekmeja" class="tab-content">
                 <div class="sub-tabs" id="subTabsCekMeja">
@@ -735,7 +751,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- BOTTOM NAV -->
         <div class="bottom-nav" id="bottomNav">
             <button class="nav-item active" data-tab="master"><i class="fas fa-database"></i><span>Data Master</span></button>
@@ -744,7 +760,7 @@
             <button class="nav-item" data-tab="laporan"><i class="fas fa-chart-bar"></i><span>Laporan</span></button>
             <button class="nav-item" data-tab="cekmeja"><i class="fas fa-search"></i><span>Cek Meja</span></button>
         </div>
-        
+
         <!-- MODALS -->
         <div id="invoiceModal" class="modal">
             <div class="modal-content">
@@ -752,7 +768,6 @@
                 <div id="modalInvoiceContent" class="invoice" style="max-height:400px;"></div>
                 <div class="btn-group" style="margin-top:15px;">
                     <button id="copyModalInvoiceBtn" class="btn btn-success btn-sm"><i class="fas fa-copy"></i> Salin</button>
-                    <button id="sendModalWhatsAppBtn" class="btn btn-whatsapp btn-sm"><i class="fab fa-whatsapp"></i> Kirim WhatsApp</button>
                     <button id="closeModalBtn" class="btn btn-secondary btn-sm"><i class="fas fa-times"></i> Tutup</button>
                 </div>
             </div>
@@ -763,7 +778,6 @@
                 <div id="modalListPesananContent" class="invoice" style="max-height:400px;"></div>
                 <div class="btn-group" style="margin-top:15px;">
                     <button id="copyModalListPesananBtn" class="btn btn-success btn-sm"><i class="fas fa-copy"></i> Salin</button>
-                    <button id="sendModalListWhatsAppBtn" class="btn btn-whatsapp btn-sm"><i class="fab fa-whatsapp"></i> Kirim WhatsApp</button>
                     <button id="closeListModalBtn" class="btn btn-secondary btn-sm"><i class="fas fa-times"></i> Tutup</button>
                 </div>
             </div>
@@ -858,15 +872,16 @@
                 <div id="reservationDetailContent"></div>
             </div>
         </div>
-        
+
+        <!-- Alert & Install -->
         <div id="alertContainer" style="position:fixed;top:20px;right:20px;z-index:1002;max-width:300px;"></div>
         <div id="installButton" style="display:none;"><i class="fas fa-download"></i> Install App</div>
     </div>
 
     <script>
-        // ===================================================================
-        //  FIREBASE CONFIG
-        // ===================================================================
+        // ================================================================
+        // FIREBASE CONFIG
+        // ================================================================
         const firebaseConfig = {
             apiKey: "AIzaSyAqb4sr3rDjuERBh2iyS6nrMbnBKZ1Pgfs",
             authDomain: "reservasi-cc592.firebaseapp.com",
@@ -879,9 +894,9 @@
         const db = firebase.firestore();
         const auth = firebase.auth();
 
-        // ===================================================================
-        //  HELPERS
-        // ===================================================================
+        // ================================================================
+        // HELPERS
+        // ================================================================
         function getTodayLocal() {
             const d = new Date();
             return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
@@ -913,17 +928,10 @@
             try { document.execCommand('copy'); showAlert(msg||'Berhasil disalin!','success'); } catch(e) { showAlert('Gagal menyalin!','danger'); }
             document.body.removeChild(ta);
         }
-        function sendToWhatsApp(text) {
-            const phone = prompt('Masukkan nomor WhatsApp tujuan (tanpa 0, dengan kode negara):','62');
-            if (!phone) return;
-            const clean = phone.replace(/[^0-9]/g,'');
-            if (clean.length < 8) { showAlert('Nomor tidak valid!','danger'); return; }
-            window.open('https://wa.me/'+clean+'?text='+encodeURIComponent(text), '_blank');
-        }
 
-        // ===================================================================
-        //  AUTH
-        // ===================================================================
+        // ================================================================
+        // AUTH
+        // ================================================================
         auth.onAuthStateChanged(user => {
             if (user) {
                 document.getElementById('loginContainer').style.display = 'none';
@@ -958,9 +966,9 @@
         });
         document.getElementById('logoutBtn').addEventListener('click', () => auth.signOut());
 
-        // ===================================================================
-        //  CONNECTION STATUS
-        // ===================================================================
+        // ================================================================
+        // CONNECTION STATUS
+        // ================================================================
         let isOnline = navigator.onLine;
         function updateConnectionStatus() {
             const el = document.getElementById('connectionStatus');
@@ -971,9 +979,9 @@
         window.addEventListener('offline', () => { isOnline = false; updateConnectionStatus(); showAlert('Offline, data tidak bisa disimpan','warning'); });
         updateConnectionStatus();
 
-        // ===================================================================
-        //  PWA INSTALL
-        // ===================================================================
+        // ================================================================
+        // PWA INSTALL
+        // ================================================================
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; document.getElementById('installButton').style.display = 'flex'; });
         document.getElementById('installButton').addEventListener('click', () => {
@@ -983,16 +991,16 @@
             document.getElementById('installButton').style.display = 'none';
         }
 
-        // ===================================================================
-        //  GLOBAL VARIABLES
-        // ===================================================================
+        // ================================================================
+        // GLOBAL VARIABLES
+        // ================================================================
         let menuItems = [], categories = [], reservations = [], takeawayOrders = [], tables = [];
         let currentOrder = { id:null, customerName:'', reservationDate:'', items:[], total:0, tables:[], dpAmount:null, dpMethod:null, dpOrder:null };
         let currentTakeaway = { id:null, customerName:'', items:[], total:0 };
 
-        // ===================================================================
-        //  NAVIGATION
-        // ===================================================================
+        // ================================================================
+        // NAVIGATION
+        // ================================================================
         document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
             item.addEventListener('click', function() {
                 const tabId = this.dataset.tab;
@@ -1001,7 +1009,6 @@
                 document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
                 const target = document.getElementById('tab-'+tabId);
                 if (target) target.classList.add('active');
-                // Reset sub-tabs to first
                 const subTabs = target ? target.querySelectorAll('.sub-tab') : [];
                 if (subTabs.length) {
                     subTabs.forEach(st => st.classList.remove('active'));
@@ -1028,16 +1035,22 @@
             });
         });
 
-        // ===================================================================
-        //  FIREBASE LISTENERS & LOAD
-        // ===================================================================
+        // ================================================================
+        // FIREBASE LISTENERS & LOAD
+        // ================================================================
         function setupFirebaseListeners() {
             if (!auth.currentUser) return;
             db.collection('menu').orderBy('name').onSnapshot(snap => { menuItems = []; snap.forEach(d => menuItems.push({id:d.id,...d.data()})); loadMenuItems(); updateMenuCount(); renderCategoryCheckboxes(); });
             db.collection('categories').orderBy('name').onSnapshot(snap => { categories = []; snap.forEach(d => categories.push({id:d.id,...d.data()})); loadCategories(); renderCategoryCheckboxes(); });
             db.collection('reservations').orderBy('reservationDate','desc').onSnapshot(snap => { reservations = []; snap.forEach(d => reservations.push({id:d.id,...d.data()})); loadReservations(); updateBadges(); });
             db.collection('takeaway').orderBy('orderDate','desc').onSnapshot(snap => { takeawayOrders = []; snap.forEach(d => takeawayOrders.push({id:d.id,...d.data()})); loadTakeawayList(); updateBadges(); });
-            db.collection('tables').onSnapshot(snap => { tables = []; snap.forEach(d => tables.push({id:d.id,...d.data()})); if (document.getElementById('sub-meja').classList.contains('active')) renderTablesList(); });
+            db.collection('tables').onSnapshot(snap => { 
+                tables = []; 
+                snap.forEach(d => tables.push({id:d.id,...d.data()})); 
+                if (document.getElementById('sub-meja') && document.getElementById('sub-meja').classList.contains('active')) {
+                    renderTablesList();
+                }
+            });
         }
 
         function loadAllData() {
@@ -1046,7 +1059,13 @@
             db.collection('categories').orderBy('name').get().then(snap => { categories = []; snap.forEach(d => categories.push({id:d.id,...d.data()})); loadCategories(); });
             db.collection('reservations').orderBy('reservationDate','desc').get().then(snap => { reservations = []; snap.forEach(d => reservations.push({id:d.id,...d.data()})); loadReservations(); updateBadges(); });
             db.collection('takeaway').orderBy('orderDate','desc').get().then(snap => { takeawayOrders = []; snap.forEach(d => takeawayOrders.push({id:d.id,...d.data()})); loadTakeawayList(); updateBadges(); });
-            db.collection('tables').orderBy('number').get().then(snap => { tables = []; snap.forEach(d => tables.push({id:d.id,...d.data()})); if (document.getElementById('sub-meja').classList.contains('active')) renderTablesList(); });
+            db.collection('tables').orderBy('number').get().then(snap => { 
+                tables = []; 
+                snap.forEach(d => tables.push({id:d.id,...d.data()})); 
+                if (document.getElementById('sub-meja') && document.getElementById('sub-meja').classList.contains('active')) {
+                    renderTablesList();
+                }
+            }).catch(err => console.error('Error loading tables:', err));
         }
 
         function updateBadges() {
@@ -1059,9 +1078,9 @@
             document.getElementById('badgeTakeaway').style.display = tCount ? 'block' : 'none';
         }
 
-        // ===================================================================
-        //  MENU FUNCTIONS
-        // ===================================================================
+        // ================================================================
+        // MENU FUNCTIONS
+        // ================================================================
         function renderCategoryCheckboxes() {
             const c1 = document.getElementById('menuCategoriesContainer');
             const c2 = document.getElementById('editMenuCategoriesContainer');
@@ -1091,9 +1110,9 @@
         }
         function updateMenuCount() { document.getElementById('menuCount').textContent = menuItems.length; }
 
-        // ===================================================================
-        //  CATEGORY FUNCTIONS
-        // ===================================================================
+        // ================================================================
+        // CATEGORY FUNCTIONS
+        // ================================================================
         function loadCategories() {
             const container = document.getElementById('categoriesListContainer');
             if (!container) return;
@@ -1110,9 +1129,9 @@
             `).join('');
         }
 
-        // ===================================================================
-        //  TABLE FUNCTIONS
-        // ===================================================================
+        // ================================================================
+        // TABLE FUNCTIONS (Manajemen Meja)
+        // ================================================================
         function renderTablesList() {
             const container = document.getElementById('tablesListContainer');
             if (!container) return;
@@ -1130,9 +1149,9 @@
             `).join('');
         }
 
-        // ===================================================================
-        //  EVENT BINDINGS (semua tombol)
-        // ===================================================================
+        // ================================================================
+        // EVENT BINDINGS (DOMContentLoaded)
+        // ================================================================
         document.addEventListener('DOMContentLoaded', function() {
             // Menu
             document.getElementById('addMenuBtn').addEventListener('click', addMenuItem);
@@ -1147,14 +1166,12 @@
             document.getElementById('saveOrderBtn').addEventListener('click', saveOrder);
             document.getElementById('copyInvoiceBtn').addEventListener('click', function() { copyTextToClipboard(document.getElementById('invoiceOutput').textContent, 'Invoice disalin!'); });
             document.getElementById('clearOrderBtn').addEventListener('click', clearOrder);
-            document.getElementById('sendWhatsAppBtn').addEventListener('click', function() { sendToWhatsApp(document.getElementById('invoiceOutput').textContent); });
 
             // Takeaway
             document.getElementById('addToTakeawayBtn').addEventListener('click', addItemToTakeaway);
             document.getElementById('saveTakeawayBtn').addEventListener('click', saveTakeaway);
             document.getElementById('copyTakeawayInvoiceBtn').addEventListener('click', function() { copyTextToClipboard(document.getElementById('invoiceTakeawayOutput').textContent, 'Invoice takeaway disalin!'); });
             document.getElementById('clearTakeawayBtn').addEventListener('click', clearTakeaway);
-            document.getElementById('sendTakeawayWhatsAppBtn').addEventListener('click', function() { sendToWhatsApp(document.getElementById('invoiceTakeawayOutput').textContent); });
 
             // Customer name / date
             document.getElementById('customerName').addEventListener('input', function() { currentOrder.customerName = this.value; updateOrderActionButtons(); });
@@ -1253,12 +1270,10 @@
             document.getElementById('closeInvoiceModal').addEventListener('click', () => document.getElementById('invoiceModal').style.display = 'none');
             document.getElementById('closeModalBtn').addEventListener('click', () => document.getElementById('invoiceModal').style.display = 'none');
             document.getElementById('copyModalInvoiceBtn').addEventListener('click', function() { copyTextToClipboard(document.getElementById('modalInvoiceContent').textContent, 'Invoice disalin!'); });
-            document.getElementById('sendModalWhatsAppBtn').addEventListener('click', function() { sendToWhatsApp(document.getElementById('modalInvoiceContent').textContent); });
 
             document.getElementById('closeListPesananModal').addEventListener('click', () => document.getElementById('listPesananModal').style.display = 'none');
             document.getElementById('closeListModalBtn').addEventListener('click', () => document.getElementById('listPesananModal').style.display = 'none');
             document.getElementById('copyModalListPesananBtn').addEventListener('click', function() { copyTextToClipboard(document.getElementById('modalListPesananContent').textContent, 'List disalin!'); });
-            document.getElementById('sendModalListWhatsAppBtn').addEventListener('click', function() { sendToWhatsApp(document.getElementById('modalListPesananContent').textContent); });
 
             document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; }));
             document.getElementById('closeMenuDetailModal').addEventListener('click', () => document.getElementById('menuDetailModal').style.display = 'none');
@@ -1271,9 +1286,9 @@
             document.getElementById('deleteTakeawayPeriodBtn').addEventListener('click', deleteTakeawayPeriod);
         });
 
-        // ===================================================================
-        //  CORE FUNCTIONS (add, edit, delete, etc.)
-        // ===================================================================
+        // ================================================================
+        // CORE FUNCTIONS (add, edit, delete, etc.)
+        // ================================================================
         function addMenuItem() {
             if (!isOnline) { showAlert('Offline, tidak bisa tambah menu','danger'); return; }
             if (!auth.currentUser) return;
@@ -1409,15 +1424,21 @@
                 .catch(err => showAlert('Gagal simpan','danger'));
         }
 
-        // ===================================================================
-        //  TABLE MANAGEMENT
-        // ===================================================================
+        // ================================================================
+        // TABLE MANAGEMENT
+        // ================================================================
         function addTable() {
+            if (!isOnline) { showAlert('Offline','danger'); return; }
             const number = document.getElementById('newTableNumber').value.trim();
             const area = document.getElementById('newTableArea').value;
             if (!number) { showAlert('Nomor meja harus diisi!','danger'); return; }
             if (tables.some(t => t.number === number)) { showAlert('Nomor sudah ada!','warning'); return; }
-            db.collection('tables').add({ number, area }).then(() => { document.getElementById('addTableModal').style.display = 'none'; document.getElementById('newTableNumber').value = ''; showAlert('Meja ditambahkan!','success'); }).catch(err => showAlert('Gagal tambah meja','danger'));
+            db.collection('tables').add({ number, area }).then(() => { 
+                document.getElementById('addTableModal').style.display = 'none'; 
+                document.getElementById('newTableNumber').value = ''; 
+                showAlert('Meja ditambahkan!','success'); 
+                // Refresh table list manually if needed (listener will handle)
+            }).catch(err => showAlert('Gagal tambah meja','danger'));
         }
 
         function updateTableArea(id, area) {
@@ -1432,6 +1453,7 @@
         }
 
         function importTablesFromCSV() {
+            if (!isOnline) { showAlert('Offline','danger'); return; }
             const text = document.getElementById('importTableCsvText').value.trim();
             if (!text) { showAlert('Masukkan data CSV','warning'); return; }
             const lines = text.split('\n');
@@ -1451,27 +1473,52 @@
                 added++;
             });
             if (!added) { showAlert('Tidak ada data valid (mungkin duplikat)','warning'); return; }
-            batch.commit().then(() => { document.getElementById('importTableCsvModal').style.display = 'none'; document.getElementById('importTableCsvText').value = ''; showAlert('Berhasil tambah '+added+' meja','success'); }).catch(err => showAlert('Gagal import','danger'));
+            batch.commit()
+                .then(() => {
+                    document.getElementById('importTableCsvModal').style.display = 'none';
+                    document.getElementById('importTableCsvText').value = '';
+                    showAlert('Berhasil tambah '+added+' meja','success');
+                })
+                .catch(err => {
+                    console.error('Import CSV error:', err);
+                    showAlert('Gagal import: '+err.message,'danger');
+                });
         }
 
-        // ===================================================================
-        //  SELECT TABLE MODAL
-        // ===================================================================
+        // ================================================================
+        // SELECT TABLE MODAL
+        // ================================================================
         function openSelectTableModal() {
             if (!currentOrder.reservationDate) { showAlert('Pilih tanggal reservasi dulu!','danger'); return; }
-            db.collection('tables').get().then(snap => {
-                tables = []; snap.forEach(d => tables.push({id:d.id,...d.data()}));
-                db.collection('reservations').where('reservationDate','==',currentOrder.reservationDate).get().then(resSnap => {
+            // Pastikan data meja sudah dimuat, jika belum muat ulang
+            if (!tables.length) {
+                db.collection('tables').get().then(snap => {
+                    tables = [];
+                    snap.forEach(d => tables.push({id:d.id,...d.data()}));
+                    proceedOpenSelectTable();
+                }).catch(err => { showAlert('Gagal memuat data meja','danger'); console.error(err); });
+            } else {
+                proceedOpenSelectTable();
+            }
+        }
+
+        function proceedOpenSelectTable() {
+            db.collection('reservations').where('reservationDate','==',currentOrder.reservationDate).get()
+                .then(resSnap => {
                     const occupied = [];
                     resSnap.forEach(d => { if (d.data().tables) occupied.push(...d.data().tables); });
                     renderTableSelection(occupied);
                     document.getElementById('selectTableModal').style.display = 'flex';
-                });
-            });
+                })
+                .catch(err => { showAlert('Gagal memuat reservasi','danger'); console.error(err); });
         }
 
         function renderTableSelection(occupied) {
             const container = document.getElementById('tableSelectionContainer');
+            if (!tables.length) {
+                container.innerHTML = '<div class="empty-state"><i class="fas fa-chair"></i><h3>Belum ada meja</h3></div>';
+                return;
+            }
             const groups = { non: [], smoking: [], tambahan: [] };
             tables.forEach(t => groups[t.area].push(t));
             let html = '';
@@ -1523,9 +1570,9 @@
             }
         }
 
-        // ===================================================================
-        //  ORDER FUNCTIONS
-        // ===================================================================
+        // ================================================================
+        // ORDER FUNCTIONS
+        // ================================================================
         function addItemToOrder() {
             const name = document.getElementById('searchMenuOrder').value.trim();
             const qty = parseInt(document.getElementById('itemQuantityOrder').value);
@@ -1725,9 +1772,9 @@
             showAlert('Pesanan dihapus','success');
         }
 
-        // ===================================================================
-        //  TAKEAWAY FUNCTIONS (mirip order)
-        // ===================================================================
+        // ================================================================
+        // TAKEAWAY FUNCTIONS
+        // ================================================================
         function addItemToTakeaway() {
             const name = document.getElementById('searchMenuTakeaway').value.trim();
             const qty = parseInt(document.getElementById('itemQuantityTakeaway').value);
@@ -1878,9 +1925,9 @@
             showAlert('Takeaway dihapus','success');
         }
 
-        // ===================================================================
-        //  RESERVATIONS (aktif & lama)
-        // ===================================================================
+        // ================================================================
+        // RESERVATIONS
+        // ================================================================
         function loadReservations(filterDate) {
             const today = getTodayLocal();
             const activeContainer = document.getElementById('activeReservationsContainer');
@@ -1998,9 +2045,9 @@
             db.collection('reservations').doc(id).delete().then(() => showAlert('Reservasi dihapus','success')).catch(err => showAlert('Gagal hapus','danger'));
         }
 
-        // ===================================================================
-        //  DP FUNCTIONS
-        // ===================================================================
+        // ================================================================
+        // DP FUNCTIONS
+        // ================================================================
         function openAddDpModal(id) {
             document.getElementById('dpModalTitle').innerText = 'Tambah Uang Muka (DP)';
             document.getElementById('dpReservationId').value = id;
@@ -2042,9 +2089,9 @@
                 .catch(err => showAlert('Gagal simpan DP','danger'));
         }
 
-        // ===================================================================
-        //  PERIOD DELETE
-        // ===================================================================
+        // ================================================================
+        // PERIOD DELETE
+        // ================================================================
         function deleteReservasiPeriod() {
             const dari = document.getElementById('deleteReservasiDari').value;
             const sampai = document.getElementById('deleteReservasiSampai').value;
@@ -2071,9 +2118,9 @@
             batch.commit().then(() => showAlert('Berhasil hapus '+target.length+' takeaway','success')).catch(err => showAlert('Gagal hapus','danger'));
         }
 
-        // ===================================================================
-        //  TAKEAWAY LIST
-        // ===================================================================
+        // ================================================================
+        // TAKEAWAY LIST
+        // ================================================================
         function loadTakeawayList() {
             const container = document.getElementById('takeawayListContainer');
             const search = document.getElementById('searchTakeaway')?.value.toLowerCase() || '';
@@ -2129,9 +2176,9 @@
             db.collection('takeaway').doc(id).delete().then(() => showAlert('Takeaway dihapus','success')).catch(err => showAlert('Gagal hapus','danger'));
         }
 
-        // ===================================================================
-        //  REPORT
-        // ===================================================================
+        // ================================================================
+        // REPORT
+        // ================================================================
         function generateDailyReport() {
             const date = document.getElementById('reportDate').value;
             const sort = document.getElementById('reportSort').value;
@@ -2193,9 +2240,9 @@
             document.getElementById('reportResult').innerHTML = html;
         }
 
-        // ===================================================================
-        //  MENU DETAIL (dengan notes)
-        // ===================================================================
+        // ================================================================
+        // MENU DETAIL (dengan notes)
+        // ================================================================
         function showMenuDetail(menuName, reportDate) {
             const withDp = reservations.filter(r => r.reservationDate === reportDate && r.dpAmount != null);
             const items = [];
@@ -2250,19 +2297,31 @@
             document.getElementById('menuDetailModal').style.display = 'flex';
         }
 
-        // ===================================================================
-        //  CHECK TABLE AVAILABILITY
-        // ===================================================================
+        // ================================================================
+        // CHECK TABLE AVAILABILITY
+        // ================================================================
         function checkTableAvailability() {
             const date = document.getElementById('checkDate').value;
             if (!date) { showAlert('Pilih tanggal','danger'); return; }
-            Promise.all([db.collection('tables').get(), db.collection('reservations').where('reservationDate','==',date).get()])
-                .then(([tSnap, rSnap]) => {
-                    const allTables = []; tSnap.forEach(d => allTables.push({id:d.id,...d.data()}));
+            // Pastikan data meja tersedia
+            if (!tables.length) {
+                db.collection('tables').get().then(snap => {
+                    tables = [];
+                    snap.forEach(d => tables.push({id:d.id,...d.data()}));
+                    proceedCheckAvailability(date);
+                }).catch(err => { showAlert('Gagal memuat data meja','danger'); console.error(err); });
+            } else {
+                proceedCheckAvailability(date);
+            }
+        }
+
+        function proceedCheckAvailability(date) {
+            db.collection('reservations').where('reservationDate','==',date).get()
+                .then(rSnap => {
                     const occupied = [];
                     rSnap.forEach(d => { if (d.data().tables) occupied.push(...d.data().tables); });
                     const groups = { non:[], smoking:[], tambahan:[] };
-                    allTables.forEach(t => groups[t.area].push(t));
+                    tables.forEach(t => groups[t.area].push(t));
                     let html = `<h3>Ketersediaan Meja ${new Date(date).toLocaleDateString('id-ID')}</h3>`;
                     const areaNames = { non:'Non Smoking', smoking:'Smoking', tambahan:'Tambahan' };
                     Object.keys(groups).forEach(area => {
@@ -2278,7 +2337,7 @@
                     });
                     document.getElementById('availabilityResult').innerHTML = html;
                 })
-                .catch(err => { console.error(err); showAlert('Gagal memuat data','danger'); });
+                .catch(err => { showAlert('Gagal memuat reservasi','danger'); console.error(err); });
         }
 
         function createReservationFromTable(tableNumber, date) {
@@ -2312,9 +2371,9 @@
             document.getElementById('reservationDetailModal').style.display = 'flex';
         }
 
-        // ===================================================================
-        //  IMPORT / EXPORT
-        // ===================================================================
+        // ================================================================
+        // IMPORT / EXPORT
+        // ================================================================
         function downloadTemplateCSV() {
             const csv = "nama_menu,harga\nNasi Goreng Special,25000\nAyam Bakar Pedas,35000\nEs Teh Manis,8000";
             const blob = new Blob([csv], { type:'text/csv' });
@@ -2382,9 +2441,9 @@
             }).catch(err => showAlert('Gagal import','danger'));
         }
 
-        // ===================================================================
-        //  AUTOCOMPLETE
-        // ===================================================================
+        // ================================================================
+        // AUTOCOMPLETE
+        // ================================================================
         function showAutocomplete(searchTerm, type) {
             const list = document.getElementById('autocompleteList'+type.charAt(0).toUpperCase()+type.slice(1));
             if (!searchTerm.trim()) { list.style.display = 'none'; return; }
@@ -2405,9 +2464,9 @@
             });
         }
 
-        // ===================================================================
-        //  INITIAL LOAD
-        // ===================================================================
+        // ================================================================
+        // INITIAL LOAD
+        // ================================================================
         console.log('Sistem Reservasi Restoran siap digunakan.');
     </script>
 </body>
