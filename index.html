@@ -1119,14 +1119,22 @@
             db.collection('categories').orderBy('name').onSnapshot(snap => { categories = []; snap.forEach(d => categories.push({id:d.id,...d.data()})); loadCategories(); renderCategoryCheckboxes(); });
             db.collection('reservations').orderBy('reservationDate','desc').onSnapshot(snap => { reservations = []; snap.forEach(d => reservations.push({id:d.id,...d.data()})); loadReservations(); updateBadges(); });
             db.collection('takeaway').orderBy('orderDate','desc').onSnapshot(snap => { takeawayOrders = []; snap.forEach(d => takeawayOrders.push({id:d.id,...d.data()})); loadTakeawayList(); updateBadges(); });
-            db.collection('tables').onSnapshot(snap => { 
+            // Perbaikan: listener untuk tables selalu update dan render ulang
+            db.collection('tables').orderBy('number').onSnapshot(snap => { 
                 tables = []; 
                 snap.forEach(d => tables.push({id:d.id,...d.data()})); 
-                // Jika sub-meja aktif, render ulang
-                const subMeja = document.getElementById('sub-meja');
-                if (subMeja && subMeja.classList.contains('active')) {
-                    renderTablesList();
+                // Render ulang setiap kali ada perubahan
+                renderTablesList();
+                // Jika modal pilih meja terbuka, refresh juga
+                const modal = document.getElementById('selectTableModal');
+                if (modal.style.display === 'flex') {
+                    // Refresh konten modal jika terbuka
+                    const date = currentOrder.reservationDate;
+                    if (date) {
+                        proceedOpenSelectTable();
+                    }
                 }
+                // Jika cek meja sedang ditampilkan, refresh juga (opsional)
             });
         }
 
@@ -1136,10 +1144,18 @@
             db.collection('categories').orderBy('name').get().then(snap => { categories = []; snap.forEach(d => categories.push({id:d.id,...d.data()})); loadCategories(); });
             db.collection('reservations').orderBy('reservationDate','desc').get().then(snap => { reservations = []; snap.forEach(d => reservations.push({id:d.id,...d.data()})); loadReservations(); updateBadges(); });
             db.collection('takeaway').orderBy('orderDate','desc').get().then(snap => { takeawayOrders = []; snap.forEach(d => takeawayOrders.push({id:d.id,...d.data()})); loadTakeawayList(); updateBadges(); });
+            // Perbaikan: selalu muat data meja
+            loadTables();
+        }
+
+        // Fungsi terpisah untuk memuat data meja
+        function loadTables() {
+            if (!auth.currentUser) return;
             db.collection('tables').orderBy('number').get().then(snap => { 
                 tables = []; 
                 snap.forEach(d => tables.push({id:d.id,...d.data()})); 
-                // Jika sub-meja aktif, render
+                renderTablesList();
+                // Jika sub meja aktif, pastikan render
                 const subMeja = document.getElementById('sub-meja');
                 if (subMeja && subMeja.classList.contains('active')) {
                     renderTablesList();
@@ -1571,13 +1587,18 @@
         // ================================================================
         function openSelectTableModal() {
             if (!currentOrder.reservationDate) { showAlert('Pilih tanggal reservasi dulu!','danger'); return; }
-            // Pastikan data meja sudah dimuat, jika belum muat ulang
+            // Perbaikan: pastikan data meja sudah dimuat
             if (!tables.length) {
-                db.collection('tables').get().then(snap => {
-                    tables = [];
-                    snap.forEach(d => tables.push({id:d.id,...d.data()}));
-                    proceedOpenSelectTable();
-                }).catch(err => { showAlert('Gagal memuat data meja','danger'); console.error(err); });
+                loadTables();
+                // Tunggu sebentar agar data termuat, lalu buka
+                showAlert('Memuat data meja...','info');
+                setTimeout(() => {
+                    if (tables.length) {
+                        proceedOpenSelectTable();
+                    } else {
+                        showAlert('Gagal memuat data meja, coba lagi','danger');
+                    }
+                }, 800);
             } else {
                 proceedOpenSelectTable();
             }
@@ -2384,13 +2405,17 @@
         function checkTableAvailability() {
             const date = document.getElementById('checkDate').value;
             if (!date) { showAlert('Pilih tanggal','danger'); return; }
-            // Pastikan data meja tersedia
+            // Perbaikan: pastikan data meja sudah dimuat
             if (!tables.length) {
-                db.collection('tables').get().then(snap => {
-                    tables = [];
-                    snap.forEach(d => tables.push({id:d.id,...d.data()}));
-                    proceedCheckAvailability(date);
-                }).catch(err => { showAlert('Gagal memuat data meja','danger'); console.error(err); });
+                loadTables();
+                showAlert('Memuat data meja...','info');
+                setTimeout(() => {
+                    if (tables.length) {
+                        proceedCheckAvailability(date);
+                    } else {
+                        showAlert('Gagal memuat data meja, coba lagi','danger');
+                    }
+                }, 800);
             } else {
                 proceedCheckAvailability(date);
             }
