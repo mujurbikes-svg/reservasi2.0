@@ -520,11 +520,11 @@
             <!-- TAB 1: DATA MASTER -->
             <div id="tab-master" class="tab-content">
                 <div class="sub-tabs" id="subTabsMaster">
-                    <button class="sub-tab active" data-sub="menu">Data Menu</button>
+                    <button class="sub-tab" data-sub="menu">Data Menu</button>
                     <button class="sub-tab" data-sub="kategori">Kategori</button>
                     <button class="sub-tab" data-sub="meja">Manajemen Meja</button>
                 </div>
-                <div id="sub-menu" class="sub-content active">
+                <div id="sub-menu" class="sub-content">
                     <h2 style="margin-bottom:15px;font-size:1.1rem;">Data Menu Restoran</h2>
                     <div class="import-export-section">
                         <h3>Import/Export</h3>
@@ -578,11 +578,11 @@
             <!-- TAB 2: RESERVASI -->
             <div id="tab-reservasi" class="tab-content">
                 <div class="sub-tabs" id="subTabsReservasi">
-                    <button class="sub-tab active" data-sub="buat">Buat Pesanan</button>
+                    <button class="sub-tab" data-sub="buat">Buat Pesanan</button>
                     <button class="sub-tab" data-sub="aktif">Reservasi Aktif</button>
                     <button class="sub-tab" data-sub="lama">Reservasi Lama</button>
                 </div>
-                <div id="sub-buat" class="sub-content active">
+                <div id="sub-buat" class="sub-content">
                     <h2 style="margin-bottom:15px;font-size:1.1rem;">Buat Pesanan Baru</h2>
                     <div class="form-row">
                         <div class="form-group"><label for="customerName">Nama Pemesan:</label><input type="text" id="customerName" class="form-control" placeholder="Masukkan nama pemesan"></div>
@@ -662,10 +662,10 @@
             <!-- TAB 3: TAKEAWAY -->
             <div id="tab-takeaway" class="tab-content">
                 <div class="sub-tabs" id="subTabsTakeaway">
-                    <button class="sub-tab active" data-sub="buat-takeaway">Buat Takeaway</button>
+                    <button class="sub-tab" data-sub="buat-takeaway">Buat Takeaway</button>
                     <button class="sub-tab" data-sub="list-takeaway">List Takeaway</button>
                 </div>
-                <div id="sub-buat-takeaway" class="sub-content active">
+                <div id="sub-buat-takeaway" class="sub-content">
                     <h2 style="margin-bottom:15px;font-size:1.1rem;">Pesanan Takeaway</h2>
                     <div class="form-group"><label for="customerNameTakeaway">Nama Pemesan (opsional):</label><input type="text" id="customerNameTakeaway" class="form-control" placeholder="Masukkan nama pemesan"></div>
                     <div class="form-group">
@@ -725,9 +725,9 @@
             <!-- TAB 4: LAPORAN -->
             <div id="tab-laporan" class="tab-content">
                 <div class="sub-tabs" id="subTabsLaporan">
-                    <button class="sub-tab active" data-sub="harian">Laporan Harian</button>
+                    <button class="sub-tab" data-sub="harian">Laporan Harian</button>
                 </div>
-                <div id="sub-harian" class="sub-content active">
+                <div id="sub-harian" class="sub-content">
                     <h2 style="margin-bottom:15px;font-size:1.1rem;">Laporan Harian (Reservasi dengan DP)</h2>
                     <div class="form-row">
                         <div class="form-group"><label for="reportDate">Pilih Tanggal:</label><input type="date" id="reportDate" class="form-control"></div>
@@ -741,9 +741,9 @@
             <!-- TAB 5: CEK MEJA -->
             <div id="tab-cekmeja" class="tab-content">
                 <div class="sub-tabs" id="subTabsCekMeja">
-                    <button class="sub-tab active" data-sub="cek">Cek Ketersediaan</button>
+                    <button class="sub-tab" data-sub="cek">Cek Ketersediaan</button>
                 </div>
-                <div id="sub-cek" class="sub-content active">
+                <div id="sub-cek" class="sub-content">
                     <h2 style="margin-bottom:15px;font-size:1.1rem;">Cek Ketersediaan Meja</h2>
                     <div class="form-group"><label for="checkDate">Pilih Tanggal:</label><input type="date" id="checkDate" class="form-control"></div>
                     <button id="checkAvailabilityBtn" class="btn btn-success"><i class="fas fa-search"></i> Tampilkan</button>
@@ -930,6 +930,19 @@
         }
 
         // ================================================================
+        // TAB STATE PERSISTENCE
+        // ================================================================
+        function saveTabState(tabId, subId) {
+            localStorage.setItem('resto_tab', tabId);
+            localStorage.setItem('resto_sub', subId || '');
+        }
+        function restoreTabState() {
+            const tabId = localStorage.getItem('resto_tab') || 'master';
+            const subId = localStorage.getItem('resto_sub') || '';
+            return { tabId, subId };
+        }
+
+        // ================================================================
         // AUTH
         // ================================================================
         auth.onAuthStateChanged(user => {
@@ -944,8 +957,11 @@
                 document.getElementById('filterReservationDate').value = today;
                 loadAllData();
                 setupFirebaseListeners();
-                // Restore tab setelah login
-                restoreActiveTab();
+                // Restore tab setelah data dimuat
+                setTimeout(() => {
+                    const { tabId, subId } = restoreTabState();
+                    activateTab(tabId, subId);
+                }, 300);
             } else {
                 document.getElementById('loginContainer').style.display = 'block';
                 document.getElementById('appContainer').style.display = 'none';
@@ -967,26 +983,6 @@
             });
         });
         document.getElementById('logoutBtn').addEventListener('click', () => auth.signOut());
-
-        // ================================================================
-        // TAB PERSISTENCE
-        // ================================================================
-        function saveActiveTab(tabId) {
-            localStorage.setItem('restoActiveTab', tabId);
-        }
-        function restoreActiveTab() {
-            const saved = localStorage.getItem('restoActiveTab');
-            if (saved) {
-                const navItem = document.querySelector(`.bottom-nav .nav-item[data-tab="${saved}"]`);
-                if (navItem) navItem.click();
-            }
-        }
-        // Simpan tab saat navigasi
-        document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                saveActiveTab(this.dataset.tab);
-            });
-        });
 
         // ================================================================
         // CONNECTION STATUS
@@ -1021,22 +1017,95 @@
         let currentTakeaway = { id:null, customerName:'', items:[], total:0 };
 
         // ================================================================
-        // NAVIGATION (sub-tabs also save)
+        // NAVIGATION FUNCTIONS
         // ================================================================
-        // Bottom nav click already saved above
+        function activateTab(tabId, subId) {
+            // Bottom nav
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(n => n.classList.remove('active'));
+            const navBtn = document.querySelector(`.bottom-nav .nav-item[data-tab="${tabId}"]`);
+            if (navBtn) navBtn.classList.add('active');
 
+            // Tab content
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            const tabContent = document.getElementById('tab-'+tabId);
+            if (tabContent) tabContent.classList.add('active');
+
+            // Sub-tabs
+            const subTabs = tabContent ? tabContent.querySelectorAll('.sub-tab') : [];
+            if (subTabs.length) {
+                // Cari sub yang cocok
+                let found = false;
+                subTabs.forEach(st => st.classList.remove('active'));
+                if (subId) {
+                    subTabs.forEach(st => {
+                        if (st.dataset.sub === subId) {
+                            st.classList.add('active');
+                            found = true;
+                        }
+                    });
+                }
+                if (!found) {
+                    subTabs[0].classList.add('active');
+                    subId = subTabs[0].dataset.sub;
+                }
+                // Sub content
+                const subs = tabContent.querySelectorAll('.sub-content');
+                subs.forEach(sc => sc.classList.remove('active'));
+                const targetSub = document.getElementById('sub-'+subId);
+                if (targetSub) targetSub.classList.add('active');
+
+                // Jika sub yang aktif adalah meja, render ulang
+                if (subId === 'meja') {
+                    renderTablesList();
+                }
+            }
+            saveTabState(tabId, subId);
+        }
+
+        // Event listeners untuk bottom nav
+        document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const tabId = this.dataset.tab;
+                // Ambil sub pertama dari tab yang aktif
+                const tabContent = document.getElementById('tab-'+tabId);
+                let subId = '';
+                if (tabContent) {
+                    const activeSub = tabContent.querySelector('.sub-tab.active');
+                    if (activeSub) subId = activeSub.dataset.sub;
+                    else {
+                        const firstSub = tabContent.querySelector('.sub-tab');
+                        if (firstSub) subId = firstSub.dataset.sub;
+                    }
+                }
+                activateTab(tabId, subId);
+            });
+        });
+
+        // Event listeners untuk sub-tabs
         document.querySelectorAll('.sub-tabs').forEach(group => {
             const tabs = group.querySelectorAll('.sub-tab');
             const parent = group.parentElement;
             tabs.forEach(tab => {
                 tab.addEventListener('click', function() {
                     const subId = this.dataset.sub;
+                    // Cari tab utama
+                    let tabId = 'master';
+                    const parentTab = parent.closest('.tab-content');
+                    if (parentTab) {
+                        const id = parentTab.id;
+                        if (id.startsWith('tab-')) tabId = id.replace('tab-', '');
+                    }
+                    // Aktifkan sub
                     tabs.forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
                     parent.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
-                    const target = document.getElementById('sub-'+subId);
-                    if (target) target.classList.add('active');
-                    // Save sub-tab also? optional
+                    const targetSub = document.getElementById('sub-'+subId);
+                    if (targetSub) targetSub.classList.add('active');
+
+                    // Jika sub adalah meja, render ulang
+                    if (subId === 'meja') renderTablesList();
+
+                    saveTabState(tabId, subId);
                 });
             });
         });
@@ -1046,41 +1115,18 @@
         // ================================================================
         function setupFirebaseListeners() {
             if (!auth.currentUser) return;
-            db.collection('menu').orderBy('name').onSnapshot(snap => { 
-                menuItems = []; 
-                snap.forEach(d => menuItems.push({id:d.id,...d.data()})); 
-                loadMenuItems(); 
-                updateMenuCount(); 
-                renderCategoryCheckboxes(); 
-            });
-            db.collection('categories').orderBy('name').onSnapshot(snap => { 
-                categories = []; 
-                snap.forEach(d => categories.push({id:d.id,...d.data()})); 
-                loadCategories(); 
-                renderCategoryCheckboxes(); 
-            });
-            db.collection('reservations').orderBy('reservationDate','desc').onSnapshot(snap => { 
-                reservations = []; 
-                snap.forEach(d => reservations.push({id:d.id,...d.data()})); 
-                loadReservations(); 
-                updateBadges(); 
-            });
-            db.collection('takeaway').orderBy('orderDate','desc').onSnapshot(snap => { 
-                takeawayOrders = []; 
-                snap.forEach(d => takeawayOrders.push({id:d.id,...d.data()})); 
-                loadTakeawayList(); 
-                updateBadges(); 
-            });
-            // ========== PERBAIKAN: listener tables dengan render langsung ==========
+            db.collection('menu').orderBy('name').onSnapshot(snap => { menuItems = []; snap.forEach(d => menuItems.push({id:d.id,...d.data()})); loadMenuItems(); updateMenuCount(); renderCategoryCheckboxes(); });
+            db.collection('categories').orderBy('name').onSnapshot(snap => { categories = []; snap.forEach(d => categories.push({id:d.id,...d.data()})); loadCategories(); renderCategoryCheckboxes(); });
+            db.collection('reservations').orderBy('reservationDate','desc').onSnapshot(snap => { reservations = []; snap.forEach(d => reservations.push({id:d.id,...d.data()})); loadReservations(); updateBadges(); });
+            db.collection('takeaway').orderBy('orderDate','desc').onSnapshot(snap => { takeawayOrders = []; snap.forEach(d => takeawayOrders.push({id:d.id,...d.data()})); loadTakeawayList(); updateBadges(); });
             db.collection('tables').onSnapshot(snap => { 
                 tables = []; 
                 snap.forEach(d => tables.push({id:d.id,...d.data()})); 
-                // Render jika sub-meja aktif
+                // Jika sub-meja aktif, render ulang
                 const subMeja = document.getElementById('sub-meja');
                 if (subMeja && subMeja.classList.contains('active')) {
                     renderTablesList();
                 }
-                // Jika sedang dalam pemilihan meja, bisa refresh? tidak perlu
             });
         }
 
@@ -1090,10 +1136,10 @@
             db.collection('categories').orderBy('name').get().then(snap => { categories = []; snap.forEach(d => categories.push({id:d.id,...d.data()})); loadCategories(); });
             db.collection('reservations').orderBy('reservationDate','desc').get().then(snap => { reservations = []; snap.forEach(d => reservations.push({id:d.id,...d.data()})); loadReservations(); updateBadges(); });
             db.collection('takeaway').orderBy('orderDate','desc').get().then(snap => { takeawayOrders = []; snap.forEach(d => takeawayOrders.push({id:d.id,...d.data()})); loadTakeawayList(); updateBadges(); });
-            // Load tables
             db.collection('tables').orderBy('number').get().then(snap => { 
                 tables = []; 
                 snap.forEach(d => tables.push({id:d.id,...d.data()})); 
+                // Jika sub-meja aktif, render
                 const subMeja = document.getElementById('sub-meja');
                 if (subMeja && subMeja.classList.contains('active')) {
                     renderTablesList();
@@ -1169,7 +1215,7 @@
             const container = document.getElementById('tablesListContainer');
             if (!container) return;
             if (!tables.length) { 
-                container.innerHTML = '<div class="empty-state"><i class="fas fa-chair"></i><h3>Belum ada meja</h3></div>'; 
+                container.innerHTML = '<div class="empty-state"><i class="fas fa-chair"></i><h3>Belum ada meja</h3><p>Tambahkan meja menggunakan tombol di atas</p></div>'; 
                 return; 
             }
             container.innerHTML = tables.sort((a,b) => a.number.localeCompare(b.number, undefined, {numeric:true})).map(t => `
@@ -1521,12 +1567,12 @@
         }
 
         // ================================================================
-        // SELECT TABLE MODAL (fixed)
+        // SELECT TABLE MODAL
         // ================================================================
         function openSelectTableModal() {
             if (!currentOrder.reservationDate) { showAlert('Pilih tanggal reservasi dulu!','danger'); return; }
-            // Pastikan data meja sudah dimuat
-            if (tables.length === 0) {
+            // Pastikan data meja sudah dimuat, jika belum muat ulang
+            if (!tables.length) {
                 db.collection('tables').get().then(snap => {
                     tables = [];
                     snap.forEach(d => tables.push({id:d.id,...d.data()}));
@@ -1579,6 +1625,7 @@
             const idx = currentOrder.tables.indexOf(number);
             if (idx === -1) currentOrder.tables.push(number);
             else currentOrder.tables.splice(idx, 1);
+            // toggle class
             document.querySelectorAll('#tableSelectionContainer .table-card').forEach(card => {
                 if (card.dataset.number === number) card.classList.toggle('selected');
             });
@@ -1605,7 +1652,7 @@
         }
 
         // ================================================================
-        // ORDER FUNCTIONS (unchanged)
+        // ORDER FUNCTIONS
         // ================================================================
         function addItemToOrder() {
             const name = document.getElementById('searchMenuOrder').value.trim();
@@ -1807,7 +1854,7 @@
         }
 
         // ================================================================
-        // TAKEAWAY FUNCTIONS (same as before)
+        // TAKEAWAY FUNCTIONS
         // ================================================================
         function addItemToTakeaway() {
             const name = document.getElementById('searchMenuTakeaway').value.trim();
@@ -2332,7 +2379,7 @@
         }
 
         // ================================================================
-        // CHECK TABLE AVAILABILITY (fixed)
+        // CHECK TABLE AVAILABILITY
         // ================================================================
         function checkTableAvailability() {
             const date = document.getElementById('checkDate').value;
@@ -2504,4 +2551,4 @@
         console.log('Sistem Reservasi Restoran siap digunakan.');
     </script>
 </body>
-</html>
+    </html>
