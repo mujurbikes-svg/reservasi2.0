@@ -434,6 +434,16 @@
         .period-delete-section { background-color: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #ffeaa7; }
         .period-delete-section .form-row { margin-bottom: 0; }
 
+        /* ===== CHANGE LIST (Konfirmasi Edit) ===== */
+        .change-item { margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed #ddd; }
+        .change-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .change-label { font-weight: bold; color: #2c3e50; margin-bottom: 4px; }
+        .change-value { font-size: 0.9rem; }
+        .change-item-line { padding: 2px 0; font-family: 'Courier New', monospace; }
+        .change-plus { color: #27ae60; }
+        .change-minus { color: #e74c3c; }
+        .change-tilde { color: #f39c12; }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 600px) {
             .form-row { flex-direction: column; gap: 10px; }
@@ -873,6 +883,137 @@
             </div>
         </div>
 
+        <!-- ================= MODAL EDIT RESERVASI (BARU) ================= -->
+        <div id="editReservationModal" class="modal">
+            <div class="modal-content" style="max-width:620px;">
+                <div class="modal-header">
+                    <div class="modal-title"><i class="fas fa-edit"></i> Edit Reservasi</div>
+                    <button class="modal-close" id="closeEditReservationModal">&times;</button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nama Pemesan:</label>
+                        <input type="text" id="editResCustomerName" class="form-control" placeholder="Nama pemesan">
+                    </div>
+                    <div class="form-group">
+                        <label>Tanggal Reservasi:</label>
+                        <input type="date" id="editResDate" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Meja (klik untuk pilih/lepas):</label>
+                    <div id="editResTablesGrid" class="tables-grid" style="grid-template-columns:repeat(auto-fill,minmax(60px,1fr));"></div>
+                    <div id="editResSelectedTables" class="selected-tables" style="display:none;margin-top:8px;">Meja terpilih: <span id="editResSelectedTablesList"></span></div>
+                </div>
+                <div class="form-group">
+                    <label>Cari Menu:</label>
+                    <div class="autocomplete-container">
+                        <input type="text" id="editResSearchMenu" class="form-control" placeholder="Ketik nama menu...">
+                        <div id="editResAutocompleteList" class="autocomplete-list"></div>
+                    </div>
+                </div>
+                <div class="add-to-order-container">
+                    <div class="form-group">
+                        <label>Jumlah:</label>
+                        <div class="quantity-controls">
+                            <button type="button" class="quantity-btn" id="editResDecQty">-</button>
+                            <input type="number" id="editResQty" class="quantity-input" value="1" min="1">
+                            <button type="button" class="quantity-btn" id="editResIncQty">+</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Catatan:</label>
+                        <input type="text" id="editResNotes" class="form-control" placeholder="pedas, tanpa bawang">
+                    </div>
+                    <div class="form-group" style="display:flex;align-items:flex-end;">
+                        <button id="editResAddItemBtn" class="btn btn-secondary small-add-btn"><i class="fas fa-cart-plus"></i> Tambah</button>
+                    </div>
+                </div>
+                <h4 style="margin-top:15px;margin-bottom:8px;font-size:0.95rem;">Daftar Pesanan (<span id="editResItemsCount">0</span> item)</h4>
+                <div id="editResItemsContainer"></div>
+                <div id="editResTotalSection" class="total-section">Total: Rp <span id="editResTotal">0</span></div>
+                <div class="btn-group" style="margin-top:15px;">
+                    <button id="editResSaveBtn" class="btn btn-success"><i class="fas fa-save"></i> Simpan Pesanan</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="editResConfirmModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">Konfirmasi Perubahan</div>
+                    <button class="modal-close" id="closeEditResConfirmModal">&times;</button>
+                </div>
+                <p style="margin-bottom:8px;">Apakah yakin ingin mengubah data reservasi ini?</p>
+                <p style="margin-bottom:10px;"><strong>Perubahan yang dilakukan:</strong></p>
+                <div id="editResChangesList" style="margin:10px 0;padding:10px;background:#f8f9fa;border-radius:8px;max-height:300px;overflow-y:auto;"></div>
+                <div class="btn-group" style="margin-top:15px;">
+                    <button id="editResConfirmSaveBtn" class="btn btn-success"><i class="fas fa-check"></i> Simpan Perubahan</button>
+                    <button id="editResConfirmBackBtn" class="btn btn-secondary"><i class="fas fa-times"></i> Kembali</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= MODAL EDIT TAKEAWAY (BARU) ================= -->
+        <div id="editTakeawayModal" class="modal">
+            <div class="modal-content" style="max-width:620px;">
+                <div class="modal-header">
+                    <div class="modal-title"><i class="fas fa-edit"></i> Edit Takeaway</div>
+                    <button class="modal-close" id="closeEditTakeawayModal">&times;</button>
+                </div>
+                <div class="form-group">
+                    <label>Nama Pemesan (opsional):</label>
+                    <input type="text" id="editTakeawayCustomerName" class="form-control" placeholder="Nama pemesan">
+                </div>
+                <div class="form-group">
+                    <label>Cari Menu:</label>
+                    <div class="autocomplete-container">
+                        <input type="text" id="editTakeawaySearchMenu" class="form-control" placeholder="Ketik nama menu...">
+                        <div id="editTakeawayAutocompleteList" class="autocomplete-list"></div>
+                    </div>
+                </div>
+                <div class="add-to-order-container">
+                    <div class="form-group">
+                        <label>Jumlah:</label>
+                        <div class="quantity-controls">
+                            <button type="button" class="quantity-btn" id="editTakeawayDecQty">-</button>
+                            <input type="number" id="editTakeawayQty" class="quantity-input" value="1" min="1">
+                            <button type="button" class="quantity-btn" id="editTakeawayIncQty">+</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Catatan:</label>
+                        <input type="text" id="editTakeawayNotes" class="form-control" placeholder="pedas, tanpa bawang">
+                    </div>
+                    <div class="form-group" style="display:flex;align-items:flex-end;">
+                        <button id="editTakeawayAddItemBtn" class="btn btn-secondary small-add-btn"><i class="fas fa-cart-plus"></i> Tambah</button>
+                    </div>
+                </div>
+                <h4 style="margin-top:15px;margin-bottom:8px;font-size:0.95rem;">Daftar Pesanan (<span id="editTakeawayItemsCount">0</span> item)</h4>
+                <div id="editTakeawayItemsContainer"></div>
+                <div id="editTakeawayTotalSection" class="total-section">Total: Rp <span id="editTakeawayTotal">0</span></div>
+                <div class="btn-group" style="margin-top:15px;">
+                    <button id="editTakeawaySaveBtn" class="btn btn-success"><i class="fas fa-save"></i> Simpan Pesanan</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="editTakeawayConfirmModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title">Konfirmasi Perubahan</div>
+                    <button class="modal-close" id="closeEditTakeawayConfirmModal">&times;</button>
+                </div>
+                <p style="margin-bottom:8px;">Apakah yakin ingin mengubah data takeaway ini?</p>
+                <p style="margin-bottom:10px;"><strong>Perubahan yang dilakukan:</strong></p>
+                <div id="editTakeawayChangesList" style="margin:10px 0;padding:10px;background:#f8f9fa;border-radius:8px;max-height:300px;overflow-y:auto;"></div>
+                <div class="btn-group" style="margin-top:15px;">
+                    <button id="editTakeawayConfirmSaveBtn" class="btn btn-success"><i class="fas fa-check"></i> Simpan Perubahan</button>
+                    <button id="editTakeawayConfirmBackBtn" class="btn btn-secondary"><i class="fas fa-times"></i> Kembali</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Alert & Install -->
         <div id="alertContainer" style="position:fixed;top:20px;right:20px;z-index:1002;max-width:300px;"></div>
         <div id="installButton" style="display:none;"><i class="fas fa-download"></i> Install App</div>
@@ -928,6 +1069,14 @@
             try { document.execCommand('copy'); showAlert(msg||'Berhasil disalin!','success'); } catch(e) { showAlert('Gagal menyalin!','danger'); }
             document.body.removeChild(ta);
         }
+        function calculateDP(total) {
+            const rounded = Math.round((total * 0.5) / 50000) * 50000;
+            return Math.max(50000, rounded);
+        }
+        function formatDateID(dateStr) {
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('id-ID');
+        }
 
         // ================================================================
         // TAB STATE PERSISTENCE
@@ -955,9 +1104,11 @@
                 document.getElementById('reportDate').value = today;
                 document.getElementById('checkDate').value = today;
                 document.getElementById('filterReservationDate').value = today;
+                // Batasi tanggal reservasi baru: hari ini ke depan
+                document.getElementById('reservationDate').min = today;
+                document.getElementById('editResDate').min = today;
                 loadAllData();
                 setupFirebaseListeners();
-                // Restore tab setelah data dimuat
                 setTimeout(() => {
                     const { tabId, subId } = restoreTabState();
                     activateTab(tabId, subId);
@@ -1015,58 +1166,45 @@
         let menuItems = [], categories = [], reservations = [], takeawayOrders = [], tables = [];
         let currentOrder = { id:null, customerName:'', reservationDate:'', items:[], total:0, tables:[], dpAmount:null, dpMethod:null, dpOrder:null };
         let currentTakeaway = { id:null, customerName:'', items:[], total:0 };
+        let editingReservation = null;   // state untuk modal Edit Reservasi
+        let editingTakeaway = null;      // state untuk modal Edit Takeaway
 
         // ================================================================
         // NAVIGATION FUNCTIONS
         // ================================================================
         function activateTab(tabId, subId) {
-            // Bottom nav
             document.querySelectorAll('.bottom-nav .nav-item').forEach(n => n.classList.remove('active'));
             const navBtn = document.querySelector(`.bottom-nav .nav-item[data-tab="${tabId}"]`);
             if (navBtn) navBtn.classList.add('active');
 
-            // Tab content
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             const tabContent = document.getElementById('tab-'+tabId);
             if (tabContent) tabContent.classList.add('active');
 
-            // Sub-tabs
             const subTabs = tabContent ? tabContent.querySelectorAll('.sub-tab') : [];
             if (subTabs.length) {
-                // Cari sub yang cocok
                 let found = false;
                 subTabs.forEach(st => st.classList.remove('active'));
                 if (subId) {
-                    subTabs.forEach(st => {
-                        if (st.dataset.sub === subId) {
-                            st.classList.add('active');
-                            found = true;
-                        }
-                    });
+                    subTabs.forEach(st => { if (st.dataset.sub === subId) { st.classList.add('active'); found = true; } });
                 }
                 if (!found) {
                     subTabs[0].classList.add('active');
                     subId = subTabs[0].dataset.sub;
                 }
-                // Sub content
                 const subs = tabContent.querySelectorAll('.sub-content');
                 subs.forEach(sc => sc.classList.remove('active'));
                 const targetSub = document.getElementById('sub-'+subId);
                 if (targetSub) targetSub.classList.add('active');
 
-                // Jika sub yang aktif adalah meja, render ulang
-                if (subId === 'meja') {
-                    renderTablesList();
-                }
+                if (subId === 'meja') renderTablesList();
             }
             saveTabState(tabId, subId);
         }
 
-        // Event listeners untuk bottom nav
         document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
             item.addEventListener('click', function() {
                 const tabId = this.dataset.tab;
-                // Ambil sub pertama dari tab yang aktif
                 const tabContent = document.getElementById('tab-'+tabId);
                 let subId = '';
                 if (tabContent) {
@@ -1081,30 +1219,24 @@
             });
         });
 
-        // Event listeners untuk sub-tabs
         document.querySelectorAll('.sub-tabs').forEach(group => {
             const tabs = group.querySelectorAll('.sub-tab');
             const parent = group.parentElement;
             tabs.forEach(tab => {
                 tab.addEventListener('click', function() {
                     const subId = this.dataset.sub;
-                    // Cari tab utama
                     let tabId = 'master';
                     const parentTab = parent.closest('.tab-content');
                     if (parentTab) {
                         const id = parentTab.id;
                         if (id.startsWith('tab-')) tabId = id.replace('tab-', '');
                     }
-                    // Aktifkan sub
                     tabs.forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
                     parent.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
                     const targetSub = document.getElementById('sub-'+subId);
                     if (targetSub) targetSub.classList.add('active');
-
-                    // Jika sub adalah meja, render ulang
                     if (subId === 'meja') renderTablesList();
-
                     saveTabState(tabId, subId);
                 });
             });
@@ -1119,22 +1251,15 @@
             db.collection('categories').orderBy('name').onSnapshot(snap => { categories = []; snap.forEach(d => categories.push({id:d.id,...d.data()})); loadCategories(); renderCategoryCheckboxes(); });
             db.collection('reservations').orderBy('reservationDate','desc').onSnapshot(snap => { reservations = []; snap.forEach(d => reservations.push({id:d.id,...d.data()})); loadReservations(); updateBadges(); });
             db.collection('takeaway').orderBy('orderDate','desc').onSnapshot(snap => { takeawayOrders = []; snap.forEach(d => takeawayOrders.push({id:d.id,...d.data()})); loadTakeawayList(); updateBadges(); });
-            // Perbaikan: listener untuk tables selalu update dan render ulang
-            db.collection('tables').orderBy('number').onSnapshot(snap => { 
-                tables = []; 
-                snap.forEach(d => tables.push({id:d.id,...d.data()})); 
-                // Render ulang setiap kali ada perubahan
+            db.collection('tables').orderBy('number').onSnapshot(snap => {
+                tables = [];
+                snap.forEach(d => tables.push({id:d.id,...d.data()}));
                 renderTablesList();
-                // Jika modal pilih meja terbuka, refresh juga
                 const modal = document.getElementById('selectTableModal');
                 if (modal.style.display === 'flex') {
-                    // Refresh konten modal jika terbuka
                     const date = currentOrder.reservationDate;
-                    if (date) {
-                        proceedOpenSelectTable();
-                    }
+                    if (date) proceedOpenSelectTable();
                 }
-                // Jika cek meja sedang ditampilkan, refresh juga (opsional)
             });
         }
 
@@ -1144,22 +1269,17 @@
             db.collection('categories').orderBy('name').get().then(snap => { categories = []; snap.forEach(d => categories.push({id:d.id,...d.data()})); loadCategories(); });
             db.collection('reservations').orderBy('reservationDate','desc').get().then(snap => { reservations = []; snap.forEach(d => reservations.push({id:d.id,...d.data()})); loadReservations(); updateBadges(); });
             db.collection('takeaway').orderBy('orderDate','desc').get().then(snap => { takeawayOrders = []; snap.forEach(d => takeawayOrders.push({id:d.id,...d.data()})); loadTakeawayList(); updateBadges(); });
-            // Perbaikan: selalu muat data meja
             loadTables();
         }
 
-        // Fungsi terpisah untuk memuat data meja
         function loadTables() {
             if (!auth.currentUser) return;
-            db.collection('tables').orderBy('number').get().then(snap => { 
-                tables = []; 
-                snap.forEach(d => tables.push({id:d.id,...d.data()})); 
+            db.collection('tables').orderBy('number').get().then(snap => {
+                tables = [];
+                snap.forEach(d => tables.push({id:d.id,...d.data()}));
                 renderTablesList();
-                // Jika sub meja aktif, pastikan render
                 const subMeja = document.getElementById('sub-meja');
-                if (subMeja && subMeja.classList.contains('active')) {
-                    renderTablesList();
-                }
+                if (subMeja && subMeja.classList.contains('active')) renderTablesList();
             }).catch(err => console.error('Error loading tables:', err));
         }
 
@@ -1174,7 +1294,7 @@
         }
 
         // ================================================================
-        // MENU FUNCTIONS
+        // MENU / CATEGORY / TABLE (tidak berubah)
         // ================================================================
         function renderCategoryCheckboxes() {
             const c1 = document.getElementById('menuCategoriesContainer');
@@ -1205,9 +1325,6 @@
         }
         function updateMenuCount() { document.getElementById('menuCount').textContent = menuItems.length; }
 
-        // ================================================================
-        // CATEGORY FUNCTIONS
-        // ================================================================
         function loadCategories() {
             const container = document.getElementById('categoriesListContainer');
             if (!container) return;
@@ -1224,15 +1341,12 @@
             `).join('');
         }
 
-        // ================================================================
-        // TABLE FUNCTIONS (Manajemen Meja)
-        // ================================================================
         function renderTablesList() {
             const container = document.getElementById('tablesListContainer');
             if (!container) return;
-            if (!tables.length) { 
-                container.innerHTML = '<div class="empty-state"><i class="fas fa-chair"></i><h3>Belum ada meja</h3><p>Tambahkan meja menggunakan tombol di atas</p></div>'; 
-                return; 
+            if (!tables.length) {
+                container.innerHTML = '<div class="empty-state"><i class="fas fa-chair"></i><h3>Belum ada meja</h3><p>Tambahkan meja menggunakan tombol di atas</p></div>';
+                return;
             }
             container.innerHTML = tables.sort((a,b) => a.number.localeCompare(b.number, undefined, {numeric:true})).map(t => `
                 <div class="table-item" data-id="${t.id}">
@@ -1285,11 +1399,15 @@
             // Autocomplete
             document.getElementById('searchMenuOrder').addEventListener('input', function() { showAutocomplete(this.value, 'order'); });
             document.getElementById('searchMenuTakeaway').addEventListener('input', function() { showAutocomplete(this.value, 'takeaway'); });
+            document.getElementById('editResSearchMenu').addEventListener('input', function() { showAutocomplete(this.value, 'editRes'); });
+            document.getElementById('editTakeawaySearchMenu').addEventListener('input', function() { showAutocomplete(this.value, 'editTakeaway'); });
+
             document.addEventListener('click', function(e) {
-                ['autocompleteListOrder','autocompleteListTakeaway'].forEach(id => {
+                ['autocompleteListOrder','autocompleteListTakeaway','editResAutocompleteList','editTakeawayAutocompleteList'].forEach(id => {
                     const list = document.getElementById(id);
-                    const input = document.getElementById(id.replace('autocompleteList','searchMenu'));
-                    if (list && input && e.target !== input && e.target !== list) list.style.display = 'none';
+                    const inputId = id.replace('autocompleteList','searchMenu').replace('editResAutocompleteList','editResSearchMenu').replace('editTakeawayAutocompleteList','editTakeawaySearchMenu');
+                    const input = document.getElementById(inputId);
+                    if (list && input && e.target !== input && e.target !== list && !list.contains(e.target)) list.style.display = 'none';
                 });
             });
 
@@ -1373,7 +1491,13 @@
             document.getElementById('closeListModalBtn').addEventListener('click', () => document.getElementById('listPesananModal').style.display = 'none');
             document.getElementById('copyModalListPesananBtn').addEventListener('click', function() { copyTextToClipboard(document.getElementById('modalListPesananContent').textContent, 'List disalin!'); });
 
-            document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; }));
+            // Generic modal: tutup saat klik area luar (kecuali modal edit & konfirmasi)
+            const skipCloseOnOutside = ['editReservationModal','editResConfirmModal','editTakeawayModal','editTakeawayConfirmModal'];
+            document.querySelectorAll('.modal').forEach(m => {
+                if (skipCloseOnOutside.includes(m.id)) return;
+                m.addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
+            });
+
             document.getElementById('closeMenuDetailModal').addEventListener('click', () => document.getElementById('menuDetailModal').style.display = 'none');
             document.getElementById('menuDetailModal').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
             document.getElementById('closeReservationDetailModal').addEventListener('click', () => document.getElementById('reservationDetailModal').style.display = 'none');
@@ -1382,10 +1506,81 @@
             // Period delete
             document.getElementById('deleteReservasiPeriodBtn').addEventListener('click', deleteReservasiPeriod);
             document.getElementById('deleteTakeawayPeriodBtn').addEventListener('click', deleteTakeawayPeriod);
+
+            // ============================================================
+            // EDIT RESERVASI MODAL (BARU)
+            // ============================================================
+            document.getElementById('editResCustomerName').addEventListener('input', function() {
+                if (editingReservation) editingReservation.customerName = this.value;
+            });
+            document.getElementById('editResDate').addEventListener('change', function() {
+                if (!editingReservation) return;
+                editingReservation.reservationDate = this.value;
+                renderEditResTables();
+            });
+            document.getElementById('editResDecQty').addEventListener('click', function() {
+                let i = document.getElementById('editResQty'); let v = parseInt(i.value)||1; if (v>1) i.value = v-1;
+            });
+            document.getElementById('editResIncQty').addEventListener('click', function() {
+                let i = document.getElementById('editResQty'); let v = parseInt(i.value)||1; i.value = v+1;
+            });
+            document.getElementById('editResAddItemBtn').addEventListener('click', addItemToEditRes);
+            document.getElementById('editResSaveBtn').addEventListener('click', saveEditReservation);
+            document.getElementById('closeEditReservationModal').addEventListener('click', function() {
+                if (confirm('Apakah ingin membatalkan Edit reservasi?')) closeEditReservationModal();
+            });
+            document.getElementById('editReservationModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    if (confirm('Apakah ingin membatalkan Edit reservasi?')) closeEditReservationModal();
+                }
+            });
+            document.getElementById('closeEditResConfirmModal').addEventListener('click', function() {
+                document.getElementById('editResConfirmModal').style.display = 'none';
+            });
+            document.getElementById('editResConfirmBackBtn').addEventListener('click', function() {
+                document.getElementById('editResConfirmModal').style.display = 'none';
+            });
+            document.getElementById('editResConfirmSaveBtn').addEventListener('click', confirmSaveEditReservation);
+            document.getElementById('editResConfirmModal').addEventListener('click', function(e) {
+                if (e.target === this) this.style.display = 'none';
+            });
+
+            // ============================================================
+            // EDIT TAKEAWAY MODAL (BARU)
+            // ============================================================
+            document.getElementById('editTakeawayCustomerName').addEventListener('input', function() {
+                if (editingTakeaway) editingTakeaway.customerName = this.value;
+            });
+            document.getElementById('editTakeawayDecQty').addEventListener('click', function() {
+                let i = document.getElementById('editTakeawayQty'); let v = parseInt(i.value)||1; if (v>1) i.value = v-1;
+            });
+            document.getElementById('editTakeawayIncQty').addEventListener('click', function() {
+                let i = document.getElementById('editTakeawayQty'); let v = parseInt(i.value)||1; i.value = v+1;
+            });
+            document.getElementById('editTakeawayAddItemBtn').addEventListener('click', addItemToEditTakeaway);
+            document.getElementById('editTakeawaySaveBtn').addEventListener('click', saveEditTakeaway);
+            document.getElementById('closeEditTakeawayModal').addEventListener('click', function() {
+                if (confirm('Apakah ingin membatalkan Edit takeaway?')) closeEditTakeawayModal();
+            });
+            document.getElementById('editTakeawayModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    if (confirm('Apakah ingin membatalkan Edit takeaway?')) closeEditTakeawayModal();
+                }
+            });
+            document.getElementById('closeEditTakeawayConfirmModal').addEventListener('click', function() {
+                document.getElementById('editTakeawayConfirmModal').style.display = 'none';
+            });
+            document.getElementById('editTakeawayConfirmBackBtn').addEventListener('click', function() {
+                document.getElementById('editTakeawayConfirmModal').style.display = 'none';
+            });
+            document.getElementById('editTakeawayConfirmSaveBtn').addEventListener('click', confirmSaveEditTakeaway);
+            document.getElementById('editTakeawayConfirmModal').addEventListener('click', function(e) {
+                if (e.target === this) this.style.display = 'none';
+            });
         });
 
         // ================================================================
-        // CORE FUNCTIONS (add, edit, delete, etc.)
+        // MENU / CATEGORY CORE FUNCTIONS
         // ================================================================
         function addMenuItem() {
             if (!isOnline) { showAlert('Offline, tidak bisa tambah menu','danger'); return; }
@@ -1531,10 +1726,10 @@
             const area = document.getElementById('newTableArea').value;
             if (!number) { showAlert('Nomor meja harus diisi!','danger'); return; }
             if (tables.some(t => t.number === number)) { showAlert('Nomor sudah ada!','warning'); return; }
-            db.collection('tables').add({ number, area }).then(() => { 
-                document.getElementById('addTableModal').style.display = 'none'; 
-                document.getElementById('newTableNumber').value = ''; 
-                showAlert('Meja ditambahkan!','success'); 
+            db.collection('tables').add({ number, area }).then(() => {
+                document.getElementById('addTableModal').style.display = 'none';
+                document.getElementById('newTableNumber').value = '';
+                showAlert('Meja ditambahkan!','success');
             }).catch(err => showAlert('Gagal tambah meja','danger'));
         }
 
@@ -1583,25 +1778,18 @@
         }
 
         // ================================================================
-        // SELECT TABLE MODAL
+        // SELECT TABLE MODAL (untuk Buat Pesanan baru)
         // ================================================================
         function openSelectTableModal() {
             if (!currentOrder.reservationDate) { showAlert('Pilih tanggal reservasi dulu!','danger'); return; }
-            // Perbaikan: pastikan data meja sudah dimuat
             if (!tables.length) {
                 loadTables();
-                // Tunggu sebentar agar data termuat, lalu buka
                 showAlert('Memuat data meja...','info');
                 setTimeout(() => {
-                    if (tables.length) {
-                        proceedOpenSelectTable();
-                    } else {
-                        showAlert('Gagal memuat data meja, coba lagi','danger');
-                    }
+                    if (tables.length) proceedOpenSelectTable();
+                    else showAlert('Gagal memuat data meja, coba lagi','danger');
                 }, 800);
-            } else {
-                proceedOpenSelectTable();
-            }
+            } else proceedOpenSelectTable();
         }
 
         function proceedOpenSelectTable() {
@@ -1646,7 +1834,6 @@
             const idx = currentOrder.tables.indexOf(number);
             if (idx === -1) currentOrder.tables.push(number);
             else currentOrder.tables.splice(idx, 1);
-            // toggle class
             document.querySelectorAll('#tableSelectionContainer .table-card').forEach(card => {
                 if (card.dataset.number === number) card.classList.toggle('selected');
             });
@@ -1673,7 +1860,7 @@
         }
 
         // ================================================================
-        // ORDER FUNCTIONS
+        // ORDER FUNCTIONS (Buat Pesanan Baru - tidak berubah)
         // ================================================================
         function addItemToOrder() {
             const name = document.getElementById('searchMenuOrder').value.trim();
@@ -1758,6 +1945,8 @@
             let price = 0;
             if (type === 'order' && idx >= 0 && currentOrder.items[idx]) price = currentOrder.items[idx].price;
             else if (type === 'takeaway' && idx >= 0 && currentTakeaway.items[idx]) price = currentTakeaway.items[idx].price;
+            else if (type === 'editRes' && editingReservation && editingReservation.items[idx]) price = editingReservation.items[idx].price;
+            else if (type === 'editTakeaway' && editingTakeaway && editingTakeaway.items[idx]) price = editingTakeaway.items[idx].price;
             document.getElementById('editItemSubtotal').textContent = 'Rp '+(price * q).toLocaleString('id-ID');
         }
 
@@ -1773,12 +1962,24 @@
                 currentOrder.items[idx].subtotal = currentOrder.items[idx].price * q;
                 updateOrderTotal();
                 loadOrderItems();
-            } else {
+            } else if (type === 'takeaway') {
                 currentTakeaway.items[idx].quantity = q;
                 currentTakeaway.items[idx].notes = notes;
                 currentTakeaway.items[idx].subtotal = currentTakeaway.items[idx].price * q;
                 updateTakeawayTotal();
                 loadTakeawayItems();
+            } else if (type === 'editRes') {
+                editingReservation.items[idx].quantity = q;
+                editingReservation.items[idx].notes = notes;
+                editingReservation.items[idx].subtotal = editingReservation.items[idx].price * q;
+                updateEditResTotal();
+                loadEditResItems();
+            } else if (type === 'editTakeaway') {
+                editingTakeaway.items[idx].quantity = q;
+                editingTakeaway.items[idx].notes = notes;
+                editingTakeaway.items[idx].subtotal = editingTakeaway.items[idx].price * q;
+                updateEditTakeawayTotal();
+                loadEditTakeawayItems();
             }
             document.getElementById('editItemModal').style.display = 'none';
             showAlert('Item diupdate!','success');
@@ -1821,9 +2022,19 @@
             return text;
         }
 
-        function calculateDP(total) {
-            const rounded = Math.round((total * 0.5) / 50000) * 50000;
-            return Math.max(50000, rounded);
+        function generateInvoiceFor(name, date, items, total) {
+            const d = new Date(date);
+            const formatted = d.toLocaleDateString('id-ID', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+            const dp = calculateDP(total);
+            let text = "Berikut rekapan pesanannya:\n\nNama : "+name+"\nTanggal Reservasi : "+formatted+"\n\nPesanan:\n";
+            items.forEach(item => {
+                const qty = item.quantity.toString().padStart(2);
+                let n = item.name;
+                if (item.notes) n += ' ('+item.notes+')';
+                text += `${qty}   ${n} Rp${item.subtotal.toLocaleString('id-ID')}\n`;
+            });
+            text += `\nTOTAL: Rp${total.toLocaleString('id-ID')}\nDP minimal: Rp${dp.toLocaleString('id-ID')}\n\nMohon untuk memeriksa kembali pesanannya 🙏`;
+            return text;
         }
 
         function saveOrder() {
@@ -1875,7 +2086,7 @@
         }
 
         // ================================================================
-        // TAKEAWAY FUNCTIONS
+        // TAKEAWAY FUNCTIONS (Buat Takeaway Baru - tidak berubah)
         // ================================================================
         function addItemToTakeaway() {
             const name = document.getElementById('searchMenuTakeaway').value.trim();
@@ -2028,7 +2239,7 @@
         }
 
         // ================================================================
-        // RESERVATIONS
+        // RESERVATIONS (tampilan & operasi list)
         // ================================================================
         function loadReservations(filterDate) {
             const today = getTodayLocal();
@@ -2116,40 +2327,556 @@
             return text;
         }
 
+        // ================================================================
+        // EDIT RESERVATION - MODAL FLOW (BARU)
+        // ================================================================
         function editReservation(id) {
-            const r = reservations.find(r => r.id === id);
+            openEditReservationModal(id);
+        }
+
+        function openEditReservationModal(id) {
+            const r = reservations.find(x => x.id === id);
             if (!r) return;
-            currentOrder = {
+            if (!isOnline) { showAlert('Offline, tidak bisa edit','danger'); return; }
+            editingReservation = {
                 id: r.id,
                 customerName: r.customerName,
                 reservationDate: r.reservationDate,
                 items: r.items.map(i => ({...i})),
                 total: r.total,
-                tables: r.tables || [],
-                dpAmount: r.dpAmount || null,
-                dpMethod: r.dpMethod || null,
-                dpOrder: r.dpOrder || null
+                tables: [...(r.tables || [])],
+                originalData: JSON.parse(JSON.stringify(r))
             };
-            document.getElementById('customerName').value = currentOrder.customerName;
-            document.getElementById('reservationDate').value = currentOrder.reservationDate;
-            updateSelectedTablesDisplay();
-            loadOrderItems();
-            const invoice = generateInvoice();
-            if (invoice) { document.getElementById('invoiceOutput').textContent = invoice; document.getElementById('invoiceSection').style.display = 'block'; }
-            document.querySelector('[data-tab="reservasi"]').click();
-            document.querySelector('#sub-buat .sub-tab')?.click();
-            showAlert('Pesanan siap diedit','info');
+            document.getElementById('editResCustomerName').value = r.customerName;
+            document.getElementById('editResDate').value = r.reservationDate;
+            document.getElementById('editResSearchMenu').value = '';
+            document.getElementById('editResQty').value = 1;
+            document.getElementById('editResNotes').value = '';
+            document.getElementById('editResAutocompleteList').style.display = 'none';
+            // Pastikan min date tetap di-set
+            document.getElementById('editResDate').min = getTodayLocal();
+            renderEditResTables();
+            loadEditResItems();
+            updateEditResTotal();
+            document.getElementById('editReservationModal').style.display = 'flex';
         }
 
+        function closeEditReservationModal() {
+            editingReservation = null;
+            document.getElementById('editReservationModal').style.display = 'none';
+            document.getElementById('editResConfirmModal').style.display = 'none';
+        }
+
+        function renderEditResTables() {
+            const container = document.getElementById('editResTablesGrid');
+            if (!editingReservation) return;
+            if (!tables.length) {
+                container.innerHTML = '<p style="font-size:0.9rem;">Belum ada meja.</p>';
+                updateEditResSelectedTables();
+                return;
+            }
+            db.collection('reservations').where('reservationDate','==',editingReservation.reservationDate).get()
+                .then(snap => {
+                    const occupied = [];
+                    snap.forEach(d => {
+                        if (d.id !== editingReservation.id && d.data().tables) occupied.push(...d.data().tables);
+                    });
+                    // Buang meja yang sekarang ditempati reservasi lain
+                    editingReservation.tables = editingReservation.tables.filter(t => !occupied.includes(t));
+                    updateEditResSelectedTables();
+
+                    const groups = { non: [], smoking: [], tambahan: [] };
+                    tables.forEach(t => groups[t.area].push(t));
+                    const areaNames = { non: 'Non Smoking', smoking: 'Smoking', tambahan: 'Tambahan' };
+                    const colors = { non: '#3498db', smoking: '#e74c3c', tambahan: '#f39c12' };
+                    let html = '';
+                    Object.keys(groups).forEach(area => {
+                        if (!groups[area].length) return;
+                        html += `<h4 style="margin:8px 0 4px;font-size:0.78rem;color:${colors[area]};">${areaNames[area]}</h4><div class="tables-grid">`;
+                        groups[area].sort((a,b) => a.number.localeCompare(b.number, undefined, {numeric:true})).forEach(t => {
+                            const occ = occupied.includes(t.number);
+                            const sel = editingReservation.tables.includes(t.number);
+                            html += `<div class="table-card area-${t.area} ${occ?'occupied':''} ${sel?'selected':''}" data-number="${t.number}" onclick="toggleEditResTable('${t.number}', ${occ})">${t.number}</div>`;
+                        });
+                        html += '</div>';
+                    });
+                    container.innerHTML = html;
+                })
+                .catch(err => {
+                    container.innerHTML = '<p style="color:#e74c3c;font-size:0.85rem;">Gagal memuat meja: '+err.message+'</p>';
+                });
+        }
+
+        function toggleEditResTable(number, occupied) {
+            if (occupied || !editingReservation) return;
+            const idx = editingReservation.tables.indexOf(number);
+            if (idx === -1) editingReservation.tables.push(number);
+            else editingReservation.tables.splice(idx, 1);
+            document.querySelectorAll('#editResTablesGrid .table-card').forEach(card => {
+                if (card.dataset.number === number) card.classList.toggle('selected');
+            });
+            updateEditResSelectedTables();
+        }
+
+        function updateEditResSelectedTables() {
+            const el = document.getElementById('editResSelectedTables');
+            const list = document.getElementById('editResSelectedTablesList');
+            if (!el || !list) return;
+            if (editingReservation && editingReservation.tables.length) {
+                list.textContent = editingReservation.tables.join(', ');
+                el.style.display = 'block';
+            } else {
+                el.style.display = 'none';
+            }
+        }
+
+        function loadEditResItems() {
+            const container = document.getElementById('editResItemsContainer');
+            const count = document.getElementById('editResItemsCount');
+            if (!container) return;
+            if (!editingReservation || !editingReservation.items.length) {
+                container.innerHTML = '<div class="empty-state" style="padding:20px;"><i class="fas fa-shopping-cart"></i><p style="margin-top:6px;">Belum ada pesanan</p></div>';
+                count.textContent = '0';
+                return;
+            }
+            container.innerHTML = editingReservation.items.map((item, idx) => `
+                <div class="order-item">
+                    <div class="order-details">
+                        <h4>${item.name}</h4>
+                        <div>Rp ${item.price.toLocaleString('id-ID')} x ${item.quantity}</div>
+                        ${item.notes ? `<div class="order-notes"><i class="fas fa-sticky-note"></i> ${item.notes}</div>` : ''}
+                        <div style="font-weight:bold;margin-top:4px;color:#2c3e50;">Subtotal: Rp ${item.subtotal.toLocaleString('id-ID')}</div>
+                    </div>
+                    <div class="order-quantity">
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="changeEditResItemQty(${idx}, -1)">-</button>
+                            <input type="number" class="quantity-input" value="${item.quantity}" min="1" onchange="updateEditResItemQty(${idx}, this.value)">
+                            <button class="quantity-btn" onclick="changeEditResItemQty(${idx}, 1)">+</button>
+                        </div>
+                        <div class="order-item-actions">
+                            <button class="btn btn-sm btn-warning" onclick="editEditResItem(${idx})"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-sm btn-danger" onclick="removeEditResItem(${idx})"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            count.textContent = editingReservation.items.length;
+        }
+
+        function changeEditResItemQty(idx, delta) {
+            if (!editingReservation) return;
+            const newQ = editingReservation.items[idx].quantity + delta;
+            if (newQ < 1) { showAlert('Minimal 1','warning'); return; }
+            editingReservation.items[idx].quantity = newQ;
+            editingReservation.items[idx].subtotal = editingReservation.items[idx].price * newQ;
+            updateEditResTotal();
+            loadEditResItems();
+        }
+
+        function updateEditResItemQty(idx, val) {
+            if (!editingReservation) return;
+            let q = parseInt(val);
+            if (isNaN(q) || q < 1) { showAlert('Minimal 1','danger'); loadEditResItems(); return; }
+            editingReservation.items[idx].quantity = q;
+            editingReservation.items[idx].subtotal = editingReservation.items[idx].price * q;
+            updateEditResTotal();
+            loadEditResItems();
+        }
+
+        function editEditResItem(idx) {
+            if (!editingReservation) return;
+            const item = editingReservation.items[idx];
+            document.getElementById('editItemMenu').value = item.name;
+            document.getElementById('editItemQuantity').value = item.quantity;
+            document.getElementById('editItemNotes').value = item.notes || '';
+            document.getElementById('editItemPrice').textContent = 'Rp ' + item.price.toLocaleString('id-ID');
+            document.getElementById('editItemIndex').value = idx;
+            document.getElementById('editItemModal').setAttribute('data-type','editRes');
+            updateEditItemSubtotal();
+            document.getElementById('editItemModal').style.display = 'flex';
+        }
+
+        function removeEditResItem(idx) {
+            if (!editingReservation) return;
+            if (!confirm('Hapus item ini?')) return;
+            editingReservation.items.splice(idx, 1);
+            updateEditResTotal();
+            loadEditResItems();
+        }
+
+        function updateEditResTotal() {
+            if (!editingReservation) return;
+            editingReservation.total = editingReservation.items.reduce((s, i) => s + i.subtotal, 0);
+            document.getElementById('editResTotal').textContent = editingReservation.total.toLocaleString('id-ID');
+        }
+
+        function addItemToEditRes() {
+            if (!editingReservation) return;
+            const name = document.getElementById('editResSearchMenu').value.trim();
+            const qty = parseInt(document.getElementById('editResQty').value);
+            const notes = document.getElementById('editResNotes').value.trim();
+            if (!name || !qty || qty <= 0) { showAlert('Pilih menu dan jumlah valid!','danger'); return; }
+            const item = menuItems.find(m => m.name.toLowerCase() === name.toLowerCase());
+            if (!item) { showAlert('Menu tidak ditemukan!','danger'); return; }
+            const existing = editingReservation.items.findIndex(i => i.id === item.id && i.notes === notes);
+            if (existing !== -1) {
+                editingReservation.items[existing].quantity += qty;
+                editingReservation.items[existing].subtotal = editingReservation.items[existing].quantity * editingReservation.items[existing].price;
+            } else {
+                editingReservation.items.push({ id: item.id, name: item.name, price: item.price, quantity: qty, notes, subtotal: item.price * qty, categories: item.categories || [] });
+            }
+            updateEditResTotal();
+            loadEditResItems();
+            document.getElementById('editResSearchMenu').value = '';
+            document.getElementById('editResAutocompleteList').style.display = 'none';
+            document.getElementById('editResQty').value = 1;
+            document.getElementById('editResNotes').value = '';
+            showAlert('Item ditambahkan!','success');
+        }
+
+        function generateReservationChanges() {
+            const changes = [];
+            if (!editingReservation) return changes;
+            const orig = editingReservation.originalData;
+
+            // Meja
+            const origTables = (orig.tables || []).slice().sort();
+            const newTables = (editingReservation.tables || []).slice().sort();
+            if (JSON.stringify(origTables) !== JSON.stringify(newTables)) {
+                const fmtT = arr => arr.length ? 'Meja ' + arr.join(', ') : '(kosong)';
+                changes.push({ label: 'Nomor Meja', text: fmtT(origTables) + ' → ' + fmtT(newTables) });
+            }
+
+            // Tanggal
+            if (orig.reservationDate !== editingReservation.reservationDate) {
+                changes.push({ label: 'Tanggal Reservasi', text: formatDateID(orig.reservationDate) + ' → ' + formatDateID(editingReservation.reservationDate) });
+            }
+
+            // Nama
+            if (orig.customerName !== editingReservation.customerName) {
+                changes.push({ label: 'Nama Pemesan', text: orig.customerName + ' → ' + editingReservation.customerName });
+            }
+
+            // Pesanan
+            const origItems = {};
+            (orig.items || []).forEach(i => {
+                const key = i.id + '|' + (i.notes || '');
+                origItems[key] = { ...i };
+            });
+            const newItems = {};
+            (editingReservation.items || []).forEach(i => {
+                const key = i.id + '|' + (i.notes || '');
+                newItems[key] = { ...i };
+            });
+            const allKeys = new Set([...Object.keys(origItems), ...Object.keys(newItems)]);
+            const itemLines = [];
+            allKeys.forEach(key => {
+                const o = origItems[key];
+                const n = newItems[key];
+                const dispName = (o ? o.name : n.name) + ((n && n.notes) || (o && o.notes) ? ' ('+((n&&n.notes)||(o&&o.notes))+')' : '');
+                if (o && !n) itemLines.push({ type:'minus', text: '- ' + o.quantity + ' ' + dispName });
+                else if (!o && n) itemLines.push({ type:'plus', text: '+ ' + n.quantity + ' ' + dispName });
+                else if (o.quantity !== n.quantity) itemLines.push({ type:'tilde', text: '~ ' + dispName + ': ' + o.quantity + ' → ' + n.quantity });
+            });
+            if (itemLines.length) changes.push({ label: 'Pesanan', list: itemLines });
+
+            return changes;
+        }
+
+        function saveEditReservation() {
+            if (!editingReservation) return;
+            if (!editingReservation.customerName.trim()) { showAlert('Nama pemesan harus diisi!','danger'); return; }
+            if (!editingReservation.reservationDate) { showAlert('Tanggal reservasi harus diisi!','danger'); return; }
+            if (!editingReservation.items.length) { showAlert('Pesanan tidak boleh kosong!','danger'); return; }
+            if (editingReservation.reservationDate < getTodayLocal()) { showAlert('Tanggal tidak boleh di masa lalu!','danger'); return; }
+
+            const changes = generateReservationChanges();
+            if (!changes.length) { showAlert('Tidak ada perubahan untuk disimpan','info'); return; }
+
+            const list = document.getElementById('editResChangesList');
+            let html = '';
+            changes.forEach(c => {
+                html += `<div class="change-item"><div class="change-label">${c.label}:</div>`;
+                if (c.list) {
+                    c.list.forEach(l => {
+                        const cls = l.type === 'plus' ? 'change-plus' : l.type === 'minus' ? 'change-minus' : 'change-tilde';
+                        html += `<div class="change-item-line ${cls}">${l.text}</div>`;
+                    });
+                } else {
+                    html += `<div class="change-value">${c.text}</div>`;
+                }
+                html += `</div>`;
+            });
+            list.innerHTML = html;
+            document.getElementById('editResConfirmModal').style.display = 'flex';
+        }
+
+        function confirmSaveEditReservation() {
+            if (!editingReservation) return;
+            if (!isOnline) { showAlert('Offline, tidak bisa simpan','danger'); return; }
+            if (!auth.currentUser) return;
+            const invoice = generateInvoiceFor(editingReservation.customerName, editingReservation.reservationDate, editingReservation.items, editingReservation.total);
+            const data = {
+                customerName: editingReservation.customerName,
+                reservationDate: editingReservation.reservationDate,
+                orderDate: editingReservation.originalData.orderDate || new Date().toISOString(),
+                items: editingReservation.items,
+                total: editingReservation.total,
+                tables: editingReservation.tables || [],
+                dpAmount: editingReservation.originalData.dpAmount || null,
+                dpMethod: editingReservation.originalData.dpMethod || null,
+                dpOrder: editingReservation.originalData.dpOrder || null,
+                invoice: invoice,
+                updatedAt: new Date().toISOString()
+            };
+            const id = editingReservation.id;
+            db.collection('reservations').doc(id).update(data)
+                .then(() => {
+                    showAlert('Reservasi berhasil diupdate!','success');
+                    closeEditReservationModal();
+                })
+                .catch(err => showAlert('Gagal simpan: '+err.message,'danger'));
+        }
+
+        // ================================================================
+        // EDIT TAKEAWAY - MODAL FLOW (BARU)
+        // ================================================================
+        function editTakeawayOrder(id) {
+            openEditTakeawayModal(id);
+        }
+
+        function openEditTakeawayModal(id) {
+            const t = takeawayOrders.find(x => x.id === id);
+            if (!t) return;
+            if (!isOnline) { showAlert('Offline, tidak bisa edit','danger'); return; }
+            editingTakeaway = {
+                id: t.id,
+                customerName: t.customerName,
+                items: t.items.map(i => ({...i})),
+                total: t.total,
+                originalData: JSON.parse(JSON.stringify(t))
+            };
+            document.getElementById('editTakeawayCustomerName').value = t.customerName;
+            document.getElementById('editTakeawaySearchMenu').value = '';
+            document.getElementById('editTakeawayQty').value = 1;
+            document.getElementById('editTakeawayNotes').value = '';
+            document.getElementById('editTakeawayAutocompleteList').style.display = 'none';
+            loadEditTakeawayItems();
+            updateEditTakeawayTotal();
+            document.getElementById('editTakeawayModal').style.display = 'flex';
+        }
+
+        function closeEditTakeawayModal() {
+            editingTakeaway = null;
+            document.getElementById('editTakeawayModal').style.display = 'none';
+            document.getElementById('editTakeawayConfirmModal').style.display = 'none';
+        }
+
+        function loadEditTakeawayItems() {
+            const container = document.getElementById('editTakeawayItemsContainer');
+            const count = document.getElementById('editTakeawayItemsCount');
+            if (!container) return;
+            if (!editingTakeaway || !editingTakeaway.items.length) {
+                container.innerHTML = '<div class="empty-state" style="padding:20px;"><i class="fas fa-shopping-bag"></i><p style="margin-top:6px;">Belum ada pesanan</p></div>';
+                count.textContent = '0';
+                return;
+            }
+            container.innerHTML = editingTakeaway.items.map((item, idx) => `
+                <div class="order-item">
+                    <div class="order-details">
+                        <h4>${item.name}</h4>
+                        <div>Rp ${item.price.toLocaleString('id-ID')} x ${item.quantity}</div>
+                        ${item.notes ? `<div class="order-notes"><i class="fas fa-sticky-note"></i> ${item.notes}</div>` : ''}
+                        <div style="font-weight:bold;margin-top:4px;color:#2c3e50;">Subtotal: Rp ${item.subtotal.toLocaleString('id-ID')}</div>
+                    </div>
+                    <div class="order-quantity">
+                        <div class="quantity-controls">
+                            <button class="quantity-btn" onclick="changeEditTakeawayItemQty(${idx}, -1)">-</button>
+                            <input type="number" class="quantity-input" value="${item.quantity}" min="1" onchange="updateEditTakeawayItemQty(${idx}, this.value)">
+                            <button class="quantity-btn" onclick="changeEditTakeawayItemQty(${idx}, 1)">+</button>
+                        </div>
+                        <div class="order-item-actions">
+                            <button class="btn btn-sm btn-warning" onclick="editEditTakeawayItem(${idx})"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-sm btn-danger" onclick="removeEditTakeawayItem(${idx})"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            count.textContent = editingTakeaway.items.length;
+        }
+
+        function changeEditTakeawayItemQty(idx, delta) {
+            if (!editingTakeaway) return;
+            const newQ = editingTakeaway.items[idx].quantity + delta;
+            if (newQ < 1) { showAlert('Minimal 1','warning'); return; }
+            editingTakeaway.items[idx].quantity = newQ;
+            editingTakeaway.items[idx].subtotal = editingTakeaway.items[idx].price * newQ;
+            updateEditTakeawayTotal();
+            loadEditTakeawayItems();
+        }
+
+        function updateEditTakeawayItemQty(idx, val) {
+            if (!editingTakeaway) return;
+            let q = parseInt(val);
+            if (isNaN(q) || q < 1) { showAlert('Minimal 1','danger'); loadEditTakeawayItems(); return; }
+            editingTakeaway.items[idx].quantity = q;
+            editingTakeaway.items[idx].subtotal = editingTakeaway.items[idx].price * q;
+            updateEditTakeawayTotal();
+            loadEditTakeawayItems();
+        }
+
+        function editEditTakeawayItem(idx) {
+            if (!editingTakeaway) return;
+            const item = editingTakeaway.items[idx];
+            document.getElementById('editItemMenu').value = item.name;
+            document.getElementById('editItemQuantity').value = item.quantity;
+            document.getElementById('editItemNotes').value = item.notes || '';
+            document.getElementById('editItemPrice').textContent = 'Rp ' + item.price.toLocaleString('id-ID');
+            document.getElementById('editItemIndex').value = idx;
+            document.getElementById('editItemModal').setAttribute('data-type','editTakeaway');
+            updateEditItemSubtotal();
+            document.getElementById('editItemModal').style.display = 'flex';
+        }
+
+        function removeEditTakeawayItem(idx) {
+            if (!editingTakeaway) return;
+            if (!confirm('Hapus item ini?')) return;
+            editingTakeaway.items.splice(idx, 1);
+            updateEditTakeawayTotal();
+            loadEditTakeawayItems();
+        }
+
+        function updateEditTakeawayTotal() {
+            if (!editingTakeaway) return;
+            editingTakeaway.total = editingTakeaway.items.reduce((s, i) => s + i.subtotal, 0);
+            document.getElementById('editTakeawayTotal').textContent = editingTakeaway.total.toLocaleString('id-ID');
+        }
+
+        function addItemToEditTakeaway() {
+            if (!editingTakeaway) return;
+            const name = document.getElementById('editTakeawaySearchMenu').value.trim();
+            const qty = parseInt(document.getElementById('editTakeawayQty').value);
+            const notes = document.getElementById('editTakeawayNotes').value.trim();
+            if (!name || !qty || qty <= 0) { showAlert('Pilih menu dan jumlah valid!','danger'); return; }
+            const item = menuItems.find(m => m.name.toLowerCase() === name.toLowerCase());
+            if (!item) { showAlert('Menu tidak ditemukan!','danger'); return; }
+            const existing = editingTakeaway.items.findIndex(i => i.id === item.id && i.notes === notes);
+            if (existing !== -1) {
+                editingTakeaway.items[existing].quantity += qty;
+                editingTakeaway.items[existing].subtotal = editingTakeaway.items[existing].quantity * editingTakeaway.items[existing].price;
+            } else {
+                editingTakeaway.items.push({ id: item.id, name: item.name, price: item.price, quantity: qty, notes, subtotal: item.price * qty, categories: item.categories || [] });
+            }
+            updateEditTakeawayTotal();
+            loadEditTakeawayItems();
+            document.getElementById('editTakeawaySearchMenu').value = '';
+            document.getElementById('editTakeawayAutocompleteList').style.display = 'none';
+            document.getElementById('editTakeawayQty').value = 1;
+            document.getElementById('editTakeawayNotes').value = '';
+            showAlert('Item ditambahkan!','success');
+        }
+
+        function generateTakeawayChanges() {
+            const changes = [];
+            if (!editingTakeaway) return changes;
+            const orig = editingTakeaway.originalData;
+
+            if (orig.customerName !== editingTakeaway.customerName) {
+                changes.push({ label: 'Nama Pemesan', text: orig.customerName + ' → ' + editingTakeaway.customerName });
+            }
+
+            const origItems = {};
+            (orig.items || []).forEach(i => {
+                const key = i.id + '|' + (i.notes || '');
+                origItems[key] = { ...i };
+            });
+            const newItems = {};
+            (editingTakeaway.items || []).forEach(i => {
+                const key = i.id + '|' + (i.notes || '');
+                newItems[key] = { ...i };
+            });
+            const allKeys = new Set([...Object.keys(origItems), ...Object.keys(newItems)]);
+            const itemLines = [];
+            allKeys.forEach(key => {
+                const o = origItems[key];
+                const n = newItems[key];
+                const dispName = (o ? o.name : n.name) + ((n && n.notes) || (o && o.notes) ? ' ('+((n&&n.notes)||(o&&o.notes))+')' : '');
+                if (o && !n) itemLines.push({ type:'minus', text: '- ' + o.quantity + ' ' + dispName });
+                else if (!o && n) itemLines.push({ type:'plus', text: '+ ' + n.quantity + ' ' + dispName });
+                else if (o.quantity !== n.quantity) itemLines.push({ type:'tilde', text: '~ ' + dispName + ': ' + o.quantity + ' → ' + n.quantity });
+            });
+            if (itemLines.length) changes.push({ label: 'Pesanan', list: itemLines });
+
+            return changes;
+        }
+
+        function saveEditTakeaway() {
+            if (!editingTakeaway) return;
+            if (!editingTakeaway.items.length) { showAlert('Pesanan tidak boleh kosong!','danger'); return; }
+            const changes = generateTakeawayChanges();
+            if (!changes.length) { showAlert('Tidak ada perubahan untuk disimpan','info'); return; }
+            const list = document.getElementById('editTakeawayChangesList');
+            let html = '';
+            changes.forEach(c => {
+                html += `<div class="change-item"><div class="change-label">${c.label}:</div>`;
+                if (c.list) {
+                    c.list.forEach(l => {
+                        const cls = l.type === 'plus' ? 'change-plus' : l.type === 'minus' ? 'change-minus' : 'change-tilde';
+                        html += `<div class="change-item-line ${cls}">${l.text}</div>`;
+                    });
+                } else {
+                    html += `<div class="change-value">${c.text}</div>`;
+                }
+                html += `</div>`;
+            });
+            list.innerHTML = html;
+            document.getElementById('editTakeawayConfirmModal').style.display = 'flex';
+        }
+
+        function confirmSaveEditTakeaway() {
+            if (!editingTakeaway) return;
+            if (!isOnline) { showAlert('Offline, tidak bisa simpan','danger'); return; }
+            if (!auth.currentUser) return;
+            const invoice = generateTakeawayInvoiceFor(editingTakeaway.items, editingTakeaway.total);
+            const data = {
+                customerName: editingTakeaway.customerName || 'Tidak ada nama',
+                orderDate: editingTakeaway.originalData.orderDate || new Date().toISOString(),
+                items: editingTakeaway.items,
+                total: editingTakeaway.total,
+                invoice: invoice,
+                updatedAt: new Date().toISOString()
+            };
+            const id = editingTakeaway.id;
+            db.collection('takeaway').doc(id).update(data)
+                .then(() => {
+                    showAlert('Takeaway berhasil diupdate!','success');
+                    closeEditTakeawayModal();
+                })
+                .catch(err => showAlert('Gagal simpan: '+err.message,'danger'));
+        }
+
+        function generateTakeawayInvoiceFor(items, total) {
+            if (!items.length) return '';
+            let text = '';
+            items.forEach(item => {
+                const qty = item.quantity.toString().padStart(2);
+                let name = item.name;
+                if (item.notes) name += ' ('+item.notes+')';
+                text += `${qty}   ${name} Rp${item.subtotal.toLocaleString('id-ID')}\n`;
+            });
+            text += `\nTOTAL: Rp${total.toLocaleString('id-ID')}\n\nMohon untuk memeriksa kembali pesanannya 🙏`;
+            return text;
+        }
+
+        // ================================================================
+        // DELETE, DP, PERIOD, LIST TAKEAWAY, REPORT, dll
+        // ================================================================
         function deleteReservation(id) {
             if (!isOnline) { showAlert('Offline','danger'); return; }
             if (!confirm('Hapus reservasi ini?')) return;
             db.collection('reservations').doc(id).delete().then(() => showAlert('Reservasi dihapus','success')).catch(err => showAlert('Gagal hapus','danger'));
         }
 
-        // ================================================================
-        // DP FUNCTIONS
-        // ================================================================
         function openAddDpModal(id) {
             document.getElementById('dpModalTitle').innerText = 'Tambah Uang Muka (DP)';
             document.getElementById('dpReservationId').value = id;
@@ -2191,9 +2918,6 @@
                 .catch(err => showAlert('Gagal simpan DP','danger'));
         }
 
-        // ================================================================
-        // PERIOD DELETE
-        // ================================================================
         function deleteReservasiPeriod() {
             const dari = document.getElementById('deleteReservasiDari').value;
             const sampai = document.getElementById('deleteReservasiSampai').value;
@@ -2220,9 +2944,6 @@
             batch.commit().then(() => showAlert('Berhasil hapus '+target.length+' takeaway','success')).catch(err => showAlert('Gagal hapus','danger'));
         }
 
-        // ================================================================
-        // TAKEAWAY LIST
-        // ================================================================
         function loadTakeawayList() {
             const container = document.getElementById('takeawayListContainer');
             const search = document.getElementById('searchTakeaway')?.value.toLowerCase() || '';
@@ -2256,31 +2977,12 @@
             document.getElementById('invoiceModal').style.display = 'flex';
         }
 
-        function editTakeawayOrder(id) {
-            const t = takeawayOrders.find(t => t.id === id);
-            if (!t) return;
-            currentTakeaway = {
-                id: t.id,
-                customerName: t.customerName,
-                items: t.items.map(i => ({...i})),
-                total: t.total
-            };
-            document.getElementById('customerNameTakeaway').value = currentTakeaway.customerName;
-            loadTakeawayItems();
-            document.querySelector('[data-tab="takeaway"]').click();
-            document.querySelector('#sub-buat-takeaway .sub-tab')?.click();
-            showAlert('Takeaway siap diedit','info');
-        }
-
         function deleteTakeawayOrder(id) {
             if (!isOnline) { showAlert('Offline','danger'); return; }
             if (!confirm('Hapus takeaway ini?')) return;
             db.collection('takeaway').doc(id).delete().then(() => showAlert('Takeaway dihapus','success')).catch(err => showAlert('Gagal hapus','danger'));
         }
 
-        // ================================================================
-        // REPORT
-        // ================================================================
         function generateDailyReport() {
             const date = document.getElementById('reportDate').value;
             const sort = document.getElementById('reportSort').value;
@@ -2342,9 +3044,6 @@
             document.getElementById('reportResult').innerHTML = html;
         }
 
-        // ================================================================
-        // MENU DETAIL (dengan notes)
-        // ================================================================
         function showMenuDetail(menuName, reportDate) {
             const withDp = reservations.filter(r => r.reservationDate === reportDate && r.dpAmount != null);
             const items = [];
@@ -2369,7 +3068,6 @@
                 groups[key].total += item.quantity;
                 groups[key].details.push(item);
             });
-            // sort details by dpOrder
             Object.keys(groups).forEach(key => {
                 groups[key].details.sort((a,b) => (a.dpOrder==='-'?Infinity:a.dpOrder) - (b.dpOrder==='-'?Infinity:b.dpOrder));
             });
@@ -2399,26 +3097,17 @@
             document.getElementById('menuDetailModal').style.display = 'flex';
         }
 
-        // ================================================================
-        // CHECK TABLE AVAILABILITY
-        // ================================================================
         function checkTableAvailability() {
             const date = document.getElementById('checkDate').value;
             if (!date) { showAlert('Pilih tanggal','danger'); return; }
-            // Perbaikan: pastikan data meja sudah dimuat
             if (!tables.length) {
                 loadTables();
                 showAlert('Memuat data meja...','info');
                 setTimeout(() => {
-                    if (tables.length) {
-                        proceedCheckAvailability(date);
-                    } else {
-                        showAlert('Gagal memuat data meja, coba lagi','danger');
-                    }
+                    if (tables.length) proceedCheckAvailability(date);
+                    else showAlert('Gagal memuat data meja, coba lagi','danger');
                 }, 800);
-            } else {
-                proceedCheckAvailability(date);
-            }
+            } else proceedCheckAvailability(date);
         }
 
         function proceedCheckAvailability(date) {
@@ -2551,29 +3240,43 @@
         // AUTOCOMPLETE
         // ================================================================
         function showAutocomplete(searchTerm, type) {
-            const list = document.getElementById('autocompleteList'+type.charAt(0).toUpperCase()+type.slice(1));
+            const listMap = {
+                'order': 'autocompleteListOrder',
+                'takeaway': 'autocompleteListTakeaway',
+                'editRes': 'editResAutocompleteList',
+                'editTakeaway': 'editTakeawayAutocompleteList'
+            };
+            const inputMap = {
+                'order': 'searchMenuOrder',
+                'takeaway': 'searchMenuTakeaway',
+                'editRes': 'editResSearchMenu',
+                'editTakeaway': 'editTakeawaySearchMenu'
+            };
+            const list = document.getElementById(listMap[type]);
+            const input = document.getElementById(inputMap[type]);
+            if (!list || !input) return;
             if (!searchTerm.trim()) { list.style.display = 'none'; return; }
             const filtered = menuItems.filter(m => m.name.toLowerCase().includes(searchTerm.toLowerCase())).slice(0,10);
             if (!filtered.length) { list.style.display = 'none'; return; }
             list.innerHTML = filtered.map(m => `
                 <div class="autocomplete-item" data-name="${m.name}" data-price="${m.price}">
-                    <div><strong>${m.name.replace(new RegExp(searchTerm,'gi'), '<mark>$&</mark>')}</strong></div>
+                    <div><strong>${m.name.replace(new RegExp(searchTerm.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'gi'), '<mark>$&</mark>')}</strong></div>
                     <div>Rp ${m.price.toLocaleString('id-ID')}</div>
                 </div>
             `).join('');
             list.style.display = 'block';
             list.querySelectorAll('.autocomplete-item').forEach(el => {
                 el.addEventListener('click', function() {
-                    document.getElementById('searchMenu'+type.charAt(0).toUpperCase()+type.slice(1)).value = this.dataset.name;
+                    input.value = this.dataset.name;
                     list.style.display = 'none';
                 });
             });
         }
 
         // ================================================================
-        // INITIAL LOAD
+        // INITIAL
         // ================================================================
-        console.log('Sistem Reservasi Restoran siap digunakan.');
+        console.log('Sistem Reservasi Restoran siap digunakan (versi edit-modal).');
     </script>
 </body>
-    </html>
+</html>
