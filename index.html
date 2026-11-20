@@ -32,7 +32,6 @@
         .status-online { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
         .status-offline { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
 
-        /* ===== BOTTOM NAV ===== */
         .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; display: flex; background: white; border-top: 1px solid #e0e0e0; box-shadow: 0 -2px 10px rgba(0,0,0,0.08); z-index: 1000; max-width: 800px; margin: 0 auto; padding: 4px 0 env(safe-area-inset-bottom, 4px) 0; }
         .bottom-nav .nav-item { flex: 1; text-align: center; padding: 6px 0 4px; font-size: 0.6rem; color: #999; cursor: pointer; transition: all 0.2s; border: none; background: none; position: relative; }
         .bottom-nav .nav-item i { display: block; font-size: 1.3rem; margin-bottom: 2px; }
@@ -40,7 +39,6 @@
         .bottom-nav .nav-item.active i { color: #3498db; }
         .bottom-nav .nav-item .badge { position: absolute; top: 0; right: 50%; transform: translateX(calc(50% + 20px)); background: #e74c3c; color: white; font-size: 0.55rem; padding: 1px 6px; border-radius: 10px; min-width: 18px; }
 
-        /* ===== SUB TABS ===== */
         .sub-tabs { display: flex; background: #f0f2f5; border-radius: 10px; padding: 4px; margin-bottom: 15px; overflow-x: auto; gap: 4px; }
         .sub-tabs .sub-tab { flex: 1; padding: 8px 12px; border: none; background: transparent; border-radius: 8px; font-size: 0.8rem; font-weight: 600; color: #666; cursor: pointer; transition: all 0.3s; white-space: nowrap; min-width: fit-content; }
         .sub-tabs .sub-tab.active { background: white; color: #2c3e50; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
@@ -52,7 +50,6 @@
         .sub-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ===== LOGIN ===== */
         .login-container { background-color: white; border-radius: 12px; padding: 30px 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); max-width: 400px; margin: 40px auto; }
         .login-container h2 { text-align: center; margin-bottom: 30px; color: #2c3e50; }
         .login-container .form-group { margin-bottom: 20px; }
@@ -61,7 +58,6 @@
         .login-container input:focus { outline: none; border-color: #3498db; }
         .error-message { color: #e74c3c; font-size: 0.9rem; margin-top: 10px; text-align: center; }
 
-        /* ===== FORMS ===== */
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #2c3e50; }
         .form-control { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; transition: border 0.3s; }
@@ -70,6 +66,7 @@
         .form-row .form-group { flex: 1; margin-bottom: 0; }
         .btn { display: inline-block; padding: 12px 20px; background-color: #3498db; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; text-align: center; font-size: 1rem; width: 100%; text-decoration: none; }
         .btn:hover { background-color: #2980b9; transform: translateY(-2px); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
         .btn-success { background-color: #27ae60; }
         .btn-success:hover { background-color: #219653; }
         .btn-danger { background-color: #e74c3c; }
@@ -94,7 +91,6 @@
         .alert-info { background-color: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
         .alert-warning { background-color: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
 
-        /* ===== MENU / CATEGORY ===== */
         .menu-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background-color: #f8f9fa; border-radius: 8px; margin-bottom: 8px; }
         .menu-details h4 { font-size: 0.95rem; color: #2c3e50; }
         .menu-price { font-weight: bold; color: #27ae60; font-size: 0.95rem; }
@@ -104,8 +100,9 @@
         .category-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background-color: #f8f9fa; border-radius: 8px; margin-bottom: 8px; }
         .category-name { font-weight: bold; color: #2c3e50; }
 
-        /* ===== ORDER ITEMS ===== */
         .order-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background-color: #f8f9fa; border-radius: 8px; margin-bottom: 8px; flex-wrap: wrap; gap: 8px; }
+        .order-item.unmatched { border-left: 4px solid #e74c3c; background: #fff5f5; }
+        .order-item.unmatched .order-details h4 { color: #e74c3c; }
         .order-details { flex: 1; }
         .order-details h4 { font-size: 0.95rem; color: #2c3e50; }
         .order-notes { font-style: italic; color: #7f8c8d; font-size: 0.8rem; margin-top: 2px; }
@@ -119,7 +116,6 @@
         .add-to-order-container .form-group { margin-bottom: 0; flex: 1; min-width: 120px; }
         .small-add-btn { padding: 8px 12px; height: 40px; font-size: 0.85rem; white-space: nowrap; width: auto; }
 
-        /* ===== RESERVATIONS ===== */
         .reservation-item { padding: 15px; background-color: #f8f9fa; border-radius: 8px; margin-bottom: 12px; border-left: 4px solid #3498db; }
         .past-reservation-item { border-left-color: #7f8c8d; opacity: 0.85; }
         .takeaway-item { border-left-color: #27ae60; }
@@ -131,7 +127,6 @@
         .dp-info i { margin-right: 4px; }
         .dp-missing { color: #e74c3c; font-style: italic; }
 
-        /* ===== TABLES ===== */
         .tables-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; margin-bottom: 15px; }
         .table-card { background-color: white; border: 2px solid #ddd; border-radius: 8px; padding: 12px 8px; text-align: center; cursor: pointer; transition: all 0.2s; font-weight: bold; font-size: 0.9rem; }
         .table-card.selected { background-color: #3498db; color: white; border-color: #2980b9; }
@@ -147,7 +142,6 @@
         .area-dropdown { padding: 6px 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.85rem; }
         .select-table-btn { margin: 5px 0; }
 
-        /* ===== CEK MEJA - meja terisi / hold ===== */
         .table-card.has-owner { height: auto; min-height: 64px; opacity: 1; background-color: #ffe8e8; border-color: #e74c3c; cursor: pointer; }
         .table-owner-name { display: block; font-size: 0.7rem; margin-top: 3px; color: #333; font-weight: normal; word-break: break-word; line-height: 1.2; }
         .table-card.held { background: #fff3cd; border-color: #f39c12; opacity: 1; cursor: pointer; height: auto; min-height: 90px; padding: 8px 6px; font-size: 0.9rem; text-align: left; }
@@ -157,14 +151,12 @@
         .table-hold-info { display: block; font-size: 0.68rem; color: #555; font-weight: normal; line-height: 1.35; word-break: break-word; }
         .table-hold-warn-icon { color: #e74c3c; margin-left: 2px; }
 
-        /* ===== MODALS ===== */
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1001; justify-content: center; align-items: center; padding: 20px; }
         .modal-content { background-color: white; border-radius: 12px; width: 100%; max-width: 500px; max-height: 90vh; overflow: auto; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
         .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
         .modal-title { font-size: 1.2rem; font-weight: bold; color: #2c3e50; }
         .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #7f8c8d; }
 
-        /* ===== IMPORT/EXPORT ===== */
         .import-export-section { background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px; }
         .import-export-section h3 { margin-bottom: 10px; color: #2c3e50; font-size: 1rem; }
         .file-input-container { position: relative; margin-bottom: 10px; }
@@ -175,14 +167,12 @@
         .manual-import-section textarea { width: 100%; min-height: 100px; padding: 10px; border: 1px solid #3498db; border-radius: 5px; font-family: monospace; margin-bottom: 10px; font-size: 0.85rem; }
         .manual-import-section .example { background-color: #f8f9fa; padding: 10px; border-radius: 5px; font-size: 0.8rem; margin-bottom: 10px; }
 
-        /* ===== AUTOCOMPLETE ===== */
         .autocomplete-container { position: relative; }
         .autocomplete-list { position: absolute; z-index: 1000; background-color: white; border: 1px solid #ddd; border-radius: 8px; max-height: 150px; overflow-y: auto; width: 100%; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: none; }
         .autocomplete-item { padding: 8px 12px; cursor: pointer; border-bottom: 1px solid #f0f0f0; font-size: 0.9rem; }
         .autocomplete-item:hover { background-color: #f0f0f0; }
         .autocomplete-item:last-child { border-bottom: none; }
 
-        /* ===== REPORT ===== */
         .report-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9rem; }
         .report-table th, .report-table td { padding: 10px 8px; text-align: left; border-bottom: 1px solid #eee; }
         .report-table th { background-color: #f2f2f2; font-weight: 600; color: #2c3e50; }
@@ -197,11 +187,9 @@
         .category-item-name:hover { color: #3498db; text-decoration: underline; }
         .category-item-qty { font-weight: bold; }
 
-        /* ===== PERIOD DELETE ===== */
         .period-delete-section { background-color: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #ffeaa7; }
         .period-delete-section .form-row { margin-bottom: 0; }
 
-        /* ===== CHANGE LIST ===== */
         .change-item { margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px dashed #ddd; }
         .change-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .change-label { font-weight: bold; color: #2c3e50; margin-bottom: 4px; }
@@ -211,7 +199,6 @@
         .change-minus { color: #e74c3c; }
         .change-tilde { color: #f39c12; }
 
-        /* ===== DASHBOARD ===== */
         .dashboard-summary { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 15px; }
         @media (min-width: 500px) { .dashboard-summary { grid-template-columns: repeat(4, 1fr); } }
         .summary-card { background: white; border-radius: 10px; padding: 12px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.06); border: 1px solid #e0e0e0; }
@@ -220,20 +207,31 @@
         .summary-card.warn { border-color: #e74c3c; background: #fff5f5; }
         .summary-card.warn .summary-value { color: #e74c3c; }
         .summary-card.ok .summary-value { color: #27ae60; }
-
         .warning-card { background: #fff3cd; border-left: 4px solid #f39c12; border-radius: 8px; padding: 12px; margin-bottom: 10px; }
         .warning-card.danger { background: #f8d7da; border-left-color: #e74c3c; }
         .warning-card-header { font-weight: bold; color: #856404; margin-bottom: 6px; font-size: 0.9rem; }
         .warning-card.danger .warning-card-header { color: #721c24; }
         .warning-item { font-size: 0.85rem; padding: 4px 0; border-bottom: 1px dashed rgba(0,0,0,0.1); }
         .warning-item:last-child { border-bottom: none; }
-
         .quick-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 15px; }
         .quick-action-btn { background: white; border: 1px solid #e0e0e0; border-radius: 10px; padding: 12px 8px; text-align: center; cursor: pointer; transition: all 0.2s; font-size: 0.75rem; color: #2c3e50; font-weight: 600; }
         .quick-action-btn:hover { background: #f8f9fa; border-color: #3498db; }
         .quick-action-btn i { display: block; font-size: 1.5rem; margin-bottom: 4px; color: #3498db; }
 
-        /* ===== RESPONSIVE ===== */
+        /* ===== MANUAL INPUT ===== */
+        .manual-input-format-info { background: #e8f4fc; padding: 10px 12px; border-radius: 8px; margin-bottom: 12px; font-size: 0.82rem; line-height: 1.5; }
+        .manual-input-format-info code { background: #f8f9fa; padding: 1px 5px; border-radius: 3px; font-size: 0.78rem; }
+        .manual-input-textarea { width: 100%; min-height: 140px; padding: 10px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Courier New', monospace; font-size: 0.88rem; line-height: 1.5; }
+        .manual-input-textarea:focus { outline: none; border-color: #3498db; }
+        .manual-preview { margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: 8px; max-height: 320px; overflow-y: auto; font-size: 0.85rem; }
+        .manual-preview-row { padding: 6px 8px; margin-bottom: 4px; border-radius: 6px; font-size: 0.85rem; }
+        .manual-preview-row.valid { background: #d4edda; }
+        .manual-preview-row.unmatched { background: #fff3cd; }
+        .manual-preview-row.error { background: #f8d7da; color: #721c24; font-size: 0.82rem; }
+        .manual-preview-row .subtotal-line { font-size: 0.78rem; color: #555; margin-top: 2px; }
+        .manual-preview-row .manual-price-input { padding: 4px 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 0.85rem; }
+        .manual-input-summary { margin-top: 10px; font-size: 0.85rem; font-weight: 600; }
+
         @media (max-width: 600px) {
             .form-row { flex-direction: column; gap: 10px; }
             .header h1 { font-size: 1.2rem; }
@@ -287,13 +285,11 @@
     <div id="appContainer" style="display: none;">
         <div id="tabContentWrapper">
 
-            <!-- TAB HOME (DASHBOARD) -->
             <div id="tab-home" class="tab-content">
                 <h2 style="margin-bottom:15px;font-size:1.1rem;">Dashboard</h2>
                 <div id="dashboardContent"></div>
             </div>
 
-            <!-- TAB 1: DATA MASTER -->
             <div id="tab-master" class="tab-content">
                 <div class="sub-tabs" id="subTabsMaster">
                     <button class="sub-tab" data-sub="menu">Data Menu</button>
@@ -356,7 +352,6 @@
                 </div>
             </div>
 
-            <!-- TAB 2: RESERVASI -->
             <div id="tab-reservasi" class="tab-content">
                 <div class="sub-tabs" id="subTabsReservasi">
                     <button class="sub-tab" data-sub="buat">Buat Pesanan</button>
@@ -402,6 +397,7 @@
                             <button id="addToOrderBtn" class="btn btn-secondary small-add-btn"><i class="fas fa-cart-plus"></i> Tambah</button>
                         </div>
                     </div>
+                    <button id="manualInputOrderBtn" class="btn btn-info" style="margin-top:10px;padding:12px;font-size:0.95rem;width:100%;"><i class="fas fa-keyboard"></i> Input Pesanan Manual</button>
                     <h3 style="margin-top:20px;margin-bottom:10px;font-size:1rem;">Daftar Pesanan (<span id="orderItemsCount">0</span> item)</h3>
                     <div id="orderItemsContainer"></div>
                     <div id="orderTotalSection" class="total-section" style="display:none;">Total: Rp <span id="orderTotal">0</span></div>
@@ -444,7 +440,6 @@
                 </div>
             </div>
 
-            <!-- TAB 3: TAKEAWAY -->
             <div id="tab-takeaway" class="tab-content">
                 <div class="sub-tabs" id="subTabsTakeaway">
                     <button class="sub-tab" data-sub="buat-takeaway">Buat Takeaway</button>
@@ -477,6 +472,7 @@
                             <button id="addToTakeawayBtn" class="btn btn-secondary small-add-btn"><i class="fas fa-cart-plus"></i> Tambah</button>
                         </div>
                     </div>
+                    <button id="manualInputTakeawayBtn" class="btn btn-info" style="margin-top:10px;padding:12px;font-size:0.95rem;width:100%;"><i class="fas fa-keyboard"></i> Input Pesanan Manual</button>
                     <h3 style="margin-top:20px;margin-bottom:10px;font-size:1rem;">Daftar Pesanan Takeaway (<span id="takeawayItemsCount">0</span> item)</h3>
                     <div id="takeawayItemsContainer"></div>
                     <div id="takeawayTotalSection" class="total-section" style="display:none;">Total: Rp <span id="takeawayTotal">0</span></div>
@@ -507,7 +503,6 @@
                 </div>
             </div>
 
-            <!-- TAB 4: LAPORAN -->
             <div id="tab-laporan" class="tab-content">
                 <div class="sub-tabs" id="subTabsLaporan">
                     <button class="sub-tab" data-sub="harian">Laporan Harian</button>
@@ -523,7 +518,6 @@
                 </div>
             </div>
 
-            <!-- TAB 5: CEK MEJA -->
             <div id="tab-cekmeja" class="tab-content">
                 <div class="sub-tabs" id="subTabsCekMeja">
                     <button class="sub-tab" data-sub="cek">Cek Ketersediaan</button>
@@ -537,7 +531,6 @@
             </div>
         </div>
 
-        <!-- BOTTOM NAV -->
         <div class="bottom-nav" id="bottomNav">
             <button class="nav-item" data-tab="home"><i class="fas fa-home"></i><span>Home</span></button>
             <button class="nav-item" data-tab="master"><i class="fas fa-database"></i><span>Master</span></button>
@@ -547,7 +540,6 @@
             <button class="nav-item" data-tab="cekmeja"><i class="fas fa-search"></i><span>Cek Meja</span></button>
         </div>
 
-        <!-- MODALS -->
         <div id="invoiceModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header"><div class="modal-title">Invoice</div><button class="modal-close" id="closeInvoiceModal">&times;</button></div>
@@ -579,7 +571,10 @@
         <div id="editItemModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header"><div class="modal-title">Edit Item</div><button class="modal-close" id="closeEditItemModal">&times;</button></div>
-                <div class="form-group"><label>Menu:</label><input type="text" id="editItemMenu" class="form-control" readonly></div>
+                <div id="editItemUnmatchedInfo" style="display:none;background:#fff3cd;padding:8px 12px;border-radius:6px;margin-bottom:15px;font-size:0.85rem;color:#856404;">
+                    <i class="fas fa-exclamation-triangle"></i> Item ini tidak ada di menu master. Perbaiki nama atau isi harga manual.
+                </div>
+                <div class="form-group"><label>Menu:</label><input type="text" id="editItemMenu" class="form-control"></div>
                 <div class="form-group"><label>Jumlah:</label>
                     <div class="quantity-controls" style="justify-content:center;">
                         <button type="button" class="quantity-btn" id="editDecreaseQuantity">-</button>
@@ -588,7 +583,11 @@
                     </div>
                 </div>
                 <div class="form-group"><label>Catatan:</label><input type="text" id="editItemNotes" class="form-control" placeholder="pedas, tanpa bawang"></div>
-                <div class="form-group"><label>Harga Satuan:</label><div id="editItemPrice" style="font-weight:bold;font-size:1.1rem;color:#27ae60;">Rp 0</div></div>
+                <div class="form-group">
+                    <label>Harga Satuan:</label>
+                    <div id="editItemPrice" style="font-weight:bold;font-size:1.1rem;color:#27ae60;">Rp 0</div>
+                    <input type="number" id="editItemPriceInput" class="form-control" style="display:none;margin-top:6px;" placeholder="Harga satuan" min="0">
+                </div>
                 <div class="form-group"><label>Subtotal:</label><div id="editItemSubtotal" style="font-weight:bold;font-size:1.2rem;color:#2c3e50;">Rp 0</div></div>
                 <input type="hidden" id="editItemIndex">
                 <div class="btn-group" style="margin-top:15px;"><button id="updateItemBtn" class="btn btn-success">Update</button><button id="cancelEditItemBtn" class="btn btn-secondary">Batal</button></div>
@@ -666,7 +665,6 @@
             </div>
         </div>
 
-        <!-- ====== MODAL EDIT RESERVASI ====== -->
         <div id="editReservationModal" class="modal">
             <div class="modal-content" style="max-width:620px;">
                 <div class="modal-header">
@@ -713,6 +711,7 @@
                     <div class="form-group"><label>Catatan:</label><input type="text" id="editResNotes" class="form-control" placeholder="pedas, tanpa bawang"></div>
                     <div class="form-group" style="display:flex;align-items:flex-end;"><button id="editResAddItemBtn" class="btn btn-secondary small-add-btn"><i class="fas fa-cart-plus"></i> Tambah</button></div>
                 </div>
+                <button id="manualInputEditResBtn" class="btn btn-info" style="margin-top:10px;padding:12px;font-size:0.95rem;width:100%;"><i class="fas fa-keyboard"></i> Input Pesanan Manual</button>
                 <h4 style="margin-top:15px;margin-bottom:8px;font-size:0.95rem;">Daftar Pesanan (<span id="editResItemsCount">0</span> item)</h4>
                 <div id="editResItemsContainer"></div>
                 <div id="editResTotalSection" class="total-section">Total: Rp <span id="editResTotal">0</span></div>
@@ -735,7 +734,6 @@
             </div>
         </div>
 
-        <!-- ====== MODAL EDIT TAKEAWAY ====== -->
         <div id="editTakeawayModal" class="modal">
             <div class="modal-content" style="max-width:620px;">
                 <div class="modal-header"><div class="modal-title"><i class="fas fa-edit"></i> Edit Takeaway</div><button class="modal-close" id="closeEditTakeawayModal">&times;</button></div>
@@ -758,6 +756,7 @@
                     <div class="form-group"><label>Catatan:</label><input type="text" id="editTakeawayNotes" class="form-control" placeholder="pedas, tanpa bawang"></div>
                     <div class="form-group" style="display:flex;align-items:flex-end;"><button id="editTakeawayAddItemBtn" class="btn btn-secondary small-add-btn"><i class="fas fa-cart-plus"></i> Tambah</button></div>
                 </div>
+                <button id="manualInputEditTakeawayBtn" class="btn btn-info" style="margin-top:10px;padding:12px;font-size:0.95rem;width:100%;"><i class="fas fa-keyboard"></i> Input Pesanan Manual</button>
                 <h4 style="margin-top:15px;margin-bottom:8px;font-size:0.95rem;">Daftar Pesanan (<span id="editTakeawayItemsCount">0</span> item)</h4>
                 <div id="editTakeawayItemsContainer"></div>
                 <div id="editTakeawayTotalSection" class="total-section">Total: Rp <span id="editTakeawayTotal">0</span></div>
@@ -780,7 +779,6 @@
             </div>
         </div>
 
-        <!-- ====== MODAL TABLE ACTION (klik meja kosong di Cek Meja) ====== -->
         <div id="tableActionModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header"><div class="modal-title" id="tableActionTitle">Meja</div><button class="modal-close" id="closeTableActionModal">&times;</button></div>
@@ -790,7 +788,6 @@
             </div>
         </div>
 
-        <!-- ====== MODAL HOLD FORM ====== -->
         <div id="holdFormModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header"><div class="modal-title" id="holdFormTitle"><i class="fas fa-clock"></i> Hold Meja</div><button class="modal-close" id="closeHoldFormModal">&times;</button></div>
@@ -817,7 +814,6 @@
             </div>
         </div>
 
-        <!-- ====== MODAL HOLD DETAIL ====== -->
         <div id="holdDetailModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header"><div class="modal-title"><i class="fas fa-clock"></i> Detail Hold</div><button class="modal-close" id="closeHoldDetailModal">&times;</button></div>
@@ -830,15 +826,37 @@
             </div>
         </div>
 
-        <!-- Alert & Install -->
+        <!-- ====== MODAL INPUT MANUAL ====== -->
+        <div id="manualInputModal" class="modal" style="z-index:1003;">
+            <div class="modal-content" style="max-width:580px;">
+                <div class="modal-header">
+                    <div class="modal-title"><i class="fas fa-keyboard"></i> Input Pesanan Manual</div>
+                    <button class="modal-close" id="closeManualInputModal">&times;</button>
+                </div>
+                <div class="manual-input-format-info">
+                    <strong>Format:</strong> <code>[jumlah] - [nama menu] | [catatan]</code><br>
+                    <strong>Contoh:</strong><br>
+                    <code>2 - Nasi Goreng Jakarta | 1 pedas</code><br>
+                    <code>1 - Es Teh Manis</code><br>
+                    <code>4 - French Fries | 2 tanpa garam</code>
+                </div>
+                <textarea id="manualInputText" class="manual-input-textarea" placeholder="Tempel atau ketik daftar pesanan di sini..."></textarea>
+                <div id="manualInputPreview" class="manual-preview">
+                    <div style="color:#7f8c8d;font-style:italic;">Preview akan muncul di sini saat Anda mulai mengetik...</div>
+                </div>
+                <div id="manualInputSummary" class="manual-input-summary"></div>
+                <div class="btn-group" style="margin-top:15px;">
+                    <button id="manualInputAddBtn" class="btn btn-success" disabled><i class="fas fa-plus"></i> Tambahkan ke Pesanan</button>
+                    <button id="manualInputCancelBtn" class="btn btn-secondary">Batal</button>
+                </div>
+            </div>
+        </div>
+
         <div id="alertContainer" style="position:fixed;top:20px;right:20px;z-index:1002;max-width:300px;"></div>
         <div id="installButton" style="display:none;"><i class="fas fa-download"></i> Install App</div>
     </div>
 
     <script>
-        // ================================================================
-        // FIREBASE CONFIG
-        // ================================================================
         const firebaseConfig = {
             apiKey: "AIzaSyAqb4sr3rDjuERBh2iyS6nrMbnBKZ1Pgfs",
             authDomain: "reservasi-cc592.firebaseapp.com",
@@ -851,9 +869,6 @@
         const db = firebase.firestore();
         const auth = firebase.auth();
 
-        // ================================================================
-        // HELPERS
-        // ================================================================
         function getTodayLocal() {
             const d = new Date();
             return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
@@ -960,10 +975,13 @@
             if (p.length > 9) return p.substring(0, 4) + '..' + p.slice(-4);
             return p;
         }
+        function escapeHtml(s) {
+            return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+        function escapeAttr(s) {
+            return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+        }
 
-        // ================================================================
-        // TAB STATE PERSISTENCE
-        // ================================================================
         function saveTabState(tabId, subId) {
             localStorage.setItem('resto_tab', tabId);
             localStorage.setItem('resto_sub', subId || '');
@@ -974,9 +992,6 @@
             return { tabId, subId };
         }
 
-        // ================================================================
-        // AUTH
-        // ================================================================
         auth.onAuthStateChanged(user => {
             if (user) {
                 document.getElementById('loginContainer').style.display = 'none';
@@ -1017,9 +1032,6 @@
         });
         document.getElementById('logoutBtn').addEventListener('click', () => auth.signOut());
 
-        // ================================================================
-        // CONNECTION STATUS
-        // ================================================================
         let isOnline = navigator.onLine;
         function updateConnectionStatus() {
             const el = document.getElementById('connectionStatus');
@@ -1030,9 +1042,6 @@
         window.addEventListener('offline', () => { isOnline = false; updateConnectionStatus(); showAlert('Offline, data tidak bisa disimpan','warning'); });
         updateConnectionStatus();
 
-        // ================================================================
-        // PWA INSTALL
-        // ================================================================
         let deferredPrompt;
         window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; document.getElementById('installButton').style.display = 'flex'; });
         document.getElementById('installButton').addEventListener('click', () => {
@@ -1042,24 +1051,24 @@
             document.getElementById('installButton').style.display = 'none';
         }
 
-        // ================================================================
-        // GLOBAL STATE
-        // ================================================================
         let menuItems = [], categories = [], reservations = [], takeawayOrders = [], tables = [], holds = [], admins = [];
         let currentOrder = { id:null, customerName:'', phone:'', adminId:null, adminName:null, reservationDate:'', items:[], total:0, tables:[], dpAmount:null, dpMethod:null, dpOrder:null, fromHoldId:null };
         let currentTakeaway = { id:null, customerName:'', items:[], total:0 };
         let editingReservation = null;
         let editingTakeaway = null;
         let editingReservationTablesTemp = null;
-        let currentHoldForm = null;       // { id?, date, tables, phone, guestCount, adminId, adminName, note }
+        let currentHoldForm = null;
         let holdFormTablesTemp = null;
-        let pendingTableAction = null;    // { tableNumber, date }
+        let pendingTableAction = null;
         let viewingHoldId = null;
         let lastReportData = null;
 
-        // ================================================================
-        // NAVIGATION
-        // ================================================================
+        // Manual Input state
+        let manualInputTarget = null;
+        let manualInputPrices = new Map();
+        let manualInputParsedItems = [];
+        let manualInputDebounceTimer = null;
+
         function activateTab(tabId, subId) {
             document.querySelectorAll('.bottom-nav .nav-item').forEach(n => n.classList.remove('active'));
             const navBtn = document.querySelector(`.bottom-nav .nav-item[data-tab="${tabId}"]`);
@@ -1121,9 +1130,6 @@
             });
         });
 
-        // ================================================================
-        // FIREBASE LISTENERS
-        // ================================================================
         function setupFirebaseListeners() {
             if (!auth.currentUser) return;
             db.collection('menu').orderBy('name').onSnapshot(snap => { menuItems = []; snap.forEach(d => menuItems.push({id:d.id,...d.data()})); loadMenuItems(); updateMenuCount(); renderCategoryCheckboxes(); });
@@ -1181,9 +1187,6 @@
             if (document.getElementById('tab-home')?.classList.contains('active')) renderDashboard();
         }
 
-        // ================================================================
-        // MENU / CATEGORY / TABLE / ADMIN rendering
-        // ================================================================
         function renderCategoryCheckboxes() {
             const c1 = document.getElementById('menuCategoriesContainer');
             const c2 = document.getElementById('editMenuCategoriesContainer');
@@ -1269,9 +1272,6 @@
             });
         }
 
-        // ================================================================
-        // EVENT BINDINGS
-        // ================================================================
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('addMenuBtn').addEventListener('click', addMenuItem);
             document.getElementById('addCategoryBtn').addEventListener('click', addCategory);
@@ -1285,11 +1285,13 @@
             document.getElementById('saveOrderBtn').addEventListener('click', saveOrder);
             document.getElementById('copyInvoiceBtn').addEventListener('click', function() { copyTextToClipboard(document.getElementById('invoiceOutput').textContent, 'Invoice disalin!'); });
             document.getElementById('clearOrderBtn').addEventListener('click', clearOrder);
+            document.getElementById('manualInputOrderBtn').addEventListener('click', () => openManualInputModal('order'));
 
             document.getElementById('addToTakeawayBtn').addEventListener('click', addItemToTakeaway);
             document.getElementById('saveTakeawayBtn').addEventListener('click', saveTakeaway);
             document.getElementById('copyTakeawayInvoiceBtn').addEventListener('click', function() { copyTextToClipboard(document.getElementById('invoiceTakeawayOutput').textContent, 'Invoice takeaway disalin!'); });
             document.getElementById('clearTakeawayBtn').addEventListener('click', clearTakeaway);
+            document.getElementById('manualInputTakeawayBtn').addEventListener('click', () => openManualInputModal('takeaway'));
 
             document.getElementById('customerName').addEventListener('input', function() { currentOrder.customerName = this.value; updateOrderActionButtons(); });
             document.getElementById('customerPhone').addEventListener('input', function() { currentOrder.phone = this.value; });
@@ -1359,6 +1361,7 @@
             document.getElementById('editDecreaseQuantity').addEventListener('click', function() { let i=document.getElementById('editItemQuantity'); let v=parseInt(i.value)||1; if(v>1) { i.value=v-1; updateEditItemSubtotal(); } });
             document.getElementById('editIncreaseQuantity').addEventListener('click', function() { let i=document.getElementById('editItemQuantity'); let v=parseInt(i.value)||1; i.value=v+1; updateEditItemSubtotal(); });
             document.getElementById('editItemQuantity').addEventListener('input', updateEditItemSubtotal);
+            document.getElementById('editItemPriceInput').addEventListener('input', updateEditItemSubtotal);
             document.getElementById('updateItemBtn').addEventListener('click', updateOrderItem);
             document.getElementById('cancelEditItemBtn').addEventListener('click', () => document.getElementById('editItemModal').style.display = 'none');
             document.getElementById('closeEditItemModal').addEventListener('click', () => document.getElementById('editItemModal').style.display = 'none');
@@ -1395,7 +1398,7 @@
             document.getElementById('closeListModalBtn').addEventListener('click', () => document.getElementById('listPesananModal').style.display = 'none');
             document.getElementById('copyModalListPesananBtn').addEventListener('click', function() { copyTextToClipboard(document.getElementById('modalListPesananContent').textContent, 'List disalin!'); });
 
-            const skipCloseOnOutside = ['editReservationModal','editResConfirmModal','editTakeawayModal','editTakeawayConfirmModal','holdFormModal'];
+            const skipCloseOnOutside = ['editReservationModal','editResConfirmModal','editTakeawayModal','editTakeawayConfirmModal','holdFormModal','manualInputModal'];
             document.querySelectorAll('.modal').forEach(m => {
                 if (skipCloseOnOutside.includes(m.id)) return;
                 m.addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
@@ -1409,7 +1412,6 @@
             document.getElementById('deleteReservasiPeriodBtn').addEventListener('click', deleteReservasiPeriod);
             document.getElementById('deleteTakeawayPeriodBtn').addEventListener('click', deleteTakeawayPeriod);
 
-            // EDIT RESERVASI
             document.getElementById('editResCustomerName').addEventListener('input', function() {
                 if (editingReservation) editingReservation.customerName = this.value;
             });
@@ -1431,6 +1433,7 @@
             document.getElementById('editResIncQty').addEventListener('click', function() { let i=document.getElementById('editResQty'); let v=parseInt(i.value)||1; i.value=v+1; });
             document.getElementById('editResAddItemBtn').addEventListener('click', addItemToEditRes);
             document.getElementById('editResSaveBtn').addEventListener('click', saveEditReservation);
+            document.getElementById('manualInputEditResBtn').addEventListener('click', () => openManualInputModal('editRes'));
             document.getElementById('closeEditReservationModal').addEventListener('click', function() { if (confirm('Apakah ingin membatalkan Edit reservasi?')) closeEditReservationModal(); });
             document.getElementById('editReservationModal').addEventListener('click', function(e) {
                 if (e.target === this) { if (confirm('Apakah ingin membatalkan Edit reservasi?')) closeEditReservationModal(); }
@@ -1456,12 +1459,12 @@
                 showAlert('Perubahan meja disimpan sementara. Klik "Simpan Pesanan" untuk menyimpan permanen.','info');
             });
 
-            // EDIT TAKEAWAY
             document.getElementById('editTakeawayCustomerName').addEventListener('input', function() { if (editingTakeaway) editingTakeaway.customerName = this.value; });
             document.getElementById('editTakeawayDecQty').addEventListener('click', function() { let i=document.getElementById('editTakeawayQty'); let v=parseInt(i.value)||1; if(v>1) i.value=v-1; });
             document.getElementById('editTakeawayIncQty').addEventListener('click', function() { let i=document.getElementById('editTakeawayQty'); let v=parseInt(i.value)||1; i.value=v+1; });
             document.getElementById('editTakeawayAddItemBtn').addEventListener('click', addItemToEditTakeaway);
             document.getElementById('editTakeawaySaveBtn').addEventListener('click', saveEditTakeaway);
+            document.getElementById('manualInputEditTakeawayBtn').addEventListener('click', () => openManualInputModal('editTakeaway'));
             document.getElementById('closeEditTakeawayModal').addEventListener('click', function() { if (confirm('Apakah ingin membatalkan Edit takeaway?')) closeEditTakeawayModal(); });
             document.getElementById('editTakeawayModal').addEventListener('click', function(e) {
                 if (e.target === this) { if (confirm('Apakah ingin membatalkan Edit takeaway?')) closeEditTakeawayModal(); }
@@ -1471,7 +1474,6 @@
             document.getElementById('editTakeawayConfirmSaveBtn').addEventListener('click', confirmSaveEditTakeaway);
             document.getElementById('editTakeawayConfirmModal').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
 
-            // TABLE ACTION MODAL
             document.getElementById('closeTableActionModal').addEventListener('click', () => document.getElementById('tableActionModal').style.display = 'none');
             document.getElementById('tableActionModal').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
             document.getElementById('actionReservasiBtn').addEventListener('click', function() {
@@ -1494,7 +1496,6 @@
                 openNewHoldForm(date, [tableNumber]);
             });
 
-            // HOLD FORM
             document.getElementById('closeHoldFormModal').addEventListener('click', function() {
                 if (confirm('Batalkan form Hold?')) closeHoldFormModal();
             });
@@ -1518,7 +1519,6 @@
             });
             document.getElementById('saveHoldBtn').addEventListener('click', saveHold);
 
-            // HOLD DETAIL
             document.getElementById('closeHoldDetailModal').addEventListener('click', () => document.getElementById('holdDetailModal').style.display = 'none');
             document.getElementById('holdDetailModal').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
             document.getElementById('holdChatBtn').addEventListener('click', function() {
@@ -1536,11 +1536,206 @@
                     .then(() => { showAlert('Hold dilepas','success'); document.getElementById('holdDetailModal').style.display = 'none'; })
                     .catch(err => showAlert('Gagal: '+err.message,'danger'));
             });
+
+            // Manual Input Modal
+            document.getElementById('closeManualInputModal').addEventListener('click', function() { if (confirm('Batalkan input manual?')) closeManualInputModal(); });
+            document.getElementById('manualInputCancelBtn').addEventListener('click', function() { if (confirm('Batalkan input manual?')) closeManualInputModal(); });
+            document.getElementById('manualInputText').addEventListener('input', function() {
+                clearTimeout(manualInputDebounceTimer);
+                manualInputDebounceTimer = setTimeout(renderManualInputPreview, 300);
+            });
+            document.getElementById('manualInputAddBtn').addEventListener('click', addManualInputToOrder);
         });
 
-        // ================================================================
-        // MENU / CATEGORY / TABLE / ADMIN CRUD
-        // ================================================================
+        // ============================================================
+        // MANUAL INPUT FUNCTIONS
+        // ============================================================
+        function openManualInputModal(target) {
+            manualInputTarget = target;
+            manualInputPrices.clear();
+            document.getElementById('manualInputText').value = '';
+            document.getElementById('manualInputPreview').innerHTML = '<div style="color:#7f8c8d;font-style:italic;">Preview akan muncul di sini saat Anda mulai mengetik...</div>';
+            document.getElementById('manualInputSummary').innerHTML = '';
+            document.getElementById('manualInputAddBtn').disabled = true;
+            document.getElementById('manualInputModal').style.display = 'flex';
+            setTimeout(() => document.getElementById('manualInputText').focus(), 100);
+        }
+
+        function closeManualInputModal() {
+            manualInputTarget = null;
+            manualInputPrices.clear();
+            manualInputParsedItems = [];
+            document.getElementById('manualInputModal').style.display = 'none';
+        }
+
+        function parseManualInput(text) {
+            const lines = text.split('\n').slice(0, 200);
+            const results = [];
+            lines.forEach((rawLine, idx) => {
+                let line = rawLine.trim();
+                if (!line) return;
+                line = line.replace(/^[-*•]\s+/, '');
+                const qtyMatch = line.match(/^(\d+)\s*[-–—:x=.]?\s+(.+)$/i);
+                if (!qtyMatch) {
+                    results.push({ lineNum: idx + 1, raw: rawLine, error: 'Format salah (harus diawali angka jumlah)' });
+                    return;
+                }
+                const qty = parseInt(qtyMatch[1]);
+                let rest = qtyMatch[2].trim();
+                if (qty < 1 || qty > 999) {
+                    results.push({ lineNum: idx + 1, raw: rawLine, error: 'Jumlah harus 1-999' });
+                    return;
+                }
+                if (!rest) {
+                    results.push({ lineNum: idx + 1, raw: rawLine, error: 'Nama menu kosong' });
+                    return;
+                }
+                let name = rest, notes = '';
+                if (rest.includes('|')) {
+                    const parts = rest.split('|');
+                    name = parts[0].trim();
+                    notes = parts.slice(1).join('|').trim();
+                } else {
+                    const wholeMatch = menuItems.find(m => m.name.toLowerCase() === rest.toLowerCase());
+                    if (wholeMatch) { name = rest; notes = ''; }
+                    else if (rest.includes(',')) {
+                        const parts = rest.split(',');
+                        name = parts[0].trim();
+                        notes = parts.slice(1).join(',').trim();
+                    }
+                }
+                if (!name) {
+                    results.push({ lineNum: idx + 1, raw: rawLine, error: 'Nama menu kosong' });
+                    return;
+                }
+                const master = menuItems.find(m => m.name.toLowerCase() === name.toLowerCase());
+                results.push({
+                    lineNum: idx + 1,
+                    raw: rawLine,
+                    qty,
+                    name: master ? master.name : name,
+                    notes,
+                    matched: !!master,
+                    price: master ? master.price : 0,
+                    masterPrice: master ? master.price : null,
+                    categories: master ? (master.categories || []) : [],
+                    menuId: master ? master.id : null
+                });
+            });
+            return results;
+        }
+
+        function renderManualInputPreview() {
+            const text = document.getElementById('manualInputText').value;
+            const parsed = parseManualInput(text);
+            manualInputParsedItems = parsed;
+            const preview = document.getElementById('manualInputPreview');
+            const summary = document.getElementById('manualInputSummary');
+            const addBtn = document.getElementById('manualInputAddBtn');
+            if (!parsed.length) {
+                preview.innerHTML = '<div style="color:#7f8c8d;font-style:italic;">Preview akan muncul di sini saat Anda mulai mengetik...</div>';
+                summary.innerHTML = '';
+                addBtn.disabled = true;
+                return;
+            }
+            let html = '';
+            let validCount = 0, unmatchedCount = 0, errorCount = 0;
+            parsed.forEach(p => {
+                if (p.error) {
+                    errorCount++;
+                    html += `<div class="manual-preview-row error">❌ Baris ${p.lineNum}: "${escapeHtml(p.raw)}" — ${p.error}</div>`;
+                    return;
+                }
+                let displayPrice = p.price;
+                if (!p.matched) {
+                    const key = p.name + '|' + p.notes;
+                    if (manualInputPrices.has(key)) displayPrice = manualInputPrices.get(key);
+                }
+                const subtotal = displayPrice * p.qty;
+                if (p.matched) {
+                    validCount++;
+                    html += `<div class="manual-preview-row valid">
+                        ✅ <strong>${p.qty} × ${escapeHtml(p.name)}</strong> — Rp ${p.price.toLocaleString('id-ID')} × ${p.qty} = <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong>
+                        ${p.notes ? `<div class="subtotal-line" style="font-style:italic;">Catatan: ${escapeHtml(p.notes)}</div>` : ''}
+                    </div>`;
+                } else {
+                    unmatchedCount++;
+                    html += `<div class="manual-preview-row unmatched">
+                        ⚠️ <strong style="color:#e74c3c;">${p.qty} × ${escapeHtml(p.name)}</strong> — <span style="color:#e74c3c;">Tidak ada di menu master</span>
+                        <div style="margin-top:4px;display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+                            <label style="font-size:0.78rem;margin:0;">Harga satuan:</label>
+                            <input type="number" class="manual-price-input" data-key="${escapeAttr(p.name + '|' + p.notes)}" value="${displayPrice}" min="0" style="flex:1;min-width:100px;">
+                            <span style="font-size:0.8rem;">= <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong></span>
+                        </div>
+                        ${p.notes ? `<div class="subtotal-line" style="font-style:italic;">Catatan: ${escapeHtml(p.notes)}</div>` : ''}
+                    </div>`;
+                }
+            });
+            preview.innerHTML = html;
+            summary.innerHTML = `<span style="color:#27ae60;">${validCount} valid</span> · <span style="color:#f39c12;">${unmatchedCount} tidak ditemukan</span> · <span style="color:#e74c3c;">${errorCount} error</span>`;
+            addBtn.disabled = (validCount + unmatchedCount) === 0;
+            preview.querySelectorAll('.manual-price-input').forEach(inp => {
+                inp.addEventListener('input', function() {
+                    const key = this.dataset.key;
+                    const val = parseInt(this.value) || 0;
+                    manualInputPrices.set(key, val);
+                    const subtotalEl = this.parentElement.querySelector('strong');
+                    const item = manualInputParsedItems.find(p => !p.error && !p.matched && (p.name + '|' + p.notes) === key);
+                    if (item && subtotalEl) subtotalEl.textContent = 'Rp ' + (val * item.qty).toLocaleString('id-ID');
+                });
+            });
+        }
+
+        function addManualInputToOrder() {
+            if (!manualInputTarget) return;
+            const text = document.getElementById('manualInputText').value;
+            const parsed = parseManualInput(text);
+            const valid = parsed.filter(p => !p.error);
+            if (!valid.length) { showAlert('Tidak ada item valid untuk ditambahkan','warning'); return; }
+            let targetArray = null;
+            if (manualInputTarget === 'order') targetArray = currentOrder.items;
+            else if (manualInputTarget === 'takeaway') targetArray = currentTakeaway.items;
+            else if (manualInputTarget === 'editRes') targetArray = editingReservation ? editingReservation.items : null;
+            else if (manualInputTarget === 'editTakeaway') targetArray = editingTakeaway ? editingTakeaway.items : null;
+            if (!targetArray) { showAlert('Target tidak valid','danger'); return; }
+            let addedCount = 0;
+            valid.forEach(p => {
+                let price = p.price;
+                let unmatched = !p.matched;
+                if (unmatched) {
+                    const key = p.name + '|' + p.notes;
+                    price = manualInputPrices.has(key) ? manualInputPrices.get(key) : 0;
+                }
+                const existing = !unmatched ? targetArray.findIndex(i => i.name.toLowerCase() === p.name.toLowerCase() && (i.notes || '') === (p.notes || '') && i.unmatched !== true) : -1;
+                if (existing !== -1) {
+                    targetArray[existing].quantity += p.qty;
+                    targetArray[existing].subtotal = targetArray[existing].quantity * targetArray[existing].price;
+                } else {
+                    const newItem = {
+                        id: p.menuId,
+                        name: p.name,
+                        price: price,
+                        quantity: p.qty,
+                        notes: p.notes,
+                        subtotal: price * p.qty,
+                        categories: p.categories || []
+                    };
+                    if (unmatched) newItem.unmatched = true;
+                    targetArray.push(newItem);
+                }
+                addedCount++;
+            });
+            if (manualInputTarget === 'order') { updateOrderTotal(); loadOrderItems(); }
+            else if (manualInputTarget === 'takeaway') { updateTakeawayTotal(); loadTakeawayItems(); }
+            else if (manualInputTarget === 'editRes') { updateEditResTotal(); loadEditResItems(); }
+            else if (manualInputTarget === 'editTakeaway') { updateEditTakeawayTotal(); loadEditTakeawayItems(); }
+            closeManualInputModal();
+            showAlert(addedCount + ' item ditambahkan!','success');
+        }
+
+        // ============================================================
+        // MENU / CATEGORY / ADMIN / TABLE CRUD
+        // ============================================================
         function addMenuItem() {
             if (!isOnline) { showAlert('Offline','danger'); return; }
             const name = document.getElementById('menuName').value.trim();
@@ -1649,7 +1844,6 @@
             batch.commit().then(() => { document.getElementById('categoryMenuModal').style.display = 'none'; showAlert('Kategori menu diperbarui!','success'); }).catch(err => showAlert('Gagal simpan','danger'));
         }
 
-        // ADMIN CRUD
         function addAdmin() {
             if (!isOnline) { showAlert('Offline','danger'); return; }
             const name = document.getElementById('adminName').value.trim();
@@ -1681,7 +1875,6 @@
             db.collection('admins').doc(id).delete().then(() => showAlert('Admin dihapus','success')).catch(err => showAlert('Gagal hapus','danger'));
         }
 
-        // TABLE CRUD
         function addTable() {
             if (!isOnline) { showAlert('Offline','danger'); return; }
             const number = document.getElementById('newTableNumber').value.trim();
@@ -1729,9 +1922,6 @@
             }).catch(err => showAlert('Gagal import: '+err.message,'danger'));
         }
 
-        // ================================================================
-        // HELPERS: cek meja / table picker
-        // ================================================================
         function getReservedTablesMap(date, excludeResId) {
             const map = new Map();
             reservations.forEach(r => {
@@ -1747,9 +1937,6 @@
             return map;
         }
 
-        // ================================================================
-        // SELECT TABLE MODAL (di Buat Pesanan)
-        // ================================================================
         function openSelectTableModal() {
             if (!currentOrder.reservationDate) { showAlert('Pilih tanggal reservasi dulu!','danger'); return; }
             proceedOpenSelectTable();
@@ -1813,9 +2000,6 @@
             }
         }
 
-        // ================================================================
-        // BUAT PESANAN (order baru)
-        // ================================================================
         function addItemToOrder() {
             const name = document.getElementById('searchMenuOrder').value.trim();
             const qty = parseInt(document.getElementById('itemQuantityOrder').value);
@@ -1830,8 +2014,7 @@
             } else {
                 currentOrder.items.push({ id: item.id, name: item.name, price: item.price, quantity: qty, notes, subtotal: item.price * qty, categories: item.categories || [] });
             }
-            updateOrderTotal();
-            loadOrderItems();
+            updateOrderTotal(); loadOrderItems();
             document.getElementById('searchMenuOrder').value = '';
             document.getElementById('autocompleteListOrder').style.display = 'none';
             document.getElementById('itemQuantityOrder').value = 1;
@@ -1848,14 +2031,17 @@
                 count.textContent = '0';
                 return;
             }
-            container.innerHTML = currentOrder.items.map((item, idx) => `
-                <div class="order-item" data-index="${idx}">
-                    <div class="order-details"><h4>${item.name}</h4><div>Rp ${item.price.toLocaleString('id-ID')} x ${item.quantity}</div>${item.notes ? `<div class="order-notes"><i class="fas fa-sticky-note"></i> ${item.notes}</div>` : ''}<div style="font-weight:bold;margin-top:4px;color:#2c3e50;">Subtotal: Rp ${item.subtotal.toLocaleString('id-ID')}</div></div>
+            container.innerHTML = currentOrder.items.map((item, idx) => {
+                const isU = item.unmatched === true;
+                return `
+                <div class="order-item ${isU?'unmatched':''}" data-index="${idx}">
+                    <div class="order-details"><h4>${isU ? '⚠️ ' : ''}${item.name}</h4><div>Rp ${item.price.toLocaleString('id-ID')} x ${item.quantity}</div>${item.notes ? `<div class="order-notes"><i class="fas fa-sticky-note"></i> ${item.notes}</div>` : ''}<div style="font-weight:bold;margin-top:4px;color:#2c3e50;">Subtotal: Rp ${item.subtotal.toLocaleString('id-ID')}</div></div>
                     <div class="order-quantity">
                         <div class="quantity-controls"><button class="quantity-btn" onclick="changeOrderItemQuantity(${idx}, -1)">-</button><input type="number" class="quantity-input" value="${item.quantity}" min="1" onchange="updateOrderItemQuantity(${idx}, this.value)"><button class="quantity-btn" onclick="changeOrderItemQuantity(${idx}, 1)">+</button></div>
                         <div class="order-item-actions"><button class="btn btn-sm btn-warning" onclick="editOrderItem(${idx})"><i class="fas fa-edit"></i></button><button class="btn btn-sm btn-danger" onclick="removeOrderItem(${idx})"><i class="fas fa-trash"></i></button></div>
                     </div>
-                </div>`).join('');
+                </div>`;
+            }).join('');
             document.getElementById('orderTotalSection').style.display = 'block';
             count.textContent = currentOrder.items.length;
         }
@@ -1864,23 +2050,27 @@
             if (newQ < 1) { showAlert('Minimal 1','warning'); return; }
             currentOrder.items[idx].quantity = newQ;
             currentOrder.items[idx].subtotal = currentOrder.items[idx].price * newQ;
-            updateOrderTotal();
-            loadOrderItems();
+            updateOrderTotal(); loadOrderItems();
         }
         function updateOrderItemQuantity(idx, val) {
             let q = parseInt(val);
             if (isNaN(q) || q < 1) { showAlert('Minimal 1','danger'); loadOrderItems(); return; }
             currentOrder.items[idx].quantity = q;
             currentOrder.items[idx].subtotal = currentOrder.items[idx].price * q;
-            updateOrderTotal();
-            loadOrderItems();
+            updateOrderTotal(); loadOrderItems();
         }
         function editOrderItem(idx) {
             const item = currentOrder.items[idx];
+            const isU = item.unmatched === true;
             document.getElementById('editItemMenu').value = item.name;
+            document.getElementById('editItemMenu').readOnly = !isU;
+            document.getElementById('editItemUnmatchedInfo').style.display = isU ? 'block' : 'none';
+            document.getElementById('editItemPrice').style.display = isU ? 'none' : 'block';
+            document.getElementById('editItemPriceInput').style.display = isU ? 'block' : 'none';
+            document.getElementById('editItemPriceInput').value = isU ? (item.price || 0) : 0;
             document.getElementById('editItemQuantity').value = item.quantity;
             document.getElementById('editItemNotes').value = item.notes || '';
-            document.getElementById('editItemPrice').textContent = 'Rp '+item.price.toLocaleString('id-ID');
+            if (!isU) document.getElementById('editItemPrice').textContent = 'Rp '+item.price.toLocaleString('id-ID');
             document.getElementById('editItemIndex').value = idx;
             document.getElementById('editItemModal').setAttribute('data-type','order');
             updateEditItemSubtotal();
@@ -1890,11 +2080,12 @@
             const q = parseInt(document.getElementById('editItemQuantity').value) || 1;
             const idx = parseInt(document.getElementById('editItemIndex').value);
             const type = document.getElementById('editItemModal').getAttribute('data-type') || 'order';
-            let price = 0;
-            if (type === 'order' && idx >= 0 && currentOrder.items[idx]) price = currentOrder.items[idx].price;
-            else if (type === 'takeaway' && idx >= 0 && currentTakeaway.items[idx]) price = currentTakeaway.items[idx].price;
-            else if (type === 'editRes' && editingReservation && editingReservation.items[idx]) price = editingReservation.items[idx].price;
-            else if (type === 'editTakeaway' && editingTakeaway && editingTakeaway.items[idx]) price = editingTakeaway.items[idx].price;
+            let price = 0, isU = false;
+            if (type === 'order' && idx >= 0 && currentOrder.items[idx]) { price = currentOrder.items[idx].price; isU = currentOrder.items[idx].unmatched === true; }
+            else if (type === 'takeaway' && idx >= 0 && currentTakeaway.items[idx]) { price = currentTakeaway.items[idx].price; isU = currentTakeaway.items[idx].unmatched === true; }
+            else if (type === 'editRes' && editingReservation && editingReservation.items[idx]) { price = editingReservation.items[idx].price; isU = editingReservation.items[idx].unmatched === true; }
+            else if (type === 'editTakeaway' && editingTakeaway && editingTakeaway.items[idx]) { price = editingTakeaway.items[idx].price; isU = editingTakeaway.items[idx].unmatched === true; }
+            if (isU) price = parseInt(document.getElementById('editItemPriceInput').value) || 0;
             document.getElementById('editItemSubtotal').textContent = 'Rp '+(price * q).toLocaleString('id-ID');
         }
         function updateOrderItem() {
@@ -1903,19 +2094,35 @@
             const notes = document.getElementById('editItemNotes').value.trim();
             const type = document.getElementById('editItemModal').getAttribute('data-type') || 'order';
             if (isNaN(q) || q < 1) { showAlert('Minimal 1','danger'); return; }
-            if (type === 'order') {
-                currentOrder.items[idx].quantity = q; currentOrder.items[idx].notes = notes; currentOrder.items[idx].subtotal = currentOrder.items[idx].price * q;
-                updateOrderTotal(); loadOrderItems();
-            } else if (type === 'takeaway') {
-                currentTakeaway.items[idx].quantity = q; currentTakeaway.items[idx].notes = notes; currentTakeaway.items[idx].subtotal = currentTakeaway.items[idx].price * q;
-                updateTakeawayTotal(); loadTakeawayItems();
-            } else if (type === 'editRes') {
-                editingReservation.items[idx].quantity = q; editingReservation.items[idx].notes = notes; editingReservation.items[idx].subtotal = editingReservation.items[idx].price * q;
-                updateEditResTotal(); loadEditResItems();
-            } else if (type === 'editTakeaway') {
-                editingTakeaway.items[idx].quantity = q; editingTakeaway.items[idx].notes = notes; editingTakeaway.items[idx].subtotal = editingTakeaway.items[idx].price * q;
-                updateEditTakeawayTotal(); loadEditTakeawayItems();
+            let arr = null;
+            if (type === 'order') arr = currentOrder.items;
+            else if (type === 'takeaway') arr = currentTakeaway.items;
+            else if (type === 'editRes') arr = editingReservation ? editingReservation.items : null;
+            else if (type === 'editTakeaway') arr = editingTakeaway ? editingTakeaway.items : null;
+            if (!arr || !arr[idx]) return;
+            const item = arr[idx];
+            if (item.unmatched === true) {
+                const newName = document.getElementById('editItemMenu').value.trim();
+                if (!newName) { showAlert('Nama menu tidak boleh kosong','danger'); return; }
+                const master = menuItems.find(m => m.name.toLowerCase() === newName.toLowerCase());
+                if (master) {
+                    item.name = master.name;
+                    item.id = master.id;
+                    item.price = master.price;
+                    item.categories = master.categories || [];
+                    item.unmatched = false;
+                } else {
+                    item.name = newName;
+                    item.price = parseInt(document.getElementById('editItemPriceInput').value) || 0;
+                }
             }
+            item.quantity = q;
+            item.notes = notes;
+            item.subtotal = item.price * q;
+            if (type === 'order') { updateOrderTotal(); loadOrderItems(); }
+            else if (type === 'takeaway') { updateTakeawayTotal(); loadTakeawayItems(); }
+            else if (type === 'editRes') { updateEditResTotal(); loadEditResItems(); }
+            else if (type === 'editTakeaway') { updateEditTakeawayTotal(); loadEditTakeawayItems(); }
             document.getElementById('editItemModal').style.display = 'none';
             showAlert('Item diupdate!','success');
         }
@@ -1959,8 +2166,6 @@
             if (!auth.currentUser) return;
             const invoice = generateInvoice();
             if (!invoice) { showAlert('Lengkapi pesanan!','danger'); return; }
-
-            // Validasi meja: cek konflik dengan reservasi & hold lain
             const date = currentOrder.reservationDate;
             const resMap = getReservedTablesMap(date, currentOrder.id);
             const holdMap = getHeldTablesMap(date, currentOrder.fromHoldId);
@@ -1968,23 +2173,14 @@
                 if (resMap.has(tn)) { showAlert(`Meja ${tn} sudah dipesan oleh ${resMap.get(tn).customerName} pada tanggal ini.`, 'danger'); return; }
                 if (holdMap.has(tn)) { showAlert(`Meja ${tn} sedang di-hold oleh ${holdMap.get(tn).adminName || '-'} (${holdMap.get(tn).phone || '-'}). Lepas hold dulu.`, 'danger'); return; }
             }
-
             document.getElementById('invoiceOutput').textContent = invoice;
             document.getElementById('invoiceSection').style.display = 'block';
             const data = {
-                customerName: currentOrder.customerName,
-                phone: currentOrder.phone || null,
-                adminId: currentOrder.adminId || null,
-                adminName: currentOrder.adminName || null,
-                reservationDate: currentOrder.reservationDate,
-                orderDate: new Date().toISOString(),
-                items: currentOrder.items,
-                total: currentOrder.total,
-                tables: currentOrder.tables || [],
-                dpAmount: currentOrder.dpAmount || null,
-                dpMethod: currentOrder.dpMethod || null,
-                dpOrder: currentOrder.dpOrder || null,
-                invoice: invoice
+                customerName: currentOrder.customerName, phone: currentOrder.phone || null,
+                adminId: currentOrder.adminId || null, adminName: currentOrder.adminName || null,
+                reservationDate: currentOrder.reservationDate, orderDate: new Date().toISOString(),
+                items: currentOrder.items, total: currentOrder.total, tables: currentOrder.tables || [],
+                dpAmount: currentOrder.dpAmount || null, dpMethod: currentOrder.dpMethod || null, dpOrder: currentOrder.dpOrder || null, invoice: invoice
             };
             const ref = currentOrder.id ? db.collection('reservations').doc(currentOrder.id) : db.collection('reservations').doc();
             const promise = currentOrder.id ? ref.update(data) : ref.set(data);
@@ -2017,9 +2213,6 @@
             showAlert('Pesanan dihapus','success');
         }
 
-        // ================================================================
-        // TAKEAWAY
-        // ================================================================
         function addItemToTakeaway() {
             const name = document.getElementById('searchMenuTakeaway').value.trim();
             const qty = parseInt(document.getElementById('itemQuantityTakeaway').value);
@@ -2051,14 +2244,17 @@
                 count.textContent = '0';
                 return;
             }
-            container.innerHTML = currentTakeaway.items.map((item, idx) => `
-                <div class="order-item" data-index="${idx}">
-                    <div class="order-details"><h4>${item.name}</h4><div>Rp ${item.price.toLocaleString('id-ID')} x ${item.quantity}</div>${item.notes ? `<div class="order-notes"><i class="fas fa-sticky-note"></i> ${item.notes}</div>` : ''}<div style="font-weight:bold;margin-top:4px;color:#2c3e50;">Subtotal: Rp ${item.subtotal.toLocaleString('id-ID')}</div></div>
+            container.innerHTML = currentTakeaway.items.map((item, idx) => {
+                const isU = item.unmatched === true;
+                return `
+                <div class="order-item ${isU?'unmatched':''}" data-index="${idx}">
+                    <div class="order-details"><h4>${isU ? '⚠️ ' : ''}${item.name}</h4><div>Rp ${item.price.toLocaleString('id-ID')} x ${item.quantity}</div>${item.notes ? `<div class="order-notes"><i class="fas fa-sticky-note"></i> ${item.notes}</div>` : ''}<div style="font-weight:bold;margin-top:4px;color:#2c3e50;">Subtotal: Rp ${item.subtotal.toLocaleString('id-ID')}</div></div>
                     <div class="order-quantity">
                         <div class="quantity-controls"><button class="quantity-btn" onclick="changeTakeawayItemQuantity(${idx}, -1)">-</button><input type="number" class="quantity-input" value="${item.quantity}" min="1" onchange="updateTakeawayItemQuantity(${idx}, this.value)"><button class="quantity-btn" onclick="changeTakeawayItemQuantity(${idx}, 1)">+</button></div>
                         <div class="order-item-actions"><button class="btn btn-sm btn-warning" onclick="editTakeawayItem(${idx})"><i class="fas fa-edit"></i></button><button class="btn btn-sm btn-danger" onclick="removeTakeawayItem(${idx})"><i class="fas fa-trash"></i></button></div>
                     </div>
-                </div>`).join('');
+                </div>`;
+            }).join('');
             document.getElementById('takeawayTotalSection').style.display = 'block';
             count.textContent = currentTakeaway.items.length;
         }
@@ -2078,10 +2274,16 @@
         }
         function editTakeawayItem(idx) {
             const item = currentTakeaway.items[idx];
+            const isU = item.unmatched === true;
             document.getElementById('editItemMenu').value = item.name;
+            document.getElementById('editItemMenu').readOnly = !isU;
+            document.getElementById('editItemUnmatchedInfo').style.display = isU ? 'block' : 'none';
+            document.getElementById('editItemPrice').style.display = isU ? 'none' : 'block';
+            document.getElementById('editItemPriceInput').style.display = isU ? 'block' : 'none';
+            document.getElementById('editItemPriceInput').value = isU ? (item.price || 0) : 0;
             document.getElementById('editItemQuantity').value = item.quantity;
             document.getElementById('editItemNotes').value = item.notes || '';
-            document.getElementById('editItemPrice').textContent = 'Rp '+item.price.toLocaleString('id-ID');
+            if (!isU) document.getElementById('editItemPrice').textContent = 'Rp '+item.price.toLocaleString('id-ID');
             document.getElementById('editItemIndex').value = idx;
             document.getElementById('editItemModal').setAttribute('data-type','takeaway');
             updateEditItemSubtotal();
@@ -2126,13 +2328,7 @@
             if (!invoice) { showAlert('Tidak ada item!','danger'); return; }
             document.getElementById('invoiceTakeawayOutput').textContent = invoice;
             document.getElementById('invoiceTakeawaySection').style.display = 'block';
-            const data = {
-                customerName: currentTakeaway.customerName || 'Tidak ada nama',
-                orderDate: new Date().toISOString(),
-                items: currentTakeaway.items,
-                total: currentTakeaway.total,
-                invoice: invoice
-            };
+            const data = { customerName: currentTakeaway.customerName || 'Tidak ada nama', orderDate: new Date().toISOString(), items: currentTakeaway.items, total: currentTakeaway.total, invoice: invoice };
             const ref = currentTakeaway.id ? db.collection('takeaway').doc(currentTakeaway.id) : db.collection('takeaway').doc();
             const promise = currentTakeaway.id ? ref.update(data) : ref.set(data);
             promise.then(() => {
@@ -2158,25 +2354,19 @@
             showAlert('Takeaway dihapus','success');
         }
 
-        // ================================================================
-        // RESERVATIONS rendering
-        // ================================================================
         function loadReservations(filterDate) {
             const today = getTodayLocal();
             const activeContainer = document.getElementById('activeReservationsContainer');
             const pastContainer = document.getElementById('pastReservationsContainer');
             const searchActive = document.getElementById('searchActiveReservations')?.value.toLowerCase() || '';
             const searchPast = document.getElementById('searchPastReservations')?.value.toLowerCase() || '';
-
             let activeRes, pastRes;
             if (filterDate) { activeRes = reservations.filter(r => r.reservationDate === filterDate); pastRes = []; }
             else { activeRes = reservations.filter(r => r.reservationDate >= today); pastRes = reservations.filter(r => r.reservationDate < today); }
             if (searchActive) activeRes = activeRes.filter(r => r.customerName.toLowerCase().includes(searchActive));
             if (searchPast) pastRes = pastRes.filter(r => r.customerName.toLowerCase().includes(searchPast));
-
             activeRes.sort((a,b) => new Date(a.reservationDate) - new Date(b.reservationDate));
             pastRes.sort((a,b) => new Date(b.reservationDate) - new Date(a.reservationDate));
-
             const renderCard = (r, isActive) => {
                 const tablesText = r.tables && r.tables.length ? `Meja: ${r.tables.join(', ')}` : '';
                 const dpText = r.dpAmount ? `DP: Rp ${r.dpAmount.toLocaleString('id-ID')} (${r.dpMethod})` : '<span class="dp-missing">Belum ada DP</span>';
@@ -2203,10 +2393,8 @@
                             <button class="btn btn-sm btn-danger" onclick="deleteReservation('${r.id}')"><i class="fas fa-trash"></i> Hapus</button>
                             ${dpButtons}
                         </div>
-                    </div>
-                `;
+                    </div>`;
             };
-
             activeContainer.innerHTML = activeRes.length ? activeRes.map(r => renderCard(r,true)).join('') :
                 `<div class="empty-state"><i class="fas fa-calendar-alt"></i><h3>${filterDate ? 'Tidak ada reservasi pada tanggal ini' : 'Belum ada reservasi aktif'}</h3></div>`;
             pastContainer.innerHTML = pastRes.length ? pastRes.map(r => renderCard(r,false)).join('') :
@@ -2240,24 +2428,15 @@
             return text;
         }
 
-        // ================================================================
-        // EDIT RESERVATION (modal flow)
-        // ================================================================
         function editReservation(id) { openEditReservationModal(id); }
-
         function openEditReservationModal(id) {
             const r = reservations.find(x => x.id === id); if (!r) return;
             if (!isOnline) { showAlert('Offline','danger'); return; }
             editingReservation = {
-                id: r.id,
-                customerName: r.customerName,
-                phone: r.phone || '',
-                adminId: r.adminId || null,
-                adminName: r.adminName || null,
-                reservationDate: r.reservationDate,
-                items: r.items.map(i => ({...i})),
-                total: r.total,
-                tables: [...(r.tables || [])],
+                id: r.id, customerName: r.customerName, phone: r.phone || '',
+                adminId: r.adminId || null, adminName: r.adminName || null,
+                reservationDate: r.reservationDate, items: r.items.map(i => ({...i})),
+                total: r.total, tables: [...(r.tables || [])],
                 originalData: JSON.parse(JSON.stringify(r))
             };
             editingReservationTablesTemp = null;
@@ -2272,7 +2451,6 @@
             document.getElementById('editResTableSelectionPanel').style.display = 'none';
             document.getElementById('editResChangeTableBtn').style.display = 'inline-block';
             document.getElementById('editResTablesGrid').innerHTML = '';
-            // populate admin dropdown & set value
             populateAdminDropdowns();
             document.getElementById('editResAdmin').value = r.adminId || '';
             updateEditResSelectedTables();
@@ -2280,23 +2458,20 @@
             updateEditResTotal();
             document.getElementById('editReservationModal').style.display = 'flex';
         }
-
         function closeEditReservationModal() {
             editingReservation = null;
             editingReservationTablesTemp = null;
             document.getElementById('editReservationModal').style.display = 'none';
             document.getElementById('editResConfirmModal').style.display = 'none';
         }
-
         function renderEditResTables() {
             const container = document.getElementById('editResTablesGrid');
             if (!editingReservation) return;
             if (!tables.length) { container.innerHTML = '<p style="font-size:0.9rem;">Belum ada meja.</p>'; updateEditResTempDisplay(); return; }
             const resMap = getReservedTablesMap(editingReservation.reservationDate, editingReservation.id);
-            const holdMap = getHeldTablesMap(editingReservation.reservationDate, editingReservation.fromHoldId || null);
+            const holdMap = getHeldTablesMap(editingReservation.reservationDate, null);
             const occupiedSet = new Set([...resMap.keys(), ...holdMap.keys()]);
             if (editingReservationTablesTemp !== null) editingReservationTablesTemp = editingReservationTablesTemp.filter(t => !occupiedSet.has(t));
-
             const groups = { non: [], smoking: [], tambahan: [] };
             tables.forEach(t => groups[t.area].push(t));
             const areaNames = { non: 'Non Smoking', smoking: 'Smoking', tambahan: 'Tambahan' };
@@ -2345,10 +2520,12 @@
                 count.textContent = '0';
                 return;
             }
-            container.innerHTML = editingReservation.items.map((item, idx) => `
-                <div class="order-item">
+            container.innerHTML = editingReservation.items.map((item, idx) => {
+                const isU = item.unmatched === true;
+                return `
+                <div class="order-item ${isU?'unmatched':''}">
                     <div class="order-details">
-                        <h4>${item.name}</h4>
+                        <h4>${isU ? '⚠️ ' : ''}${item.name}</h4>
                         <div>Rp ${item.price.toLocaleString('id-ID')} x ${item.quantity}</div>
                         ${item.notes ? `<div class="order-notes"><i class="fas fa-sticky-note"></i> ${item.notes}</div>` : ''}
                         <div style="font-weight:bold;margin-top:4px;color:#2c3e50;">Subtotal: Rp ${item.subtotal.toLocaleString('id-ID')}</div>
@@ -2364,7 +2541,8 @@
                             <button class="btn btn-sm btn-danger" onclick="removeEditResItem(${idx})"><i class="fas fa-trash"></i></button>
                         </div>
                     </div>
-                </div>`).join('');
+                </div>`;
+            }).join('');
             count.textContent = editingReservation.items.length;
         }
         function changeEditResItemQty(idx, delta) {
@@ -2386,10 +2564,16 @@
         function editEditResItem(idx) {
             if (!editingReservation) return;
             const item = editingReservation.items[idx];
+            const isU = item.unmatched === true;
             document.getElementById('editItemMenu').value = item.name;
+            document.getElementById('editItemMenu').readOnly = !isU;
+            document.getElementById('editItemUnmatchedInfo').style.display = isU ? 'block' : 'none';
+            document.getElementById('editItemPrice').style.display = isU ? 'none' : 'block';
+            document.getElementById('editItemPriceInput').style.display = isU ? 'block' : 'none';
+            document.getElementById('editItemPriceInput').value = isU ? (item.price || 0) : 0;
             document.getElementById('editItemQuantity').value = item.quantity;
             document.getElementById('editItemNotes').value = item.notes || '';
-            document.getElementById('editItemPrice').textContent = 'Rp ' + item.price.toLocaleString('id-ID');
+            if (!isU) document.getElementById('editItemPrice').textContent = 'Rp ' + item.price.toLocaleString('id-ID');
             document.getElementById('editItemIndex').value = idx;
             document.getElementById('editItemModal').setAttribute('data-type','editRes');
             updateEditItemSubtotal();
@@ -2432,7 +2616,6 @@
             const changes = [];
             if (!editingReservation) return changes;
             const orig = editingReservation.originalData;
-
             const origTables = (orig.tables || []).slice().sort();
             const newTables = (editingReservation.tables || []).slice().sort();
             if (JSON.stringify(origTables) !== JSON.stringify(newTables)) {
@@ -2451,7 +2634,6 @@
             if ((orig.adminName || '') !== (editingReservation.adminName || '')) {
                 changes.push({ label: 'Dilayani Oleh', text: (orig.adminName || '-') + ' → ' + (editingReservation.adminName || '-') });
             }
-
             const origItems = {}; (orig.items || []).forEach(i => { origItems[i.id + '|' + (i.notes || '')] = { ...i }; });
             const newItems = {}; (editingReservation.items || []).forEach(i => { newItems[i.id + '|' + (i.notes || '')] = { ...i }; });
             const allKeys = new Set([...Object.keys(origItems), ...Object.keys(newItems)]);
@@ -2479,18 +2661,14 @@
             if (!editingReservation.reservationDate) { showAlert('Tanggal reservasi harus diisi!','danger'); return; }
             if (!editingReservation.items.length) { showAlert('Pesanan tidak boleh kosong!','danger'); return; }
             if (editingReservation.reservationDate < getTodayLocal()) { showAlert('Tanggal tidak boleh di masa lalu!','danger'); return; }
-
-            // Validasi meja terhadap hold/reservasi lain
             const resMap = getReservedTablesMap(editingReservation.reservationDate, editingReservation.id);
             const holdMap = getHeldTablesMap(editingReservation.reservationDate, null);
             for (const tn of (editingReservation.tables || [])) {
                 if (resMap.has(tn)) { showAlert(`Meja ${tn} sudah dipesan oleh ${resMap.get(tn).customerName}.`, 'danger'); return; }
                 if (holdMap.has(tn)) { showAlert(`Meja ${tn} sedang di-hold oleh ${holdMap.get(tn).adminName || '-'}. Lepas hold dulu.`, 'danger'); return; }
             }
-
             const changes = generateReservationChanges();
             if (!changes.length) { showAlert('Tidak ada perubahan untuk disimpan','info'); return; }
-
             const list = document.getElementById('editResChangesList');
             let html = '';
             changes.forEach(c => {
@@ -2508,38 +2686,23 @@
             if (!auth.currentUser) return;
             const invoice = generateInvoiceFor(editingReservation.customerName, editingReservation.reservationDate, editingReservation.items, editingReservation.total);
             const data = {
-                customerName: editingReservation.customerName,
-                phone: editingReservation.phone || null,
-                adminId: editingReservation.adminId || null,
-                adminName: editingReservation.adminName || null,
-                reservationDate: editingReservation.reservationDate,
-                orderDate: editingReservation.originalData.orderDate || new Date().toISOString(),
-                items: editingReservation.items,
-                total: editingReservation.total,
-                tables: editingReservation.tables || [],
-                dpAmount: editingReservation.originalData.dpAmount || null,
-                dpMethod: editingReservation.originalData.dpMethod || null,
-                dpOrder: editingReservation.originalData.dpOrder || null,
-                invoice: invoice,
-                updatedAt: new Date().toISOString()
+                customerName: editingReservation.customerName, phone: editingReservation.phone || null,
+                adminId: editingReservation.adminId || null, adminName: editingReservation.adminName || null,
+                reservationDate: editingReservation.reservationDate, orderDate: editingReservation.originalData.orderDate || new Date().toISOString(),
+                items: editingReservation.items, total: editingReservation.total, tables: editingReservation.tables || [],
+                dpAmount: editingReservation.originalData.dpAmount || null, dpMethod: editingReservation.originalData.dpMethod || null,
+                dpOrder: editingReservation.originalData.dpOrder || null, invoice: invoice, updatedAt: new Date().toISOString()
             };
             db.collection('reservations').doc(editingReservation.id).update(data)
                 .then(() => { showAlert('Reservasi berhasil diupdate!','success'); closeEditReservationModal(); })
                 .catch(err => showAlert('Gagal simpan: '+err.message,'danger'));
         }
 
-        // ================================================================
-        // EDIT TAKEAWAY (modal flow)
-        // ================================================================
         function editTakeawayOrder(id) { openEditTakeawayModal(id); }
         function openEditTakeawayModal(id) {
             const t = takeawayOrders.find(x => x.id === id); if (!t) return;
             if (!isOnline) { showAlert('Offline','danger'); return; }
-            editingTakeaway = {
-                id: t.id, customerName: t.customerName,
-                items: t.items.map(i => ({...i})), total: t.total,
-                originalData: JSON.parse(JSON.stringify(t))
-            };
+            editingTakeaway = { id: t.id, customerName: t.customerName, items: t.items.map(i => ({...i})), total: t.total, originalData: JSON.parse(JSON.stringify(t)) };
             document.getElementById('editTakeawayCustomerName').value = t.customerName;
             document.getElementById('editTakeawaySearchMenu').value = '';
             document.getElementById('editTakeawayQty').value = 1;
@@ -2562,10 +2725,12 @@
                 count.textContent = '0';
                 return;
             }
-            container.innerHTML = editingTakeaway.items.map((item, idx) => `
-                <div class="order-item">
+            container.innerHTML = editingTakeaway.items.map((item, idx) => {
+                const isU = item.unmatched === true;
+                return `
+                <div class="order-item ${isU?'unmatched':''}">
                     <div class="order-details">
-                        <h4>${item.name}</h4>
+                        <h4>${isU ? '⚠️ ' : ''}${item.name}</h4>
                         <div>Rp ${item.price.toLocaleString('id-ID')} x ${item.quantity}</div>
                         ${item.notes ? `<div class="order-notes"><i class="fas fa-sticky-note"></i> ${item.notes}</div>` : ''}
                         <div style="font-weight:bold;margin-top:4px;color:#2c3e50;">Subtotal: Rp ${item.subtotal.toLocaleString('id-ID')}</div>
@@ -2581,7 +2746,8 @@
                             <button class="btn btn-sm btn-danger" onclick="removeEditTakeawayItem(${idx})"><i class="fas fa-trash"></i></button>
                         </div>
                     </div>
-                </div>`).join('');
+                </div>`;
+            }).join('');
             count.textContent = editingTakeaway.items.length;
         }
         function changeEditTakeawayItemQty(idx, delta) {
@@ -2603,10 +2769,16 @@
         function editEditTakeawayItem(idx) {
             if (!editingTakeaway) return;
             const item = editingTakeaway.items[idx];
+            const isU = item.unmatched === true;
             document.getElementById('editItemMenu').value = item.name;
+            document.getElementById('editItemMenu').readOnly = !isU;
+            document.getElementById('editItemUnmatchedInfo').style.display = isU ? 'block' : 'none';
+            document.getElementById('editItemPrice').style.display = isU ? 'none' : 'block';
+            document.getElementById('editItemPriceInput').style.display = isU ? 'block' : 'none';
+            document.getElementById('editItemPriceInput').value = isU ? (item.price || 0) : 0;
             document.getElementById('editItemQuantity').value = item.quantity;
             document.getElementById('editItemNotes').value = item.notes || '';
-            document.getElementById('editItemPrice').textContent = 'Rp ' + item.price.toLocaleString('id-ID');
+            if (!isU) document.getElementById('editItemPrice').textContent = 'Rp ' + item.price.toLocaleString('id-ID');
             document.getElementById('editItemIndex').value = idx;
             document.getElementById('editItemModal').setAttribute('data-type','editTakeaway');
             updateEditItemSubtotal();
@@ -2690,19 +2862,14 @@
             const data = {
                 customerName: editingTakeaway.customerName || 'Tidak ada nama',
                 orderDate: editingTakeaway.originalData.orderDate || new Date().toISOString(),
-                items: editingTakeaway.items,
-                total: editingTakeaway.total,
-                invoice: invoice,
-                updatedAt: new Date().toISOString()
+                items: editingTakeaway.items, total: editingTakeaway.total,
+                invoice: invoice, updatedAt: new Date().toISOString()
             };
             db.collection('takeaway').doc(editingTakeaway.id).update(data)
                 .then(() => { showAlert('Takeaway berhasil diupdate!','success'); closeEditTakeawayModal(); })
                 .catch(err => showAlert('Gagal simpan: '+err.message,'danger'));
         }
 
-        // ================================================================
-        // DELETE, DP, PERIOD
-        // ================================================================
         function deleteReservation(id) {
             if (!isOnline) { showAlert('Offline','danger'); return; }
             if (!confirm('Hapus reservasi ini?')) return;
@@ -2803,9 +2970,6 @@
             db.collection('takeaway').doc(id).delete().then(() => showAlert('Takeaway dihapus','success')).catch(err => showAlert('Gagal hapus','danger'));
         }
 
-        // ================================================================
-        // REPORT
-        // ================================================================
         function generateDailyReport() {
             const date = document.getElementById('reportDate').value;
             const sort = document.getElementById('reportSort').value;
@@ -2839,7 +3003,6 @@
             else if (sort === 'least') reportData.sort((a,b) => a.total - b.total);
             else reportData.sort((a,b) => a.menu.localeCompare(b.menu));
             const grand = reportData.reduce((s, i) => s + i.total, 0);
-
             let html = `<h3 style="margin-bottom:15px;">Laporan ${new Date(date).toLocaleDateString('id-ID')} (DP)</h3>`;
             if (Object.keys(categoryTotals).length) {
                 html += `<h4 style="margin-top:20px;">Per Kategori</h4>`;
@@ -2938,15 +3101,11 @@
             document.getElementById('menuDetailModal').style.display = 'flex';
         }
 
-        // ================================================================
-        // CEK MEJA — dengan hold + reservasi
-        // ================================================================
         function checkTableAvailability() {
             const date = document.getElementById('checkDate').value;
             if (!date) { showAlert('Pilih tanggal','danger'); return; }
             proceedCheckAvailability(date);
         }
-
         function refreshCekMejaIfActive() {
             const cekMejaTab = document.getElementById('tab-cekmeja');
             if (cekMejaTab && cekMejaTab.classList.contains('active')) {
@@ -2954,26 +3113,21 @@
                 if (date) proceedCheckAvailability(date);
             }
         }
-
         function proceedCheckAvailability(date) {
             const dayRes = reservations.filter(r => r.reservationDate === date);
             const dayHolds = holds.filter(h => h.date === date);
-
             const reservedMap = new Map();
             dayRes.forEach(r => (r.tables || []).forEach(t => reservedMap.set(t, r)));
             const heldMap = new Map();
             dayHolds.forEach(h => (h.tables || []).forEach(t => heldMap.set(t, h)));
-
             const groups = { non: [], smoking: [], tambahan: [] };
             tables.forEach(t => groups[t.area].push(t));
-
             let html = `<h3>Ketersediaan Meja ${new Date(date).toLocaleDateString('id-ID')}</h3>`;
             html += `<div style="font-size:0.8rem;color:#666;margin-bottom:10px;">
                 <span style="display:inline-block;padding:2px 8px;background:#d4edda;border-radius:8px;color:#155724;margin-right:6px;">Hijau = Kosong</span>
                 <span style="display:inline-block;padding:2px 8px;background:#ffe8e8;border-radius:8px;color:#721c24;margin-right:6px;">Merah = Terisi</span>
                 <span style="display:inline-block;padding:2px 8px;background:#fff3cd;border-radius:8px;color:#856404;">Kuning = Hold</span>
             </div>`;
-
             const areaNames = { non:'Non Smoking', smoking:'Smoking', tambahan:'Tambahan' };
             Object.keys(groups).forEach(area => {
                 if (!groups[area].length) return;
@@ -3006,7 +3160,6 @@
             });
             document.getElementById('availabilityResult').innerHTML = html;
         }
-
         function handleCekMejaTableClick(tableNumber, date) {
             const r = reservations.find(x => x.reservationDate === date && x.tables && x.tables.includes(tableNumber));
             if (r) { showReservationForTable(tableNumber, date); return; }
@@ -3014,13 +3167,11 @@
             if (h) { openHoldDetailModal(h.id); return; }
             openTableActionModal(tableNumber, date);
         }
-
         function openTableActionModal(tableNumber, date) {
             pendingTableAction = { tableNumber, date };
             document.getElementById('tableActionTitle').textContent = 'Meja ' + tableNumber + ' — ' + new Date(date).toLocaleDateString('id-ID');
             document.getElementById('tableActionModal').style.display = 'flex';
         }
-
         function showReservationForTable(tableNumber, date) {
             const r = reservations.find(x => x.reservationDate === date && x.tables && x.tables.includes(tableNumber));
             if (!r) { showAlert('Data reservasi tidak ditemukan','danger'); return; }
@@ -3043,21 +3194,9 @@
             document.getElementById('reservationDetailModal').style.display = 'flex';
         }
 
-        // ================================================================
-        // HOLD — CREATE / EDIT / DETAIL / RELEASE / CONVERT
-        // ================================================================
         function openNewHoldForm(date, preselectTables) {
             if (!isOnline) { showAlert('Offline','danger'); return; }
-            currentHoldForm = {
-                id: null,
-                date: date,
-                tables: [...(preselectTables || [])],
-                phone: '',
-                guestCount: null,
-                adminId: null,
-                adminName: null,
-                note: ''
-            };
+            currentHoldForm = { id: null, date: date, tables: [...(preselectTables || [])], phone: '', guestCount: null, adminId: null, adminName: null, note: '' };
             holdFormTablesTemp = null;
             document.getElementById('holdFormTitle').innerHTML = '<i class="fas fa-clock"></i> Hold Meja';
             document.getElementById('holdFormDate').textContent = new Date(date).toLocaleDateString('id-ID', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
@@ -3072,19 +3211,16 @@
             updateHoldFormSelectedTablesDisplay();
             document.getElementById('holdFormModal').style.display = 'flex';
         }
-
         function closeHoldFormModal() {
             currentHoldForm = null;
             holdFormTablesTemp = null;
             document.getElementById('holdFormModal').style.display = 'none';
         }
-
         function updateHoldFormSelectedTablesDisplay() {
             const list = document.getElementById('holdFormSelectedTablesList');
             if (!list) return;
             list.textContent = (currentHoldForm && currentHoldForm.tables && currentHoldForm.tables.length) ? currentHoldForm.tables.join(', ') : '-';
         }
-
         function renderHoldFormTables() {
             const container = document.getElementById('holdFormTablesGrid');
             if (!currentHoldForm) return;
@@ -3093,7 +3229,6 @@
             const holdMap = getHeldTablesMap(currentHoldForm.date, currentHoldForm.id);
             const occupiedSet = new Set([...resMap.keys(), ...holdMap.keys()]);
             if (holdFormTablesTemp !== null) holdFormTablesTemp = holdFormTablesTemp.filter(t => !occupiedSet.has(t));
-
             const groups = { non: [], smoking: [], tambahan: [] };
             tables.forEach(t => groups[t.area].push(t));
             let html = '';
@@ -3112,7 +3247,6 @@
             container.innerHTML = html;
             updateHoldFormTempDisplay();
         }
-
         function toggleHoldFormTable(number, occupied) {
             if (occupied || !currentHoldForm) return;
             if (holdFormTablesTemp === null) holdFormTablesTemp = [...currentHoldForm.tables];
@@ -3124,13 +3258,11 @@
             });
             updateHoldFormTempDisplay();
         }
-
         function updateHoldFormTempDisplay() {
             const el = document.getElementById('holdFormTempSelectedTablesList');
             if (!el) return;
             el.textContent = (holdFormTablesTemp && holdFormTablesTemp.length) ? holdFormTablesTemp.join(', ') : '(kosong)';
         }
-
         function saveHold() {
             if (!currentHoldForm) return;
             if (!isOnline) { showAlert('Offline','danger'); return; }
@@ -3150,37 +3282,22 @@
             const note = document.getElementById('holdNote').value.trim();
             if (!phone) { showAlert('No HP wajib diisi!','danger'); return; }
             if (!adminId) { showAlert('Pilih admin yang melayani!','danger'); return; }
-
-            // Validasi konflik
             const resMap = getReservedTablesMap(currentHoldForm.date, null);
             const holdMap = getHeldTablesMap(currentHoldForm.date, currentHoldForm.id);
             for (const tn of currentHoldForm.tables) {
                 if (resMap.has(tn)) { showAlert(`Meja ${tn} sudah dipesan oleh ${resMap.get(tn).customerName}.`, 'danger'); return; }
                 if (holdMap.has(tn)) { showAlert(`Meja ${tn} sedang di-hold oleh ${holdMap.get(tn).adminName || '-'}.`, 'danger'); return; }
             }
-
             const data = {
-                date: currentHoldForm.date,
-                tables: currentHoldForm.tables,
-                phone: phone,
-                guestCount: guestCount,
-                adminId: adminId,
-                adminName: adminName,
-                note: note,
+                date: currentHoldForm.date, tables: currentHoldForm.tables, phone: phone,
+                guestCount: guestCount, adminId: adminId, adminName: adminName, note: note,
                 heldAt: currentHoldForm.id ? currentHoldForm.originalHeldAt : firebase.firestore.FieldValue.serverTimestamp()
             };
-            const promise = currentHoldForm.id
-                ? db.collection('holds').doc(currentHoldForm.id).update(data)
-                : db.collection('holds').add(data);
-            promise.then(() => {
-                showAlert('Hold disimpan!','success');
-                closeHoldFormModal();
-            }).catch(err => showAlert('Gagal simpan: '+err.message,'danger'));
+            const promise = currentHoldForm.id ? db.collection('holds').doc(currentHoldForm.id).update(data) : db.collection('holds').add(data);
+            promise.then(() => { showAlert('Hold disimpan!','success'); closeHoldFormModal(); }).catch(err => showAlert('Gagal simpan: '+err.message,'danger'));
         }
-
         function openHoldDetailModal(id) {
-            const h = holds.find(x => x.id === id);
-            if (!h) return;
+            const h = holds.find(x => x.id === id); if (!h) return;
             viewingHoldId = id;
             const heldMs = getHeldTimestampMs(h.heldAt);
             const isWarn = (Date.now() - heldMs) >= 3600000;
@@ -3196,10 +3313,8 @@
             document.getElementById('holdDetailContent').innerHTML = content;
             document.getElementById('holdDetailModal').style.display = 'flex';
         }
-
         function convertHoldToReservation() {
-            const h = holds.find(x => x.id === viewingHoldId);
-            if (!h) return;
+            const h = holds.find(x => x.id === viewingHoldId); if (!h) return;
             if (!confirm(`Konversi Hold Meja ${h.tables.join(', ')} menjadi Reservasi?\n\nHold akan dilepas setelah reservasi disimpan.`)) return;
             document.getElementById('holdDetailModal').style.display = 'none';
             clearOrderWithoutConfirm();
@@ -3219,21 +3334,16 @@
             showAlert('Silakan isi nama pemesan & pesanan','info');
         }
 
-        // ================================================================
-        // DASHBOARD
-        // ================================================================
         function renderDashboard() {
             const container = document.getElementById('dashboardContent');
             if (!container) return;
             const today = getTodayLocal();
             const tomorrow = getDatePlus(today, 1);
             const now = new Date();
-
             const todayRes = reservations.filter(r => r.reservationDate === today);
             const todayResNoDp = todayRes.filter(r => r.dpAmount == null);
             const activeHolds = holds.filter(h => h.date >= today);
             const todayTakeaway = takeawayOrders.filter(t => t.orderDate && t.orderDate.slice(0,10) === today);
-
             let html = '';
             html += `<div class="dashboard-summary">
                 <div class="summary-card"><div class="summary-value">${todayRes.length}</div><div class="summary-label">Reservasi Hari Ini</div></div>
@@ -3241,7 +3351,6 @@
                 <div class="summary-card"><div class="summary-value">${activeHolds.length}</div><div class="summary-label">Hold Aktif</div></div>
                 <div class="summary-card"><div class="summary-value">${todayTakeaway.length}</div><div class="summary-label">Takeaway Hari Ini</div></div>
             </div>`;
-
             let warningsHtml = '';
             if (todayResNoDp.length) {
                 warningsHtml += `<div class="warning-card danger">
@@ -3277,21 +3386,17 @@
                 }
             }
             html += warningsHtml;
-
             html += `<div class="quick-actions">
                 <button class="quick-action-btn" onclick="quickGoReservation()"><i class="fas fa-calendar-plus"></i>Reservasi Baru</button>
                 <button class="quick-action-btn" onclick="quickGoTakeaway()"><i class="fas fa-shopping-bag"></i>Takeaway</button>
                 <button class="quick-action-btn" onclick="quickGoCekMeja()"><i class="fas fa-chair"></i>Cek Meja</button>
             </div>`;
-
-            // Mini grid hari ini, split per area
             const reservedSet = new Set();
             todayRes.forEach(r => (r.tables || []).forEach(t => reservedSet.add(t)));
             const heldSet = new Set();
             holds.filter(h => h.date === today).forEach(h => (h.tables || []).forEach(t => heldSet.add(t)));
             const groups = { non: [], smoking: [], tambahan: [] };
             tables.forEach(t => groups[t.area].push(t));
-
             html += `<h3 style="margin-bottom:10px;font-size:1rem;">Ketersediaan Meja Hari Ini</h3>`;
             const areaNames = { non: 'Non Smoking', smoking: 'Smoking', tambahan: 'Tambahan' };
             const areaColors = { non: '#3498db', smoking: '#e74c3c', tambahan: '#f39c12' };
@@ -3309,7 +3414,6 @@
             });
             container.innerHTML = html;
         }
-
         function quickGoReservation() {
             document.querySelector('[data-tab="reservasi"]').click();
             setTimeout(() => document.querySelector('#sub-buat .sub-tab')?.click(), 50);
@@ -3322,9 +3426,6 @@
             document.querySelector('[data-tab="cekmeja"]').click();
         }
 
-        // ================================================================
-        // IMPORT / EXPORT MENU
-        // ================================================================
         function downloadTemplateCSV() {
             const csv = "nama_menu,harga\nNasi Goreng Special,25000\nAyam Bakar Pedas,35000\nEs Teh Manis,8000";
             const blob = new Blob([csv], { type:'text/csv' });
@@ -3381,9 +3482,6 @@
             }).catch(err => showAlert('Gagal import','danger'));
         }
 
-        // ================================================================
-        // AUTOCOMPLETE
-        // ================================================================
         function showAutocomplete(searchTerm, type) {
             const listMap = { order: 'autocompleteListOrder', takeaway: 'autocompleteListTakeaway', editRes: 'editResAutocompleteList', editTakeaway: 'editTakeawayAutocompleteList' };
             const inputMap = { order: 'searchMenuOrder', takeaway: 'searchMenuTakeaway', editRes: 'editResSearchMenu', editTakeaway: 'editTakeawaySearchMenu' };
@@ -3404,7 +3502,7 @@
             });
         }
 
-        console.log('Sistem Reservasi Restoran siap (v3: Home Dashboard, Hold Meja, Admin, WA Chat).');
+        console.log('Sistem Reservasi Restoran siap (v4: Input Pesanan Manual).');
     </script>
 </body>
 </html>
